@@ -293,9 +293,72 @@
   .mb-discovery { background: #FEF3C7; color: #92400E; }
   .mat-cell-name { font-size: 11px; font-weight: 600; color: var(--navy); }
   .mat-cell-detail { font-size: 10px; color: var(--gray-500); margin-top: 2px; }
+
+  /* ── PIN GATE ── */
+  #pin-gate { position: fixed; inset: 0; background: var(--navy); display: flex; align-items: center; justify-content: center; z-index: 1000; }
+  .pin-box { background: white; border-radius: 16px; padding: 36px 40px; width: 320px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.35); }
+  .pin-logo { font-weight: 800; font-size: 18px; color: var(--navy); margin-bottom: 4px; }
+  .pin-logo span { color: var(--orange); }
+  .pin-title { font-size: 13px; color: var(--gray-500); margin-bottom: 20px; }
+  .pin-input { width: 100%; text-align: center; font-size: 22px; letter-spacing: 6px; padding: 12px; border: 1px solid var(--gray-200); border-radius: 8px; margin-bottom: 14px; font-family: inherit; }
+  .pin-input:focus { outline: none; border-color: var(--orange); }
+  .pin-btn { width: 100%; background: var(--orange); color: white; border: none; padding: 11px; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: inherit; }
+  .pin-btn:hover { background: var(--orange-light); }
+  .pin-error { font-size: 11px; color: var(--red); margin-top: 10px; min-height: 14px; }
 </style>
 </head>
 <body>
+
+<!-- PIN GATE -->
+<div id="pin-gate">
+  <div class="pin-box">
+    <div class="pin-logo">Qi<span>ve</span></div>
+    <div class="pin-title">Conteúdo confidencial · digite o PIN de acesso</div>
+    <input type="password" id="pin-input" class="pin-input" maxlength="6" inputmode="numeric" autocomplete="off" placeholder="••••••">
+    <button class="pin-btn" onclick="checkPin()">Acessar</button>
+    <div class="pin-error" id="pin-error"></div>
+  </div>
+</div>
+
+<script>
+  // PIN protegido — apenas o hash SHA-256 é armazenado, nunca o valor em texto puro.
+  var PIN_HASH = "de5312e9d41854cdba69d9f7ec10d2fe8b1af3e55f9f6dd12da19ff7bbf158ca";
+
+  async function sha256(text) {
+    var enc = new TextEncoder().encode(text);
+    var buf = await crypto.subtle.digest('SHA-256', enc);
+    return Array.from(new Uint8Array(buf)).map(function(b){ return b.toString(16).padStart(2,'0'); }).join('');
+  }
+
+  async function checkPin() {
+    var val = document.getElementById('pin-input').value.trim();
+    var hash = await sha256(val);
+    if (hash === PIN_HASH) {
+      document.getElementById('pin-gate').style.display = 'none';
+      document.getElementById('protected-content').style.display = 'block';
+      try { sessionStorage.setItem('qive_pin_ok', '1'); } catch(e) {}
+    } else {
+      document.getElementById('pin-error').textContent = 'PIN incorreto. Tente novamente.';
+      document.getElementById('pin-input').value = '';
+    }
+  }
+
+  document.getElementById('pin-input').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') checkPin();
+  });
+
+  // Evita pedir o PIN de novo a cada navegação na mesma sessão do navegador
+  (function() {
+    try {
+      if (sessionStorage.getItem('qive_pin_ok') === '1') {
+        document.getElementById('pin-gate').style.display = 'none';
+        document.getElementById('protected-content').style.display = 'block';
+      }
+    } catch(e) {}
+  })();
+</script>
+
+<div id="protected-content" style="display:none;">
 
 <!-- TAB NAVIGATION -->
 <div class="page-tabs">
@@ -2063,5 +2126,8 @@ function showTab(id) {
   document.head.appendChild(s);
 })();
 </script>
+
+</div><!-- /protected-content -->
+
 </body>
 </html>
