@@ -1,0 +1,2067 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mapa de Apostas de IA | Qive 2026</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --orange: #FF6B00;
+    --orange-light: #FF8C33;
+    --orange-pale: #FFF0E6;
+    --navy: #0F1629;
+    --navy-mid: #1C2B4A;
+    --navy-light: #263554;
+    --white: #FFFFFF;
+    --gray-50: #F8F9FA;
+    --gray-100: #F0F2F5;
+    --gray-200: #E1E5EB;
+    --gray-500: #6B7280;
+    --gray-700: #374151;
+    --green: #10B981;
+    --green-bg: #D1FAE5;
+    --blue: #3B82F6;
+    --blue-bg: #DBEAFE;
+    --purple: #8B5CF6;
+    --purple-bg: #EDE9FE;
+    --yellow: #F59E0B;
+    --yellow-bg: #FEF3C7;
+    --red: #EF4444;
+    --red-bg: #FEE2E2;
+    --teal: #0D9488;
+    --teal-bg: #CCFBF1;
+  }
+
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--gray-50); color: var(--gray-700); font-size: 13px; line-height: 1.5; }
+
+  /* HEADER */
+  .header { background: var(--navy); color: white; padding: 32px 40px 28px; display: flex; justify-content: space-between; align-items: flex-end; }
+  .header-label { font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--orange); margin-bottom: 6px; }
+  .header-title { font-size: 28px; font-weight: 700; color: white; margin-bottom: 4px; }
+  .header-sub { font-size: 13px; color: rgba(255,255,255,0.55); }
+  .header-meta { font-size: 11px; color: rgba(255,255,255,0.4); line-height: 1.8; text-align: right; }
+  .header-sources { display: flex; gap: 8px; margin-top: 8px; justify-content: flex-end; }
+  .source-chip { font-size: 10px; font-weight: 600; padding: 3px 9px; border-radius: 20px; background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.15); }
+
+  /* THESIS BAR */
+  .thesis-bar { background: var(--orange); padding: 14px 40px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .thesis-label { font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: rgba(255,255,255,0.7); white-space: nowrap; }
+  .thesis-text { font-size: 13px; font-weight: 600; color: white; }
+  .thesis-flow { display: flex; align-items: center; gap: 6px; margin-left: auto; flex-wrap: wrap; }
+  .flow-step { background: rgba(255,255,255,0.2); color: white; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; white-space: nowrap; }
+  .flow-arrow { color: rgba(255,255,255,0.6); font-size: 14px; }
+
+  /* TRUST ARCHITECTURE BAR */
+  .trust-bar { background: var(--navy-mid); padding: 12px 40px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .trust-label { font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: rgba(255,255,255,0.5); white-space: nowrap; }
+  .trust-stages { display: flex; align-items: center; gap: 0; }
+  .trust-stage { display: flex; flex-direction: column; align-items: center; padding: 6px 20px; border-right: 1px solid rgba(255,255,255,0.1); }
+  .trust-stage:last-child { border-right: none; }
+  .trust-stage-name { font-size: 12px; font-weight: 700; color: white; }
+  .trust-stage-desc { font-size: 10px; color: rgba(255,255,255,0.45); }
+  .trust-stage.active .trust-stage-name { color: var(--orange); }
+  .trust-tag { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 20px; margin-top: 3px; }
+  .trust-tag-crawl { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.6); }
+  .trust-tag-walk { background: rgba(255,107,0,0.3); color: var(--orange-light); }
+  .trust-tag-run { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.3); }
+  .trust-credit { font-size: 10px; color: rgba(255,255,255,0.25); margin-left: auto; }
+
+  /* MAIN */
+  .main { padding: 28px 40px 48px; max-width: 1320px; margin: 0 auto; }
+
+  /* SOURCES ROW */
+  .sources-row { display: flex; gap: 12px; margin-bottom: 24px; }
+  .source-card { flex: 1; background: white; border: 1px solid var(--gray-200); border-radius: 10px; padding: 14px 16px; display: flex; align-items: flex-start; gap: 12px; }
+  .source-icon { font-size: 20px; flex-shrink: 0; }
+  .source-title { font-size: 12px; font-weight: 700; color: var(--navy); margin-bottom: 3px; }
+  .source-detail { font-size: 11px; color: var(--gray-500); }
+  .source-stats { display: flex; gap: 12px; margin-top: 8px; flex-wrap: wrap; }
+  .source-stat { font-size: 11px; }
+  .source-stat strong { color: var(--orange); }
+
+  /* MODEL SECTION */
+  .model-section { margin-bottom: 32px; }
+  .model-header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 2px solid var(--gray-200); }
+  .model-number { width: 28px; height: 28px; border-radius: 50%; background: var(--navy); color: white; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .model-name { font-size: 15px; font-weight: 700; color: var(--navy); }
+  .model-desc { font-size: 12px; color: var(--gray-500); margin-left: 4px; }
+  .model-tag { margin-left: auto; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; white-space: nowrap; }
+  .tag-push { background: #FEE2E2; color: #991B1B; }
+  .tag-inflow { background: #D1FAE5; color: #065F46; }
+  .tag-pull { background: #DBEAFE; color: #1E40AF; }
+  .tag-embedded { background: #EDE9FE; color: #5B21B6; }
+  .tag-positioning { background: #FEF3C7; color: #92400E; }
+
+  /* CARDS GRID */
+  .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; }
+  .cards-grid.single { grid-template-columns: 1fr; }
+  .cards-grid.two { grid-template-columns: repeat(2, 1fr); }
+  .cards-grid.three { grid-template-columns: repeat(3, 1fr); }
+
+  /* BET CARD */
+  .bet-card { background: white; border-radius: 12px; border: 1px solid var(--gray-200); overflow: hidden; }
+  .card-top { padding: 16px 18px 14px; border-bottom: 1px solid var(--gray-100); display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+  .card-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+  .card-title-block { flex: 1; }
+  .card-title { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+  .card-subtitle { font-size: 11px; color: var(--gray-500); }
+  .status-badge { font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; }
+  .status-nao-testada { background: var(--gray-100); color: var(--gray-500); }
+  .status-em-dev { background: var(--blue-bg); color: #1E40AF; }
+  .status-em-validacao { background: var(--purple-bg); color: #5B21B6; }
+  .status-validada { background: var(--green-bg); color: #065F46; }
+  .status-revisao { background: var(--yellow-bg); color: #92400E; }
+  .status-competitivo { background: var(--teal-bg); color: var(--teal); }
+  .status-sem-evidencia { background: #F3F4F6; color: #374151; border: 1px dashed #9CA3AF; }
+  .status-cliente { background: #FEF9C3; color: #854D0E; border: 1px solid #FDE047; }
+
+  /* CARD BODY */
+  .card-body { padding: 14px 18px; }
+  .field { margin-bottom: 12px; }
+  .field:last-child { margin-bottom: 0; }
+  .field-label { font-size: 9px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--gray-500); margin-bottom: 4px; }
+  .field-text { font-size: 12px; color: var(--gray-700); line-height: 1.5; }
+
+  /* EVIDENCE */
+  .evidence-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .evidence-chip { display: inline-flex; align-items: center; gap: 5px; background: var(--orange-pale); border: 1px solid #FFD0AA; color: #C04A00; font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 20px; }
+  .evidence-chip .score { font-size: 13px; font-weight: 800; }
+  .evidence-chip.comp { background: var(--teal-bg); border-color: #99F6E4; color: var(--teal); }
+  .evidence-chip.quali { background: var(--purple-bg); border-color: #C4B5FD; color: #5B21B6; }
+
+  /* RISK */
+  .risk-row { display: flex; align-items: flex-start; gap: 6px; background: #FFF8F0; border-left: 3px solid var(--orange); padding: 8px 10px; border-radius: 0 6px 6px 0; }
+  .risk-icon { font-size: 12px; flex-shrink: 0; margin-top: 1px; }
+  .risk-text { font-size: 11px; color: #7C3A00; line-height: 1.4; }
+
+  /* REFRAME */
+  .bet-card.reframe { border: 2px solid var(--orange); }
+  .reframe-banner { background: var(--orange); color: white; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 5px 18px; text-align: center; }
+
+  /* QUALITATIVE INSIGHT */
+  .quali-insight { background: var(--purple-bg); border-left: 3px solid var(--purple); padding: 8px 10px; border-radius: 0 6px 6px 0; margin-top: 8px; }
+  .quali-insight-label { font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--purple); margin-bottom: 3px; }
+  .quali-insight-text { font-size: 11px; color: #4C1D95; line-height: 1.4; font-style: italic; }
+
+  /* COMPETITIVE SECTION */
+  .comp-section { margin-bottom: 32px; }
+  .comp-header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 2px solid var(--teal-bg); }
+  .comp-title { font-size: 15px; font-weight: 700; color: var(--navy); }
+  .comp-sub { font-size: 12px; color: var(--gray-500); }
+  .comp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+  .comp-card { background: white; border: 1px solid var(--gray-200); border-radius: 10px; padding: 14px; }
+  .comp-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+  .comp-name { font-size: 13px; font-weight: 700; color: var(--navy); }
+  .comp-badge { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 20px; }
+  .comp-badge-rt { background: var(--yellow-bg); color: #92400E; }
+  .comp-badge-agent { background: var(--teal-bg); color: var(--teal); }
+  .comp-badge-chat { background: var(--blue-bg); color: #1E40AF; }
+  .comp-feature { font-size: 11px; color: var(--gray-700); line-height: 1.4; margin-bottom: 6px; }
+  .comp-feature:last-child { margin-bottom: 0; }
+  .comp-highlight { font-size: 10px; font-weight: 700; color: var(--teal); margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--gray-100); }
+
+  /* PRIORITY TABLE */
+  .order-section { margin-top: 32px; background: white; border: 1px solid var(--gray-200); border-radius: 12px; overflow: hidden; }
+  .order-header { background: var(--navy-mid); color: white; padding: 12px 20px; font-size: 12px; font-weight: 700; letter-spacing: 0.5px; }
+  .order-table { width: 100%; border-collapse: collapse; }
+  .order-table th { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--gray-500); padding: 10px 16px; text-align: left; border-bottom: 1px solid var(--gray-200); background: var(--gray-50); }
+  .order-table td { padding: 11px 16px; font-size: 12px; border-bottom: 1px solid var(--gray-100); vertical-align: middle; }
+  .order-table tr:last-child td { border-bottom: none; }
+  .priority-num { width: 24px; height: 24px; background: var(--orange); color: white; font-size: 11px; font-weight: 800; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+  .score-bar-wrap { display: flex; align-items: center; gap: 8px; }
+  .score-bar { height: 6px; border-radius: 3px; background: var(--orange); flex-shrink: 0; }
+  .score-bar.teal { background: var(--teal); }
+  .score-val { font-size: 12px; font-weight: 700; color: var(--orange); }
+  .score-val.comp-signal { color: var(--teal); font-size: 10px; font-weight: 600; }
+
+  /* TRUST MODELS */
+  .trust-models { background: white; border: 1px solid var(--gray-200); border-radius: 12px; overflow: hidden; margin-bottom: 32px; }
+  .trust-models-header { background: var(--navy-light); color: white; padding: 12px 20px; font-size: 12px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+  .trust-models-body { padding: 16px 20px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .trust-model-card { border: 1px solid var(--gray-200); border-radius: 8px; padding: 14px; }
+  .trust-model-title { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+  .trust-model-sub { font-size: 10px; color: var(--orange); font-weight: 700; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
+  .trust-model-text { font-size: 11px; color: var(--gray-700); line-height: 1.5; }
+  .trust-model-source { font-size: 10px; color: var(--purple); font-style: italic; margin-top: 6px; }
+
+  /* FOOTER */
+  .doc-footer { margin-top: 12px; padding-top: 16px; border-top: 1px solid var(--gray-200); display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: var(--gray-500); }
+  .footer-logo { font-weight: 800; font-size: 14px; color: var(--navy); }
+  .footer-logo span { color: var(--orange); }
+
+  /* ── TAB SYSTEM ── */
+  .page-tabs { position: sticky; top: 0; z-index: 200; background: var(--navy); display: flex; padding: 0 24px; gap: 2px; box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+  .tab-btn { padding: 13px 22px; font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.5); background: none; border: none; border-bottom: 3px solid transparent; margin-bottom: -1px; cursor: pointer; letter-spacing: 0.3px; transition: color 0.2s, border-color 0.2s; font-family: inherit; }
+  .tab-btn:hover { color: rgba(255,255,255,0.85); }
+  .tab-btn.active { color: #fff; border-bottom-color: var(--orange); }
+
+  /* ── EXECUTIVE SUMMARY ── */
+  #tab-exec { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--gray-50); min-height: 100vh; padding: 32px 24px 48px; }
+  .exec-wrap { max-width: 1040px; margin: 0 auto; }
+
+  .exec-hero { background: var(--navy); color: white; border-radius: 16px; padding: 36px 40px; margin-bottom: 28px; display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; }
+  .exec-kicker { font-size: 11px; font-weight: 700; color: var(--orange); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+  .exec-title { font-size: 26px; font-weight: 800; line-height: 1.2; }
+  .exec-subtitle { font-size: 14px; color: rgba(255,255,255,0.55); margin-top: 8px; }
+  .exec-meta { text-align: right; font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.8; }
+  .exec-meta-badge { display: inline-block; background: var(--orange); color: white; font-size: 11px; font-weight: 700; padding: 3px 12px; border-radius: 20px; margin-bottom: 6px; }
+
+  .exec-section { margin-bottom: 28px; }
+  .exec-section-label { font-size: 10px; font-weight: 700; color: var(--gray-500); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+  .exec-section-label::after { content: ''; flex: 1; height: 1px; background: var(--gray-200); }
+
+  .thesis-box { background: linear-gradient(135deg, #FFF7ED, #FFFBEB); border: 1px solid #FED7AA; border-left: 4px solid var(--orange); border-radius: 12px; padding: 20px 26px; font-size: 14px; color: var(--navy); font-weight: 500; line-height: 1.7; }
+  .thesis-em { font-weight: 800; color: var(--orange); }
+
+  .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .stat-box { background: white; border: 1px solid var(--gray-200); border-radius: 12px; padding: 22px; text-align: center; }
+  .stat-num { font-size: 40px; font-weight: 900; color: var(--navy); line-height: 1; }
+  .stat-label { font-size: 12px; color: var(--gray-500); margin-top: 6px; line-height: 1.4; }
+  .stat-insight { font-size: 12px; color: var(--orange); font-weight: 700; margin-top: 6px; }
+
+  .portfolio-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .portfolio-item { display: flex; align-items: center; gap: 10px; background: white; border: 1px solid var(--gray-200); border-radius: 8px; padding: 10px 14px; }
+  .p-rank { width: 24px; height: 24px; border-radius: 50%; background: var(--navy); color: white; font-size: 10px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .p-name { font-size: 12px; font-weight: 600; color: var(--navy); flex: 1; }
+  .p-signal { font-size: 10px; font-weight: 700; white-space: nowrap; }
+
+  .timeline-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .tl-col { border-radius: 12px; overflow: hidden; border: 1px solid var(--gray-200); }
+  .tl-head { padding: 14px 16px; font-size: 12px; font-weight: 700; }
+  .tl-head-now { background: var(--navy); color: white; }
+  .tl-head-next { background: var(--navy-light); color: white; }
+  .tl-head-later { background: var(--gray-100); color: var(--gray-700); }
+  .tl-body { background: white; }
+  .tl-item { padding: 10px 14px; border-bottom: 1px solid var(--gray-100); font-size: 12px; color: var(--gray-700); line-height: 1.5; display: flex; gap: 8px; }
+  .tl-item:last-child { border-bottom: none; }
+  .tl-dot-now { color: var(--orange); font-weight: 700; flex-shrink: 0; }
+  .tl-dot-next { color: #3B82F6; font-weight: 700; flex-shrink: 0; }
+  .tl-dot-later { color: var(--gray-500); flex-shrink: 0; }
+  .tl-item strong { color: var(--navy); display: block; }
+
+  .diff-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .diff-card { background: white; border: 1px solid var(--gray-200); border-radius: 10px; padding: 18px; }
+  .diff-icon { font-size: 22px; margin-bottom: 8px; }
+  .diff-title { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+  .diff-text { font-size: 12px; color: var(--gray-700); line-height: 1.55; }
+  .diff-badge { display: inline-block; background: #D1FAE5; color: #065F46; font-size: 10px; font-weight: 700; padding: 2px 9px; border-radius: 10px; margin-top: 8px; }
+
+  .actions-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .action-item { display: flex; align-items: flex-start; gap: 12px; background: white; border: 1px solid var(--gray-200); border-radius: 10px; padding: 14px; }
+  .action-num { width: 24px; height: 24px; border-radius: 50%; background: var(--orange); color: white; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .action-body { font-size: 12px; color: var(--gray-700); line-height: 1.5; }
+  .action-body strong { color: var(--navy); font-size: 13px; display: block; margin-bottom: 3px; }
+
+  .exec-footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--gray-200); display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: var(--gray-500); }
+  .exec-footer-logo { font-weight: 800; font-size: 15px; color: var(--navy); }
+  .exec-footer-logo span { color: var(--orange); }
+
+  /* ── RADAR ── */
+  .radar-wrap { display: grid; grid-template-columns: 1fr 240px; gap: 20px; align-items: start; }
+  .radar-canvas-box { background: white; border: 1px solid var(--gray-200); border-radius: 12px; padding: 24px 20px; }
+  .radar-side { display: flex; flex-direction: column; gap: 14px; }
+  .q-toggles-box, .ms-box { background: white; border: 1px solid var(--gray-200); border-radius: 10px; padding: 16px; }
+  .q-toggles-title, .ms-title { font-size: 10px; font-weight: 700; color: var(--gray-500); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; }
+  .q-btn { width: 100%; text-align: left; padding: 9px 12px; border-radius: 8px; border: 1px solid var(--gray-200); background: white; font-size: 12px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; margin-bottom: 6px; transition: opacity 0.15s; font-family: inherit; color: var(--navy); }
+  .q-btn:last-child { margin-bottom: 0; }
+  .q-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .q-btn.inactive { opacity: 0.35; }
+  .ms-item { display: flex; align-items: center; gap: 8px; padding: 5px 0; border-bottom: 1px solid var(--gray-100); font-size: 11px; color: var(--gray-700); line-height: 1.3; }
+  .ms-item:last-child { border-bottom: none; }
+  .ms-num { width: 20px; height: 20px; border-radius: 50%; background: var(--navy); color: white; font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .radar-note { margin-top: 10px; font-size: 11px; color: var(--gray-500); line-height: 1.5; text-align: center; }
+
+  /* ── MATRIX DE ENTREGAS ── */
+  .mat-wrap { margin-top: 20px; overflow-x: auto; }
+  .mat-table { width: 100%; border-collapse: collapse; font-size: 11px; }
+  .mat-table thead th { padding: 10px 12px; background: var(--navy); color: white; font-size: 12px; font-weight: 700; text-align: left; }
+  .mat-table thead th:first-child { width: 110px; background: var(--navy-mid); font-size: 10px; text-align: center; color: rgba(255,255,255,0.7); }
+  .mat-table td { padding: 9px 12px; border: 1px solid var(--gray-200); vertical-align: top; line-height: 1.5; color: var(--gray-700); }
+  .mat-table td:first-child { text-align: center; font-weight: 700; color: var(--navy); background: var(--gray-50); border-right: 2px solid var(--gray-200); font-size: 10px; line-height: 1.6; }
+  .mat-hoje { background: #F1F5F9; }
+  .mat-q426 { background: #FFF7ED; }
+  .mat-q227 { background: #EFF6FF; }
+  .mat-q427 { background: #F0FDF4; }
+  .mat-vazio { background: white; color: var(--gray-300); text-align: center; }
+  .mat-badge { display: inline-block; font-size: 9px; font-weight: 700; padding: 1px 7px; border-radius: 8px; margin-top: 4px; letter-spacing: 0.3px; }
+  .mb-hoje  { background: #E2E8F0; color: #475569; }
+  .mb-q426  { background: #FED7AA; color: #9A3412; }
+  .mb-q227  { background: #BFDBFE; color: #1E40AF; }
+  .mb-q427  { background: #BBF7D0; color: #065F46; }
+  .mb-discovery { background: #FEF3C7; color: #92400E; }
+  .mat-cell-name { font-size: 11px; font-weight: 600; color: var(--navy); }
+  .mat-cell-detail { font-size: 10px; color: var(--gray-500); margin-top: 2px; }
+</style>
+</head>
+<body>
+
+<!-- TAB NAVIGATION -->
+<div class="page-tabs">
+  <button class="tab-btn active" id="btn-exec" onclick="showTab('exec')">📊 Resumo Executivo</button>
+  <button class="tab-btn" id="btn-mapa" onclick="showTab('mapa')">📋 Mapa Completo</button>
+</div>
+
+<div id="tab-mapa" style="display:none;">
+
+<!-- HEADER -->
+<div class="header">
+  <div>
+    <div class="header-label">Qive · Produto de IA</div>
+    <div class="header-title">Mapa de Apostas de IA</div>
+    <div class="header-sub">Hipóteses, evidências e sinais de validação · 2026</div>
+  </div>
+  <div>
+    <div class="header-meta">Revisão do roadmap · H2 2026 · Última atualização: Junho 2026</div>
+    <div class="header-sources">
+      <div class="source-chip">📊 Survey 186 respondentes</div>
+      <div class="source-chip">🔍 Desk Research Competitivo</div>
+      <div class="source-chip">🧑‍🤝‍🧑 10 Entrevistas Qualitativas</div>
+    </div>
+  </div>
+</div>
+
+<!-- THESIS BAR -->
+<div class="thesis-bar">
+  <div class="thesis-label">Tese central</div>
+  <div class="thesis-text">Retenção se constrói nesta ordem:</div>
+  <div class="thesis-flow">
+    <div class="flow-step">📣 Monitora</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">✍️ Acompanha</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">💬 Responde</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">🔗 Habita</div>
+  </div>
+</div>
+
+<!-- TRUST ARCHITECTURE BAR -->
+<div class="trust-bar">
+  <div class="trust-label">Arquitetura de confiança</div>
+  <div class="trust-stages">
+    <div class="trust-stage active">
+      <div class="trust-stage-name">🔍 Confere</div>
+      <div class="trust-stage-desc">IA sugere · usuário decide</div>
+      <div class="trust-tag trust-tag-crawl">Agora · MVP</div>
+    </div>
+    <div class="trust-stage active">
+      <div class="trust-stage-name">✅ Aprova</div>
+      <div class="trust-stage-desc">IA executa · validação D-1</div>
+      <div class="trust-tag trust-tag-walk">H2 2026</div>
+    </div>
+    <div class="trust-stage">
+      <div class="trust-stage-name">⚡ Confia</div>
+      <div class="trust-stage-desc">Autonomia total · sem fricção</div>
+      <div class="trust-tag trust-tag-run">2027+</div>
+    </div>
+  </div>
+  <div class="trust-credit">Modelo validado pelas entrevistas · referência: Coupa Navi™</div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- SOURCES -->
+  <div class="sources-row">
+    <div class="source-card">
+      <div class="source-icon">📊</div>
+      <div>
+        <div class="source-title">Survey Quantitativa · Abril 2026</div>
+        <div class="source-detail">Responsável: Mariana Moraes da Silva</div>
+        <div class="source-stats">
+          <div class="source-stat"><strong>186</strong> respostas completas</div>
+          <div class="source-stat"><strong>54%</strong> exportam diariamente</div>
+          <div class="source-stat"><strong>88%</strong> abertos a IA</div>
+        </div>
+      </div>
+    </div>
+    <div class="source-card">
+      <div class="source-icon">🔍</div>
+      <div>
+        <div class="source-title">Desk Research Competitivo · 2026</div>
+        <div class="source-detail">Responsável: Natasha Furquim Zalewski</div>
+        <div class="source-stats">
+          <div class="source-stat"><strong>8</strong> players analisados</div>
+          <div class="source-stat"><strong>3</strong> usam RT como vetor</div>
+          <div class="source-stat">AppZen · Ramp · Coupa · ROIT...</div>
+        </div>
+      </div>
+    </div>
+    <div class="source-card">
+      <div class="source-icon">🧑‍🤝‍🧑</div>
+      <div>
+        <div class="source-title">Entrevistas Qualitativas · 2026</div>
+        <div class="source-detail">Responsável: Mariana M.S. e Natasha F.Z.</div>
+        <div class="source-stats">
+          <div class="source-stat"><strong>10</strong> entrevistados</div>
+          <div class="source-stat">4 SMBs · 3 Mids · 3 Enterprise</div>
+          <div class="source-stat"><strong>9/10</strong> delegariam tarefas com condições</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODEL 1: PUSH -->
+  <div class="model-section">
+    <div class="model-header">
+      <div class="model-number">1</div>
+      <div>
+        <div class="model-name">Monitora — Proativo</div>
+        <span class="model-desc">A Qive age antes do usuário pedir · Não depende de intenção · Maior potencial de retenção</span>
+      </div>
+      <div class="model-tag tag-push">🚨 Prioridade máxima</div>
+    </div>
+    <div class="cards-grid three">
+
+      <!-- Aposta 1: Inconsistências -->
+      <div class="bet-card">
+        <div class="card-top">
+          <div class="card-icon">⚠️</div>
+          <div class="card-title-block">
+            <div class="card-title">Agente de Inconsistências Tributárias</div>
+            <div class="card-subtitle">Alertas automáticos de erros em NF-e, alíquotas, prazos e duplicidade</div>
+          </div>
+          <div class="status-badge status-nao-testada">Não testada</div>
+        </div>
+        <div class="card-body">
+          <div class="field">
+            <div class="field-label">Hipótese</div>
+            <div class="field-text">Alertas proativos de inconsistências fiscais trazem o usuário de volta à Qive sem depender de intenção, criando hábito por utilidade real.</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Evidência</div>
+            <div class="evidence-row">
+              <div class="evidence-chip"><span class="score">4.37</span>/5 survey</div>
+              <div class="evidence-chip quali">Risco #1 nas entrevistas</div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Recorte por área (survey)</div>
+            <div class="field-text">Fiscal: <strong>4.49</strong> · Contábil: <strong>4.38</strong> · Gerentes: <strong>4.58</strong></div>
+          </div>
+          <div class="field">
+            <div class="field-label">Referência competitiva</div>
+            <div style="background:#F0FDF4;border-left:3px solid #10B981;padding:7px 10px;border-radius:0 6px 6px 0;">
+              <div style="font-size:10px;font-weight:700;color:#065F46;margin-bottom:3px;">✦ Sem referência mapeada nos 8 players do desk research</div>
+              <div style="font-size:11px;color:#065F46;">Nenhum player mapeado oferece notificação proativa de inconsistências em NF-e recebida. ROIT atua no lançamento fiscal, AppZen no audit de despesas — nenhum no fluxo de entrada de documentos. Possível diferencial de mercado.</div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Sinal de validação</div>
+            <div class="field-text">% de alertas que geram ação na Qive em 24h · Taxa de retorno de usuários notificados</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Risco principal</div>
+            <div class="risk-row">
+              <div class="risk-icon">⚡</div>
+              <div class="risk-text">Falso positivo em nota fiscal tem alto custo de confiança. Usuários exigem >90% de acerto. Um erro gritante no início pode matar a feature antes de decolar.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Aposta 2: Verificação Tributária -->
+      <div class="bet-card">
+        <div class="card-top">
+          <div class="card-icon">🧾</div>
+          <div class="card-title-block">
+            <div class="card-title">Verificação Tributária Automatizada</div>
+            <div class="card-subtitle">Validação de CST, CFOP, ICMS, PIS, COFINS em cada NF-e recebida</div>
+          </div>
+          <div class="status-badge status-nao-testada">Não testada</div>
+        </div>
+        <div class="card-body">
+          <div class="field">
+            <div class="field-label">Hipótese</div>
+            <div class="field-text">Se a Qive verifica automaticamente a correção dos tributos, torna-se indispensável antes da aprovação de qualquer documento — sem essa etapa, o usuário não tem segurança.</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Evidência</div>
+            <div class="evidence-row">
+              <div class="evidence-chip quali">Mencionada espontaneamente por múltiplos respondentes</div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Referência competitiva</div>
+            <div class="evidence-row">
+              <div class="evidence-chip comp">ROIT: robô fiscal/contábil</div>
+              <div class="evidence-chip comp">AppZen: auditoria 100%</div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Sinal de validação</div>
+            <div class="field-text">Adoção em 30 dias · % de notas com inconsistências detectadas · NPS da funcionalidade</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Risco principal</div>
+            <div class="risk-row">
+              <div class="risk-icon">⚡</div>
+              <div class="risk-text">Alta complexidade tributária brasileira — variações por regime, CFOP e UF. Maior risco técnico do mapa. Avaliar viabilidade antes de spec.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Aposta: Agente de Validação PO + NF-e -->
+      <div class="bet-card" style="border: 1px solid #FDE047;">
+        <div class="card-top" style="border-bottom-color:#FEF9C3;">
+          <div class="card-icon">📋</div>
+          <div class="card-title-block">
+            <div class="card-title">Agente de Validação PO + NF-e</div>
+            <div class="card-subtitle">Detecta divergência entre pedido e nota, identifica responsável e sugere a comunicação de ajuste</div>
+          </div>
+          <div class="status-badge status-cliente">🤝 Explorando com Fini</div>
+        </div>
+        <div class="card-body">
+          <div class="field">
+            <div class="field-label">Problema mapeado com cliente</div>
+            <div class="quali-insight">
+              <div class="quali-insight-label">Sinal — Fini</div>
+              <div class="quali-insight-text">Quando há inconsistência entre o PO e a NF-e recebida, alguém precisa parar, identificar o que está errado (o pedido ou a nota), descobrir quem acionar e escrever a comunicação manualmente. O custo é de tempo e de interrupção de pessoas.</div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Hipótese</div>
+            <div class="field-text">Se o agente detecta a divergência PO ≠ NF-e, identifica se o problema está no pedido ou na nota e rascunha a comunicação de ajuste para a pessoa certa, o usuário resolve a inconsistência sem precisar parar outras pessoas para investigar — reduzindo o tempo de ciclo de correção.</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Evolução Confere → Aprova → Confia</div>
+            <div style="display:flex;flex-direction:column;gap:6px;margin-top:4px;">
+              <div style="background:#F0FDF4;border-left:3px solid #10B981;padding:8px 10px;border-radius:0 6px 6px 0;">
+                <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:4px;">
+                  <div style="font-size:11px;font-weight:800;color:#065F46;white-space:nowrap;">🔍 Confere</div>
+                  <div style="font-size:11px;color:#065F46;line-height:1.4;"><strong>Detecta + sugere:</strong> agente identifica a divergência (valor, quantidade, item), classifica se o problema está no PO ou na NF-e e gera rascunho da mensagem de ajuste. Usuário revisa e envia manualmente.</div>
+                </div>
+                <div style="font-size:10px;color:#059669;font-style:italic;">Nenhuma integração com sistema de mensagens necessária no Confere.</div>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:8px;background:#FFF7ED;border-left:3px solid #F59E0B;padding:8px 10px;border-radius:0 6px 6px 0;">
+                <div style="font-size:11px;font-weight:800;color:#92400E;white-space:nowrap;">✅ Aprova</div>
+                <div style="font-size:11px;color:#92400E;line-height:1.4;"><strong>Envia com aprovação:</strong> usuário aprova o rascunho com um clique e o agente envia a comunicação pelo canal configurado (e-mail, Teams, WhatsApp). Rastreia se houve resposta.</div>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:8px;background:#EFF6FF;border-left:3px solid #3B82F6;padding:8px 10px;border-radius:0 6px 6px 0;">
+                <div style="font-size:11px;font-weight:800;color:#1E40AF;white-space:nowrap;">⚡ Confia</div>
+                <div style="font-size:11px;color:#1E40AF;line-height:1.4;"><strong>Loop autônomo:</strong> detecta, comunica, acompanha resposta, escala para o responsável se não houver resolução em X dias. Encerra o ciclo quando o ajuste é confirmado.</div>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Referência competitiva</div>
+            <div style="background:#F0FDF4;border-left:3px solid #10B981;padding:7px 10px;border-radius:0 6px 6px 0;">
+              <div style="font-size:10px;font-weight:700;color:#065F46;margin-bottom:3px;">✦ Sem referência mapeada nos 8 players do desk research</div>
+              <div style="font-size:11px;color:#065F46;">Nenhum player mapeado combina detecção de divergência PO+NF-e com orquestração da comunicação de ajuste. Ferramentas de AP automation (Ramp, Coupa) detectam divergências, mas a comunicação de correção permanece manual. O agente de comunicação é o diferencial.</div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Conexão com Three-Way Match</div>
+            <div style="background:var(--purple-bg);border-left:3px solid var(--purple);padding:8px 10px;border-radius:0 6px 6px 0;">
+              <div style="font-size:11px;color:#4C1D95;">Compartilha a lógica de detecção de divergência com o Three-Way Match — são dois agentes que consomem o mesmo sinal, com ações diferentes: Three-Way Match bloqueia pagamento; este agente inicia o fluxo de correção.</div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Sinal de validação</div>
+            <div class="field-text">Número de divergências resolvidas sem intervenção manual · Tempo médio de ciclo de correção (antes vs. depois) · NPS do agente com a Fini</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Risco principal</div>
+            <div class="risk-row">
+              <div class="risk-icon">⚡</div>
+              <div class="risk-text">Comunicar eroneamente quem deve ajustar (acusar o fornecedor quando o PO está errado, ou vice-versa) gera atrito com terceiros. A classificação da origem do erro precisa de alta precisão antes de automatizar o envio.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODEL 2: IN-FLOW -->
+  <div class="model-section">
+    <div class="model-header">
+      <div class="model-number">2</div>
+      <div>
+        <div class="model-name">Acompanha — Assistido</div>
+        <span class="model-desc">A Qive sugere enquanto o usuário executa sua rotina · Cria loops recorrentes de uso</span>
+      </div>
+      <div class="model-tag tag-inflow">✅ Alta prioridade</div>
+    </div>
+    <div class="cards-grid three">
+
+      <!-- Aposta 3: Sugestão de Etiquetas Automatizadas -->
+      <div class="bet-card">
+        <div class="card-top">
+          <div class="card-icon">🏷️</div>
+          <div class="card-title-block">
+            <div class="card-title">Sugestão de Etiquetas Automatizadas</div>
+            <div class="card-subtitle">Sugestão de etiqueta de etapa do fluxo (conferência, lançamento, aprovação…) com base no contexto da NF-e e histórico do usuário</div>
+          </div>
+          <div class="status-badge status-em-dev">Em desenvolvimento</div>
+        </div>
+        <div class="card-body">
+          <div class="field">
+            <div class="field-label">Hipótese</div>
+            <div class="field-text">Sugestões de etiqueta de etapa do fluxo criam um ritual recorrente: o usuário volta toda semana para revisar e aprovar em lote quais NF-es estão em conferência, lançamento ou aprovação — gerando hábito semanal sem depender de intenção.</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Evidência</div>
+            <div class="evidence-row">
+              <div class="evidence-chip"><span class="score">3.64</span>/5 survey</div>
+              <div class="evidence-chip">Classificação = 2ª tarefa mais custosa</div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Validação qualitativa — modelo correto</div>
+            <div class="quali-insight">
+              <div class="quali-insight-label">Entrevistas · Supervisora Fiscal (Mid)</div>
+              <div class="quali-insight-text">"Não deixaria uma IA genérica lançar dados. Mas se eu parametrizar bem as regras, depois é só ligar."</div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">O que gera confiança (survey)</div>
+            <div class="field-text">Taxa de acerto >90% · Histórico visível de sugestões · Possibilidade de corrigir fácil · Período de teste sem impacto real</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Referência competitiva</div>
+            <div style="background:#F0FDF4;border-left:3px solid #10B981;padding:7px 10px;border-radius:0 6px 6px 0;">
+              <div style="font-size:10px;font-weight:700;color:#065F46;margin-bottom:3px;">✦ Sem referência mapeada nos 8 players do desk research</div>
+              <div style="font-size:11px;color:#065F46;">Sugestão de etiqueta de etapa de fluxo (conferência, lançamento, aprovação) com base no contexto da NF-e não foi identificada em nenhum player. ERPs oferecem regras fixas, mas não aprendizado por histórico e contexto documental. Possível diferencial de mercado no contexto brasileiro.</div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Sinal de validação</div>
+            <div class="field-text">% de sugestões aprovadas sem revisão individual · Retenção semanal de usuários do agente</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Risco principal</div>
+            <div class="risk-row">
+              <div class="risk-icon">⚡</div>
+              <div class="risk-text">Se a taxa de acerto for baixa no início, o usuário para de revisar e abandona. Threshold de confiança é alto. Começar com Confere obrigatório — sugestão sem ação automática.</div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Tracking no Notion</div>
+            <div class="evidence-row">
+              <a href="https://www.notion.so/3126f5f2cc0280978fd1e2f348d63d98" target="_blank" style="text-decoration:none;"><div class="evidence-chip" style="cursor:pointer;">📦 Entrega — Agente de aplicação de etiquetas</div></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Aposta 4a: Conferência Qive × ERP (Confere) -->
+      <div class="bet-card">
+        <div class="card-top">
+          <div class="card-icon">🔑</div>
+          <div class="card-title-block">
+            <div class="card-title">Conferência Qive × ERP (Confere)</div>
+            <div class="card-subtitle">Democratizar via Assistente Qive um produto que já existe, hoje restrito a planos superiores</div>
+          </div>
+          <div class="status-badge status-em-dev">Produto existente · expandindo via chat</div>
+        </div>
+        <div class="card-body">
+          <div style="background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;padding:10px 12px;margin-bottom:12px;">
+            <div style="font-size:10px;font-weight:700;color:#1E40AF;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;">✅ Onde estamos hoje</div>
+            <div style="font-size:11px;color:#1E40AF;">A conferência de chaves de acesso ERP × Qive já existe como produto, mas é uma funcionalidade restrita a planos superiores — quem não tem acesso continua fazendo a conferência manualmente em planilha. A aposta aqui não é construir algo novo: é expor essa capacidade já validada dentro do Assistente Qive, via linguagem natural, para democratizar o acesso.</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Hipótese</div>
+            <div class="field-text">Se a Qive leva a conferência de chaves para dentro do Assistente Qive, ela elimina o cruzamento manual que o usuário faz hoje no Excel entre ERP e documentos fiscais — sem exigir upgrade de plano. Isso democratiza um recurso que já comprovou seu valor e reduz a dependência da versão restrita.</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Como funciona (Confere)</div>
+            <div style="background:#F0FDF4;border-left:3px solid #10B981;padding:8px 10px;border-radius:0 6px 6px 0;">
+              <div style="display:flex;flex-direction:column;gap:4px;padding-left:4px;">
+                <div style="font-size:11px;color:#065F46;line-height:1.4;"><strong>1.</strong> Usuário cola a lista de chaves de acesso do ERP (coluna de planilha ou texto) no chat</div>
+                <div style="font-size:11px;color:#065F46;line-height:1.4;"><strong>2.</strong> Assistente compara com as NF-es presentes na Qive pela chave de acesso (44 dígitos)</div>
+                <div style="font-size:11px;color:#065F46;line-height:1.4;"><strong>3.</strong> Retorna, em linguagem natural, as divergências: NF-es na Qive que não estão no ERP · NF-es no ERP que não estão na Qive</div>
+              </div>
+              <div style="font-size:10px;color:#059669;margin-top:6px;font-style:italic;">Zero integração técnica necessária — a lógica de comparação já está construída e em produção. O trabalho aqui é expor a capacidade via Assistente Qive.</div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Evidência</div>
+            <div class="evidence-row">
+              <div class="evidence-chip"><span class="score">4.30</span>/5 survey</div>
+              <div class="evidence-chip"><span class="score">54%</span> exportam diariamente</div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Recorte por área</div>
+            <div class="field-text">Fiscal: <strong>4.43</strong> · Controladoria: <strong>4.44</strong> · Coordenadores: <strong>4.37</strong> — sinal consistente, incluindo quem hoje não tem acesso ao produto legado por restrição de plano.</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Referência competitiva</div>
+            <div class="evidence-row">
+              <div class="evidence-chip comp">ROIT: lançamento direto no ERP (mesmo nível de conferência)</div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Critério de sucesso central</div>
+            <div style="background:var(--purple-bg);border-left:3px solid var(--purple);padding:8px 10px;border-radius:0 6px 6px 0;">
+              <div style="font-size:11px;color:#4C1D95;">O lançamento da conferência via Assistente Qive precisa estar vinculado ao <strong>sunset do produto legado</strong> restrito a planos superiores — a nova capacidade deve atingir paridade de uso/confiança suficiente para justificar a descontinuação da versão paga isolada, e não apenas coexistir com ela.</div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Fora de escopo</div>
+            <div class="field-text">Comparação de valores, vínculo automático com PO e bloqueio preventivo de pagamento fazem parte da iniciativa separada de <strong>Three-Way Match</strong> (ver aposta a seguir) — não fazem parte deste escopo.</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Risco principal</div>
+            <div class="risk-row">
+              <div class="risk-icon">⚡</div>
+              <div class="risk-text"><strong>Canibalização e sunset prematuro.</strong> Democratizar via chat uma funcionalidade hoje paga pode gerar resistência comercial, e descontinuar o produto legado antes da paridade de confiança pode regredir a experiência de quem já depende dele. Mitigação: alinhar com o time de monetização e tratar paridade como pré-condição do sunset, não como consequência automática do lançamento.</div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Tracking no Notion</div>
+            <div class="evidence-row">
+              <a href="https://www.notion.so/3816f5f2cc0281a18ccdcbde24042960" target="_blank" style="text-decoration:none;"><div class="evidence-chip" style="cursor:pointer;">📄 Product Briefing</div></a>
+              <a href="https://www.notion.so/3836f5f2cc0281e08b98c555c675540d" target="_blank" style="text-decoration:none;"><div class="evidence-chip" style="cursor:pointer;">📦 Entrega — Conferência Qive × ERP</div></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Aposta 4b: Three-Way Match -->
+      <div class="bet-card" style="border: 1px dashed var(--gray-200); opacity: 0.85;">
+        <div class="card-top">
+          <div class="card-icon">🔄</div>
+          <div class="card-title-block">
+            <div class="card-title">Three-Way Match (PO + NF-e + CT-e)</div>
+            <div class="card-subtitle">Iniciativa separada — evolução futura para Aprova → Confia, depende de integração contratada com ERP</div>
+          </div>
+          <div class="status-badge status-nao-testada">Não testada</div>
+        </div>
+        <div class="card-body">
+          <div class="field">
+            <div class="field-label">Hipótese central</div>
+            <div class="field-text">Se a Qive cruza automaticamente PO, NF-e e CT-e com comparação de valores, o usuário deixa de revisar nota por nota e a Qive se torna indispensável antes de qualquer pagamento. Pré-requisito: a Conferência Qive × ERP (Confere) validada e democratizada via chat.</div>
+          </div>
+          <div class="field">
+            <div class="field-label">⚡ Vantagem competitiva nativa</div>
+            <div style="background:linear-gradient(135deg,#F0FDFA,#ECFDF5);border:1px solid #6EE7B7;border-radius:8px;padding:10px 12px;">
+              <div style="font-size:11px;font-weight:700;color:#065F46;margin-bottom:4px;">A Qive já tem as duas pernas documentais do match — sem integração adicional</div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px;">
+                <div style="font-size:11px;background:white;border:1px solid #A7F3D0;border-radius:6px;padding:4px 10px;color:#065F46;font-weight:600;">📄 NF-e → o que foi cobrado</div>
+                <div style="font-size:11px;background:white;border:1px solid #A7F3D0;border-radius:6px;padding:4px 10px;color:#065F46;font-weight:600;">🚛 CT-e → evidência de entrega</div>
+                <div style="font-size:11px;background:#FEF9C3;border:1px solid #FDE68A;border-radius:6px;padding:4px 10px;color:#92400E;font-weight:600;">📋 PO (ERP) → o que foi pedido ← única integração necessária</div>
+              </div>
+              <div style="font-size:10px;color:#059669;margin-bottom:6px;">Ramp, AppZen e Coupa precisam de integração com WMS para ter a perna de entrega. A Qive tem nativamente via CT-e.</div>
+              <div style="background:#F0F9FF;border:1px solid #BAE6FD;border-radius:6px;padding:8px 10px;">
+                <div style="font-size:10px;font-weight:700;color:#0369A1;margin-bottom:4px;">🔗 Vínculo PO → NF-e: dois caminhos já existentes</div>
+                <div style="display:flex;flex-direction:column;gap:3px;">
+                  <div style="font-size:11px;color:#0C4A6E;"><strong>Tag XPed (XML da NF-e):</strong> fornecedor preenche o número do pedido no campo XPed — vínculo explícito, matching direto, zero inferência. Caminho padrão hoje.</div>
+                  <div style="font-size:11px;color:#0C4A6E;"><strong>Vínculo manual no produto:</strong> quando o fornecedor não preenche o XPed, o usuário já associa NF-e ↔ PO dentro da Qive. A IA aprende esse padrão (fornecedor + valor + janela de data) e automatiza o que hoje é trabalho manual.</div>
+                </div>
+                <div style="font-size:10px;color:#0369A1;margin-top:4px;font-style:italic;">A lógica de vínculo já existe — a IA escala o que hoje é manual. Reduz significativamente o risco técnico da evolução para Aprova.</div>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Evolução em 2 níveis (Aprova → Confia)</div>
+            <div style="display:flex;flex-direction:column;gap:6px;margin-top:4px;">
+              <div style="display:flex;align-items:flex-start;gap:8px;background:#FFF7ED;border-left:3px solid #F59E0B;padding:8px 10px;border-radius:0 6px 6px 0;">
+                <div style="font-size:11px;font-weight:800;color:#92400E;white-space:nowrap;">✅ Aprova</div>
+                <div style="font-size:11px;color:#92400E;line-height:1.4;"><strong>Integração contratada com ERP:</strong> vínculo automático via XPed ou API. Three-Way Match completo (NF-e + CT-e + PO) com comparação de valores — sinaliza divergências antes do pagamento sem ação manual do usuário.</div>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:8px;background:#EFF6FF;border-left:3px solid #3B82F6;padding:8px 10px;border-radius:0 6px 6px 0;">
+                <div style="font-size:11px;font-weight:800;color:#1E40AF;white-space:nowrap;">⚡ Confia</div>
+                <div style="font-size:11px;color:#1E40AF;line-height:1.4;"><strong>Bloqueio preventivo:</strong> divergência detectada → pagamento retido automaticamente antes de ir ao ERP. Zero intervenção manual para casos claros.</div>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Referência competitiva por nível</div>
+            <div class="evidence-row">
+              <div class="evidence-chip comp">Ramp + Coupa: Three-Way Match (Aprova)</div>
+              <div class="evidence-chip comp">AppZen: bloqueio automático (Confia)</div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Como a IA age — modelo de notificação</div>
+            <div style="display:flex;flex-direction:column;gap:6px;margin-top:4px;">
+              <div style="background:#F8FAFC;border:1px solid var(--gray-200);border-radius:8px;padding:10px 12px;">
+                <div style="font-size:10px;font-weight:700;color:var(--gray-500);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">Fluxo de ação da IA</div>
+                <div style="display:flex;flex-direction:column;gap:4px;">
+                  <div style="font-size:11px;color:var(--gray-700);"><strong>1. Detecta</strong> — NF-e ≠ PO, CT-e ausente, valor divergente</div>
+                  <div style="font-size:11px;color:var(--gray-700);"><strong>2. Classifica</strong> — severidade (valor da divergência) e tipo (tributária, de valor, documento faltante)</div>
+                  <div style="font-size:11px;color:var(--gray-700);"><strong>3. Notifica</strong> — digest diário com todas as exceções agrupadas; alerta em tempo real apenas para divergências acima de threshold configurável pelo usuário</div>
+                  <div style="font-size:11px;color:var(--gray-700);"><strong>4. Sugere</strong> — contestar com fornecedor, manifestar desconhecimento, solicitar nota de crédito</div>
+                  <div style="font-size:11px;color:#3B82F6;"><strong>5. Executa (Aprova)</strong> — usuário aprova a sugestão com um clique dentro da notificação</div>
+                </div>
+              </div>
+              <div style="background:var(--orange-pale);border-left:3px solid var(--orange);padding:8px 10px;border-radius:0 6px 6px 0;">
+                <div style="font-size:10px;font-weight:700;color:#C04A00;margin-bottom:3px;">⚠️ Notificação por evento = armadilha</div>
+                <div style="font-size:11px;color:#7C3A00;">40 notas do mesmo fornecedor com o mesmo erro → 40 alertas → usuário desativa tudo. Digest é obrigatório desde o início desta iniciativa.</div>
+              </div>
+              <div style="background:var(--purple-bg);border-left:3px solid var(--purple);padding:8px 10px;border-radius:0 6px 6px 0;">
+                <div style="font-size:10px;font-weight:700;color:#5B21B6;margin-bottom:3px;">🔗 Infraestrutura compartilhada com Aposta 1</div>
+                <div style="font-size:11px;color:#4C1D95;">O canal de notificação Monitora é o mesmo do Agente de Inconsistências Tributárias. Three-way match é mais um tipo de sinal fluindo pela mesma infraestrutura — justifica construir o Monitora uma vez e alimentar com múltiplos agentes.</div>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Sinal de validação por fase</div>
+            <div class="field-text">Aprova: % de divergências detectadas antes do pagamento · Confia: % de pagamentos bloqueados corretamente vs. falsos positivos</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Pontos de atenção</div>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <div class="risk-row">
+                <div class="risk-icon">⚡</div>
+                <div class="risk-text"><strong>CT-e prova transporte, não aceitação.</strong> Se houve devolução ou divergência na entrega, o CT-e pode existir mesmo assim. Tratar NF-e de devolução e CT-e de retorno — que também passam pela Qive — como casos especiais do match.</div>
+              </div>
+              <div class="risk-row">
+                <div class="risk-icon">⚠️</div>
+                <div class="risk-text"><strong>Nem toda NF-e tem CT-e vinculado.</strong> Serviços e algumas compras diretas não geram CT-e. O match deve funcionar quando o CT-e existe e degradar graciosamente quando não existe — sem bloquear o fluxo.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Aposta: Sugestão de Pagamentos -->
+      <div class="bet-card" style="border: 1px dashed var(--gray-200); opacity: 0.85;">
+        <div class="card-top">
+          <div class="card-icon">💳</div>
+          <div class="card-title-block">
+            <div class="card-title">Agenda de Pagamentos Inteligente</div>
+            <div class="card-subtitle">O que pagar hoje — sugerido pela IA, executado pelo usuário, automatizado com o tempo</div>
+          </div>
+          <div class="status-badge status-sem-evidencia">Sem evidência</div>
+        </div>
+        <div class="card-body">
+          <div style="background:#F9FAFB;border:1px dashed #D1D5DB;border-radius:8px;padding:10px 12px;margin-bottom:12px;">
+            <div style="font-size:10px;font-weight:700;color:#6B7280;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;">⚠️ Hipótese sem evidência</div>
+            <div style="font-size:11px;color:#6B7280;">Sem sinal de survey, entrevistas ou competidores por enquanto. Registrada para exploração futura — validar antes de qualquer spec.</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Hipótese</div>
+            <div class="field-text">A NF-e XML já contém <code style="font-size:10px;background:#F3F4F6;padding:1px 4px;border-radius:3px;">&lt;dVenc&gt;</code> — a data de vencimento de cada nota. Com esse dado mais o status do documento (confirmado, sem inconsistências, CT-e vinculado), a Qive pode montar a agenda de pagamentos do dia sem ML no Confere. Conforme o modelo aprende o comportamento real de pagamento do usuário, o grau de confiança aumenta e a execução vai sendo automatizada.</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Evolução Confere → Aprova → Confia</div>
+            <div style="display:flex;flex-direction:column;gap:6px;margin-top:4px;">
+              <div style="display:flex;align-items:flex-start;gap:8px;background:#F0FDF4;border-left:3px solid #10B981;padding:8px 10px;border-radius:0 6px 6px 0;">
+                <div style="font-size:11px;font-weight:800;color:#065F46;white-space:nowrap;">🔍 Confere</div>
+                <div style="font-size:11px;color:#065F46;line-height:1.5;">
+                  <strong>"O que preciso pagar hoje?"</strong> — lista de NF-es com vencimento no dia, ordenada por valor, com grau de confiança por documento:<br>
+                  <span style="display:inline-block;margin-top:4px;background:white;border:1px solid #A7F3D0;border-radius:4px;padding:2px 8px;font-size:10px;">🟢 Alta confiança</span> NF-e validada, CT-e presente, sem inconsistências<br>
+                  <span style="display:inline-block;margin-top:2px;background:white;border:1px solid #FDE68A;border-radius:4px;padding:2px 8px;font-size:10px;">🟡 Média confiança</span> NF-e ok, CT-e ausente<br>
+                  <span style="display:inline-block;margin-top:2px;background:white;border:1px solid #FCA5A5;border-radius:4px;padding:2px 8px;font-size:10px;">🔴 Revisar antes</span> Inconsistência detectada · divergência de valor<br>
+                  <span style="font-size:10px;color:#059669;display:block;margin-top:4px;">Zero ML no Confere — apenas lógica de data + status do documento.</span>
+                </div>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:8px;background:#FFF7ED;border-left:3px solid #F59E0B;padding:8px 10px;border-radius:0 6px 6px 0;">
+                <div style="font-size:11px;font-weight:800;color:#92400E;white-space:nowrap;">✅ Aprova</div>
+                <div style="font-size:11px;color:#92400E;line-height:1.4;"><strong>Aprovação em lote:</strong> usuário revisa a lista sugerida pela manhã e aprova tudo de uma vez — sem entrar nota por nota. A IA aprende quais NF-es o usuário costuma pagar adiantado, em dia ou com atraso por fornecedor. Score de confiança aumenta com acerto acumulado.</div>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:8px;background:#EFF6FF;border-left:3px solid #3B82F6;padding:8px 10px;border-radius:0 6px 6px 0;">
+                <div style="font-size:11px;font-weight:800;color:#1E40AF;white-space:nowrap;">⚡ Confia</div>
+                <div style="font-size:11px;color:#1E40AF;line-height:1.4;"><strong>Fluxo automatizado:</strong> NF-es de alta confiança entram no fluxo de pagamento automaticamente. Usuário só vê exceções — o que ficou fora da automação por baixa confiança ou inconsistência detectada.</div>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Conexão com Three-Way Match</div>
+            <div style="background:var(--purple-bg);border-left:3px solid var(--purple);padding:8px 10px;border-radius:0 6px 6px 0;">
+              <div style="font-size:11px;color:#4C1D95;">O score de confiança do Three-Way Match alimenta diretamente esta aposta: uma NF-e aprovada no match tem alta confiança para pagamento. As duas apostas compartilham lógica de scoring — construir juntas reduz custo.</div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Referência competitiva</div>
+            <div style="background:#F0FDF4;border-left:3px solid #10B981;padding:7px 10px;border-radius:0 6px 6px 0;">
+              <div style="font-size:10px;font-weight:700;color:#065F46;margin-bottom:3px;">✦ Sem referência mapeada nos 8 players do desk research</div>
+              <div style="font-size:11px;color:#065F46;">Sugestão de agenda de pagamentos cruzada com dados fiscais (NF-e + CT-e + score de confiança) não foi identificada em nenhum player. ERPs fazem gestão de vencimentos, mas sem o cruzamento com validação documental que a Qive pode oferecer. Possível diferencial de mercado.</div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Perguntas a responder antes de priorizar</div>
+            <div class="field-text">A Qive registra confirmação de pagamento realizado ou só de NF-e recebida? · Qual % da base usa a Qive no fluxo de aprovação de pagamentos? · O ERP do cliente já tem essa função — ou a Qive é a única visão consolidada?</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Risco principal</div>
+            <div class="risk-row">
+              <div class="risk-icon">⚡</div>
+              <div class="risk-text">Se o ERP já concentra a aprovação de pagamentos, a Qive vira uma camada redundante. O diferencial real é o cruzamento com dados fiscais (Three-Way Match, inconsistências) que o ERP não faz. Sem essa integração, a aposta perde força.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TRUST MODELS FROM INTERVIEWS -->
+  <div class="trust-models">
+    <div class="trust-models-header">🧠 Modelos de confiança identificados nas entrevistas — aplicar como padrão de design nos Modelos 1 e 2</div>
+    <div class="trust-models-body">
+      <div class="trust-model-card">
+        <div class="trust-model-title">Validação em Paralelo</div>
+        <div class="trust-model-sub">🔍 Confere</div>
+        <div class="trust-model-text">O usuário roda a IA em paralelo com seu processo manual por 4–5 dias. A transição para uso exclusivo acontece só depois de confirmar 100% de precisão. Não pular esta etapa.</div>
+        <div class="trust-model-source">Relato: Enterprise / Perfil Fiscal</div>
+      </div>
+      <div class="trust-model-card">
+        <div class="trust-model-title">Supervisão D-1</div>
+        <div class="trust-model-sub">✅ Aprova</div>
+        <div class="trust-model-text">A IA processa lotes autonomamente. No dia seguinte, o usuário confere apenas o relatório de exceções e divergências. Confiança se constrói pelo acerto consecutivo dos fechamentos.</div>
+        <div class="trust-model-source">Relato: Enterprise / Perfil Financeiro</div>
+      </div>
+      <div class="trust-model-card">
+        <div class="trust-model-title">Parametrização pelo Especialista</div>
+        <div class="trust-model-sub">⚡ Confia</div>
+        <div class="trust-model-text">O especialista humano define as regras com precisão. Depois que a parametrização está correta, a IA apenas escala e repete o padrão — eliminando erros na origem.</div>
+        <div class="trust-model-source">Relato: Mid / Supervisora Fiscal</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODEL 3: PULL -->
+  <div class="model-section">
+    <div class="model-header">
+      <div class="model-number">3</div>
+      <div>
+        <div class="model-name">Responde — Conversacional</div>
+        <span class="model-desc">O usuário pergunta, a Qive responde · Requer intenção de acesso · Melhor como segundo passo</span>
+      </div>
+      <div class="model-tag tag-pull">🔄 Em revisão</div>
+    </div>
+    <div class="cards-grid three">
+      <div class="bet-card reframe">
+        <div class="reframe-banner">⚠️ HIPÓTESE REVISADA — A PoC não mostrou retenção. Reframing necessário baseado em survey + entrevistas.</div>
+        <div class="card-top">
+          <div class="card-icon">💬</div>
+          <div class="card-title-block">
+            <div class="card-title">Assistente Qive — Chat com Documentos Fiscais</div>
+            <div class="card-subtitle">Consulta, etiquetas e manifestação via linguagem natural</div>
+          </div>
+          <div class="status-badge status-revisao">Hipótese em revisão</div>
+        </div>
+        <div class="card-body">
+          <div style="background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;padding:10px 12px;margin-bottom:12px;">
+            <div style="font-size:10px;font-weight:700;color:#1E40AF;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;">✅ Onde estamos hoje</div>
+            <div style="font-size:11px;color:#1E40AF;">O chatbot já cumpre bem o papel de Responde: tira dúvidas básicas sobre notas fiscais eletrônicas e executa ações via linguagem natural — classificação por etiquetas e manifestação dos documentos fiscais. A capacidade técnica está validada; o que está em revisão é a hipótese de que o chat funcione como porta de entrada principal da IA.</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Melhorias de usabilidade — Q3 2026</div>
+            <div style="background:#F8FAFC;border:1px solid var(--gray-200);border-radius:8px;padding:10px 12px;">
+              <div style="font-size:11px;color:var(--gray-700);line-height:1.6;">
+                <div>• Adicionar uma camada de conversação na Home do Produto</div>
+                <div>• Gerar relatórios dentro da conversação</div>
+                <div>• Reduzir validações desnecessárias</div>
+                <div>• Sugestão de ações rápidas com base no contexto da conversa</div>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Hipótese original (invalidada pela PoC)</div>
+            <div class="field-text" style="text-decoration: line-through; color: var(--gray-500);">Chat como interface principal de IA gera adoção e retenção na Qive.</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Hipótese revisada</div>
+            <div class="field-text"><strong>Chat amplifica o valor de usuários que já estão ativos por outro motivo.</strong> O usuário recebe uma notificação (Monitora) → entra na Qive → usa o chat para investigar e agir em lote. O chat é o segundo passo, não a porta de entrada.</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Confirmação qualitativa</div>
+            <div class="quali-insight">
+              <div class="quali-insight-label">Conclusão das entrevistas</div>
+              <div class="quali-insight-text">"A IA é vista como grande aliada, mas não para 'conversar' em um chat — e sim para agir como um auditor preditivo e executor de tarefas repetitivas, desde que com rastreabilidade."</div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Evidência da survey</div>
+            <div class="evidence-row">
+              <div class="evidence-chip"><span class="score">3.73</span>/5 — consulta via chat · 3º no ranking</div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Mudança de métrica de sucesso</div>
+            <div class="field-text">
+              <strong>Antes:</strong> sessões de chat iniciadas por mês<br>
+              <strong>Depois:</strong> % de usuários ativos que usam o chat · ações executadas por sessão · % de sessões iniciadas a partir de notificação (Monitora)
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Referência competitiva</div>
+            <div style="background:#F0FDF4;border-left:3px solid #10B981;padding:7px 10px;border-radius:0 6px 6px 0;">
+              <div style="font-size:10px;font-weight:700;color:#065F46;margin-bottom:3px;">✦ Sem referência mapeada para chat contextualizado em documentos fiscais</div>
+              <div style="font-size:11px;color:#065F46;">V360 possui chatbot, mas focado em Reforma Tributária (perguntas genéricas). Nenhum player mapeado oferece chat que responde com base nos documentos fiscais reais do cliente — CFOPs específicos, fornecedores, regimes. Possível diferencial estrutural.</div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Risco principal</div>
+            <div class="risk-row">
+              <div class="risk-icon">⚡</div>
+              <div class="risk-text">O chat depende do sucesso do Modelo 1 (Monitora) para ter entrada qualificada. Sem notificações que tragam o usuário, o chat fica sem contexto de uso recorrente.</div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Tracking no Notion</div>
+            <div class="evidence-row">
+              <a href="https://www.notion.so/3126f5f2cc02807885c8c24825056b2d" target="_blank" style="text-decoration:none;"><div class="evidence-chip" style="cursor:pointer;">📦 Entrega — Assistente Qive: Conversando com documentos fiscais</div></a>
+              <a href="https://www.notion.so/3126f5f2cc0280a48f7ec65713237084" target="_blank" style="text-decoration:none;"><div class="evidence-chip" style="cursor:pointer;">📦 Entrega — Agente de manifestação</div></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Aposta: Guia de Reforma Tributária -->
+      <div class="bet-card" style="border: 2px dashed var(--teal);">
+        <div class="card-top" style="border-bottom-color: var(--teal-bg);">
+          <div class="card-icon">🏛️</div>
+          <div class="card-title-block">
+            <div class="card-title">Guia de Reforma Tributária</div>
+            <div class="card-subtitle">Capacidade especializada dentro do Assistente Qive — não um produto separado</div>
+          </div>
+          <div class="status-badge status-competitivo">Sinal competitivo</div>
+        </div>
+        <div class="card-body">
+          <div class="field">
+            <div class="field-label">Hipótese</div>
+            <div class="field-text">Oferecer um canal de consulta sobre a Reforma Tributária — o que muda, quando muda e como impacta o negócio — resolve a ansiedade de quem tem pouca informação e cria um motivo de uso do chat independente dos documentos do usuário. Na sequência, o diferencial é trazer os dados reais do cliente para personalizar a análise.</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Evolução Confere → Aprova → Confia</div>
+            <div style="display:flex;flex-direction:column;gap:6px;margin-top:4px;">
+              <div style="background:#F0FDF4;border-left:3px solid #10B981;padding:8px 10px;border-radius:0 6px 6px 0;">
+                <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:4px;">
+                  <div style="font-size:11px;font-weight:800;color:#065F46;white-space:nowrap;">🔍 Confere</div>
+                  <div style="font-size:11px;color:#065F46;line-height:1.4;"><strong>Canal de consulta genérico:</strong> usuário pergunta sobre IBS/CBS, Split Payment, transição de regimes e impactos operacionais. Respostas baseadas em curadoria de conteúdo — sem dados do cliente.</div>
+                </div>
+                <div style="font-size:10px;color:#059669;font-style:italic;">Aproveitamento do LLM e interface do Assistente Qive já existentes. Esforço principal = curadoria tributária.</div>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:8px;background:#FFF7ED;border-left:3px solid #F59E0B;padding:8px 10px;border-radius:0 6px 6px 0;">
+                <div style="font-size:11px;font-weight:800;color:#92400E;white-space:nowrap;">✅ Aprova</div>
+                <div style="font-size:11px;color:#92400E;line-height:1.4;"><strong>Análise personalizada com dados do cliente:</strong> <em>"Como a RT impacta as suas notas com CFOP X?"</em> — responde com base nos documentos reais do usuário. Proposta irreproduzível por quem não tem os dados.</div>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:8px;background:#EFF6FF;border-left:3px solid #3B82F6;padding:8px 10px;border-radius:0 6px 6px 0;">
+                <div style="font-size:11px;font-weight:800;color:#1E40AF;white-space:nowrap;">⚡ Confia</div>
+                <div style="font-size:11px;color:#1E40AF;line-height:1.4;"><strong>Alertas proativos:</strong> Qive detecta documentos com CFOPs afetados pela transição IBS/CBS e notifica o usuário antes que o impacto aconteça.</div>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Por que é Responde, não Monitora</div>
+            <div class="quali-insight">
+              <div class="quali-insight-label">Correção de classificação</div>
+              <div class="quali-insight-text">No Confere não há evento nos dados que dispare um alerta proativo. A Qive age quando o usuário pergunta. Migra para Monitora (Confia) apenas quando a detecção de CFOPs afetados estiver ativa.</div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Diferencial vs. concorrência</div>
+            <div class="field-text">V360, ROIT e Solutio respondem dúvidas genéricas (Confere). O passo seguinte da Qive — análise com dados reais do cliente — é irreproduzível por quem não tem os documentos.</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Evidência competitiva</div>
+            <div class="evidence-row">
+              <div class="evidence-chip comp">V360: chatbot RT 2025</div>
+              <div class="evidence-chip comp">ROIT: carro-chefe 2026</div>
+              <div class="evidence-chip comp">Solutio: Total Reforma 2.0</div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Custo</div>
+            <div class="field-text">Baixo — aproveita o LLM e a interface do Assistente Qive já existentes. Esforço principal é curadoria do conteúdo tributário da RT.</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Sinal de validação</div>
+            <div class="field-text">% de sessões de chat que tocam em RT · Redução de tickets de suporte sobre RT · NPS da capacidade</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Risco principal</div>
+            <div class="risk-row">
+              <div class="risk-icon">⚡</div>
+              <div class="risk-text">Janela de oportunidade limitada — após 2028 a urgência reduz. E herda o problema de retenção do Assistente Qive: gera uso pontual, não hábito. Não resolve o problema de retention sozinha.</div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Tracking no Notion</div>
+            <div class="evidence-row">
+              <a href="https://www.notion.so/3816f5f2cc02811d9122e1fd74129930" target="_blank" style="text-decoration:none;"><div class="evidence-chip" style="cursor:pointer;">📄 Product Briefing</div></a>
+              <a href="https://www.notion.so/3836f5f2cc0281099a51d69fa758d801" target="_blank" style="text-decoration:none;"><div class="evidence-chip" style="cursor:pointer;">📦 Entrega — Guia de Reforma Tributária</div></a>
+              <a href="https://www.notion.so/3806f5f2cc0281bdb953f5aee2012164" target="_blank" style="text-decoration:none;"><div class="evidence-chip quali" style="cursor:pointer;">🧪 Experimento de hipótese</div></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Aposta: Inteligência de Fornecedores -->
+      <div class="bet-card" style="border: 1px dashed var(--gray-200); opacity: 0.85;">
+        <div class="card-top">
+          <div class="card-icon">🏭</div>
+          <div class="card-title-block">
+            <div class="card-title">Inteligência de Fornecedores</div>
+            <div class="card-subtitle">Perguntas sobre desempenho, preços e padrões de fornecedores via chat</div>
+          </div>
+          <div class="status-badge status-sem-evidencia">Sem evidência</div>
+        </div>
+        <div class="card-body">
+          <div style="background:#F9FAFB;border:1px dashed #D1D5DB;border-radius:8px;padding:10px 12px;margin-bottom:12px;">
+            <div style="font-size:10px;font-weight:700;color:#6B7280;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;">⚠️ Hipótese sem evidência</div>
+            <div style="font-size:11px;color:#6B7280;">Sem sinal de survey, entrevistas ou competidores por enquanto. Registrada para exploração futura — validar antes de qualquer spec.</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Hipótese</div>
+            <div class="field-text">A Qive acumula NF-es de múltiplos fornecedores ao longo do tempo. A IA pode responder perguntas que hoje exigem cruzamento manual: <em>"Qual fornecedor tem a menor taxa de divergências?"</em>, <em>"O preço desta NF-e está acima da média histórica?"</em>, <em>"Quem entrega mais rápido para o CFOP X?"</em></div>
+          </div>
+          <div class="field">
+            <div class="field-label">Por que é Responde</div>
+            <div class="field-text">O usuário precisa formular a pergunta — a Qive não sabe quando ele quer comparar fornecedores. Vira Monitora se a IA detectar anomalia de preço em uma NF-e recebida e notificar proativamente.</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Vantagem de dados potencial</div>
+            <div class="field-text">Com anonimização adequada, a Qive poderia oferecer benchmarks de mercado entre clientes semelhantes — uma proposta que concorrentes sem base de NF-es não conseguem replicar.</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Referência competitiva</div>
+            <div style="background:#F0FDF4;border-left:3px solid #10B981;padding:7px 10px;border-radius:0 6px 6px 0;">
+              <div style="font-size:10px;font-weight:700;color:#065F46;margin-bottom:3px;">✦ Sem referência mapeada nos 8 players do desk research</div>
+              <div style="font-size:11px;color:#065F46;">Nenhum player mapeado oferece inteligência de fornecedores contextualizada a dados reais de NF-e do cliente. Ferramentas de procurement (SAP Ariba, Coupa) fazem benchmark de preços, mas sem acesso aos documentos fiscais brasileiros. A base de NF-es da Qive é um ativo de dados sem equivalente no mercado nacional.</div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Perguntas a responder antes de priorizar</div>
+            <div class="field-text">Usuários buscam essa informação hoje? Por onde? · Há sobreposição com BI interno (Power BI / ERPs)? · Política de anonimização dos dados entre clientes é viável juridicamente?</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Risco principal</div>
+            <div class="risk-row">
+              <div class="risk-icon">⚡</div>
+              <div class="risk-text">Valor cresce com volume de dados — SMBs com poucos fornecedores têm histórico insuficiente para padrões confiáveis. Pode ser uma aposta Enterprise-first, não de base ampla.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MODEL 4: EMBEDDED -->
+  <div class="model-section">
+    <div class="model-header">
+      <div class="model-number">4</div>
+      <div>
+        <div class="model-name">Habita — Integrado</div>
+        <span class="model-desc">A Qive vive dentro das ferramentas que o usuário já usa · Aposta de longo prazo · Segmento AI-native e TI</span>
+      </div>
+      <div class="model-tag tag-embedded">📌 Explorar H2 2026</div>
+    </div>
+    <div class="cards-grid single">
+      <div class="bet-card">
+        <div class="card-top">
+          <div class="card-icon">🤖</div>
+          <div class="card-title-block">
+            <div class="card-title">Presença em Assistentes Externos (API / MCP)</div>
+            <div class="card-subtitle">Dados fiscais acessíveis via ChatGPT, Copilot ou assistentes internos sem abrir a Qive</div>
+          </div>
+          <div class="status-badge status-nao-testada">Não testada</div>
+        </div>
+        <div class="card-body">
+          <div class="field">
+            <div class="field-label">Hipótese</div>
+            <div class="field-text">Existe um segmento AI-native em contas enterprise que prefere acessar dados da Qive via ferramentas que já usam. Para eles, abrir a Qive é fricção — a integração elimina essa fricção e cria dependência de dados.</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Evidência da survey</div>
+            <div class="evidence-row">
+              <div class="evidence-chip"><span class="score">74</span>/170 deram 5/5 · Feature mais polarizada</div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Insight qualitativo — persona TI</div>
+            <div class="quali-insight">
+              <div class="quali-insight-label">Descoberta das entrevistas</div>
+              <div class="quali-insight-text">"A persona TI constrói painéis de Power BI, automações de Power Apps e pipelines sobre a API da Qive porque a plataforma não entrega essa visibilidade nativamente. O que esses usuários constroem por fora se aproxima do nosso roadmap."</div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Referência competitiva</div>
+            <div style="background:#F0FDF4;border-left:3px solid #10B981;padding:7px 10px;border-radius:0 6px 6px 0;">
+              <div style="font-size:10px;font-weight:700;color:#065F46;margin-bottom:3px;">✦ Sem referência mapeada nos 8 players do desk research</div>
+              <div style="font-size:11px;color:#065F46;">Nenhum player fiscal brasileiro mapeado oferece integração via API/MCP para assistentes externos (ChatGPT, Copilot). Ferramentas globais como Ramp e Coupa possuem APIs, mas sem cobertura de NF-e e CT-e brasileiros. Possível diferencial para o segmento enterprise AI-native.</div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Sinal de validação</div>
+            <div class="field-text">Tamanho do segmento AI-native na base KA · Entrevistas com os 74 que deram 5/5 · Willingness to pay por integração</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Risco principal</div>
+            <div class="risk-row">
+              <div class="risk-icon">⚡</div>
+              <div class="risk-text">Apostar nessa feature antes de validar o tamanho do segmento desvia energia de apostas com maior cobertura de base. Recomendado como exploração em H2 2026, não como prioridade de build.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LABS / PLATFORM -->
+  <div class="model-section" style="border: 1px dashed #C4B5FD; border-radius: 12px; padding: 20px 20px 4px; background: linear-gradient(135deg, #FAF5FF, #F5F3FF);">
+    <div class="model-header" style="border-bottom-color: #DDD6FE;">
+      <div class="model-number" style="background: var(--purple);">🔬</div>
+      <div>
+        <div class="model-name" style="color: #5B21B6;">Labs & Plataforma — Infraestrutura de dados</div>
+        <span class="model-desc">Apostas que não são features diretas — são capacidades que habilitam múltiplas apostas acima · Originadas no Labs de IA</span>
+      </div>
+      <div class="model-tag" style="background: #EDE9FE; color: #5B21B6;">🚀 Pronto · Validando PMF</div>
+    </div>
+    <div class="cards-grid single">
+
+      <!-- Aposta Labs: Normalização de Produtos & Benchmark de Preços -->
+      <div class="bet-card" style="border: 1px dashed #C4B5FD;">
+        <div class="card-top" style="border-bottom-color: #EDE9FE;">
+          <div class="card-icon">🏷️</div>
+          <div class="card-title-block">
+            <div class="card-title">Normalização de Produtos & Benchmark de Preços</div>
+            <div class="card-subtitle">Capacidade de plataforma: normaliza nomes de produtos via GTIN e habilita inteligência de preços entre fornecedores e clientes</div>
+          </div>
+          <div class="status-badge" style="background:#EDE9FE;color:#5B21B6;">Validando PMF · Q3 2026</div>
+        </div>
+        <div class="card-body">
+          <div style="background:#F5F3FF;border:1px solid #C4B5FD;border-radius:8px;padding:10px 12px;margin-bottom:12px;">
+            <div style="font-size:10px;font-weight:700;color:#5B21B6;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;">🚀 Tecnologia pronta — pergunta é de mercado</div>
+            <div style="font-size:11px;color:#4C1D95;">O Labs já tem o modelo de normalização de produtos construído. A aposta entra em estágio de validação de PMF em <strong>Q3 2026</strong>: a tecnologia existe, a questão agora é confirmar se benchmark de preços é um problema real para os clientes, com qual frequência ocorre e qual o custo do erro atual. Encontrando PMF, a produtização está planejada para <strong>Q4 2026</strong>.</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Problema técnico que o Labs está resolvendo</div>
+            <div style="background:#F8FAFC;border:1px solid var(--gray-200);border-radius:8px;padding:10px 12px;">
+              <div style="font-size:11px;color:var(--gray-700);line-height:1.5;margin-bottom:6px;">A NF-e tem dois campos para identificar um produto:</div>
+              <div style="display:flex;flex-direction:column;gap:4px;">
+                <div style="font-size:11px;color:var(--gray-700);"><code style="font-size:10px;background:#F3F4F6;padding:1px 5px;border-radius:3px;">&lt;cEAN&gt;</code> — GTIN/código de barras. Quando preenchido, identifica o produto de forma universal. <span style="color:#059669;font-weight:600;">Problema resolvido.</span></div>
+                <div style="font-size:11px;color:var(--gray-700);"><code style="font-size:10px;background:#F3F4F6;padding:1px 5px;border-radius:3px;">&lt;xProd&gt;</code> — descrição livre. O mesmo produto vira <em>"Caneta BIC AZ"</em>, <em>"CANETA ESFEROGRAFICA AZUL"</em> e <em>"BIC Cristal Azul"</em> em fornecedores diferentes. <span style="color:#EF4444;font-weight:600;">Problema que o Labs está atacando.</span></div>
+              </div>
+              <div style="font-size:10px;color:var(--gray-500);margin-top:8px;">O Labs está treinando um modelo para normalizar <code style="font-size:10px;background:#F3F4F6;padding:1px 4px;border-radius:3px;">&lt;xProd&gt;</code> → nome canônico de produto, permitindo comparação entre fornecedores mesmo quando o GTIN está ausente.</div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">O que essa capacidade habilita — Confere → Aprova → Confia</div>
+            <div style="display:flex;flex-direction:column;gap:6px;margin-top:4px;">
+              <div style="display:flex;align-items:flex-start;gap:8px;background:#F0FDF4;border-left:3px solid #10B981;padding:8px 10px;border-radius:0 6px 6px 0;">
+                <div style="font-size:11px;font-weight:800;color:#065F46;white-space:nowrap;">🔍 Confere</div>
+                <div style="font-size:11px;color:#065F46;line-height:1.4;"><strong>Benchmark intra-cliente:</strong> "Você comprou este produto de 3 fornecedores diferentes este ano — os preços foram R$12, R$14 e R$17." Sem dados externos. Valor com poucos clientes, sem compliance de privacidade.</div>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:8px;background:#FFF7ED;border-left:3px solid #F59E0B;padding:8px 10px;border-radius:0 6px 6px 0;">
+                <div style="font-size:11px;font-weight:800;color:#92400E;white-space:nowrap;">✅ Aprova</div>
+                <div style="font-size:11px;color:#92400E;line-height:1.4;"><strong>Benchmark inter-cliente anonimizado:</strong> "O preço médio deste produto na base Qive é R$13,20." Requer anonimização robusta + base suficiente. Efeito de rede — quanto mais clientes, mais preciso.</div>
+              </div>
+              <div style="display:flex;align-items:flex-start;gap:8px;background:#EFF6FF;border-left:3px solid #3B82F6;padding:8px 10px;border-radius:0 6px 6px 0;">
+                <div style="font-size:11px;font-weight:800;color:#1E40AF;white-space:nowrap;">⚡ Confia</div>
+                <div style="font-size:11px;color:#1E40AF;line-height:1.4;"><strong>Alerta em tempo real:</strong> NF-e é ingerida → produto normalizado → preço comparado ao benchmark → "este item está 23% acima da sua média histórica para este fornecedor. Contestar?" — integra ao fluxo de Three-Way Match e Agenda de Pagamentos.</div>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Referência competitiva</div>
+            <div style="background:#F0FDF4;border-left:3px solid #10B981;padding:7px 10px;border-radius:0 6px 6px 0;">
+              <div style="font-size:10px;font-weight:700;color:#065F46;margin-bottom:3px;">✦ Sem referência mapeada nos 8 players do desk research</div>
+              <div style="font-size:11px;color:#065F46;">Normalização de produtos por NF-e com benchmark de preços não foi identificada em nenhum player brasileiro. Ferramentas globais de procurement (SAP Ariba, Coupa) fazem benchmark, mas não processam o XML de NF-e. A Qive seria o único player com essa capacidade sobre documentos fiscais reais — diferencial estrutural se houver demanda de mercado.</div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Apostas que esta capacidade desbloqueia</div>
+            <div class="evidence-row">
+              <div class="evidence-chip comp">Inteligência de Fornecedores (Responde)</div>
+              <div class="evidence-chip comp">Three-Way Match — dimensão preço (Acompanha)</div>
+              <div class="evidence-chip comp">Agenda de Pagamentos — priorização por anomalia</div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Experimento de PMF em andamento</div>
+            <div style="background:#EDE9FE;border-left:3px solid var(--purple);padding:8px 10px;border-radius:0 6px 6px 0;">
+              <div style="font-size:10px;font-weight:700;color:#5B21B6;margin-bottom:6px;">🎯 Roteiro de validação com a base de clientes</div>
+              <div style="display:flex;flex-direction:column;gap:4px;">
+                <div style="font-size:11px;color:#4C1D95;"><strong>1. Identificar segmento:</strong> quem na base faz cotação ou compras recorrentes com múltiplos fornecedores? (Setor de Compras / Controladoria)</div>
+                <div style="font-size:11px;color:#4C1D95;"><strong>2. Entender o processo atual:</strong> como comparam preços hoje? Planilha, ERP, cotação manual? Com qual frequência? Qual o volume mensal de itens cotados?</div>
+                <div style="font-size:11px;color:#4C1D95;"><strong>3. Quantificar o erro:</strong> já pagaram acima do preço de mercado sem perceber? Qual o impacto financeiro estimado?</div>
+                <div style="font-size:11px;color:#4C1D95;"><strong>4. Testar a solução:</strong> mostrar o output do modelo de normalização com benchmark intra-cliente e observar a reação — reconhecem o produto? O preço faz sentido? Confiariam na sugestão?</div>
+              </div>
+              <div style="font-size:10px;color:#5B21B6;margin-top:6px;font-style:italic;">Critério de go/no-go: se ≥3 de 5 entrevistados identificarem um episódio recente onde teriam usado essa informação para tomar uma decisão diferente, a aposta entra no roadmap.</div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Riscos principais</div>
+            <div style="display:flex;flex-direction:column;gap:6px;">
+              <div class="risk-row">
+                <div class="risk-icon">⚡</div>
+                <div class="risk-text"><strong>Efeito de rede:</strong> benchmark inter-cliente requer massa crítica. Com poucos clientes, o preço médio não é estatisticamente confiável — pode gerar alertas enganosos e minar confiança.</div>
+              </div>
+              <div class="risk-row">
+                <div class="risk-icon">⚠️</div>
+                <div class="risk-text"><strong>Cobertura de GTIN:</strong> fornecedores menores frequentemente omitem o <code style="font-size:10px;background:#FFF8F0;padding:1px 4px;border-radius:3px;">&lt;cEAN&gt;</code>. A normalização via &lt;xProd&gt; por ML tem taxa de erro — um produto mal classificado gera benchmarks errados downstream.</div>
+              </div>
+              <div class="risk-row">
+                <div class="risk-icon">🔒</div>
+                <div class="risk-text"><strong>Compliance de dados:</strong> usar dados de NF-es de um cliente para alimentar benchmarks de outro exige política clara de anonimização e, possivelmente, consentimento explícito nos contratos.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- COMPETITIVE CONTEXT -->
+  <div class="comp-section">
+    <div class="comp-header">
+      <div class="model-number" style="background: var(--teal);">🔍</div>
+      <div>
+        <div class="comp-title">Contexto Competitivo — O mercado já saiu do modo ferramenta</div>
+        <span class="comp-sub">Referências do desk research que informam as apostas · Não são concorrentes diretos, mas definem expectativas de mercado</span>
+      </div>
+    </div>
+    <div class="comp-grid">
+      <div class="comp-card">
+        <div class="comp-card-header">
+          <div class="comp-name">V360</div>
+          <div class="comp-badge comp-badge-rt">Reforma Tributária</div>
+        </div>
+        <div class="comp-feature">Chatbot específico para dúvidas sobre RT lançado em 2025. Foco em impactos operacionais da transição IBS/CBS.</div>
+        <div class="comp-highlight">→ Já valida a aposta de assistente RT</div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-card-header">
+          <div class="comp-name">ROIT</div>
+          <div class="comp-badge comp-badge-rt">Reforma Tributária</div>
+        </div>
+        <div class="comp-feature">Calculadora e simulador de RT como carro-chefe 2026. Reprocessa SPED e NF-e antigas para simular impacto IBS/CBS e Split Payment.</div>
+        <div class="comp-highlight">→ Player mais agressivo em IA + RT</div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-card-header">
+          <div class="comp-name">Solutio</div>
+          <div class="comp-badge comp-badge-rt">Reforma Tributária</div>
+        </div>
+        <div class="comp-feature">Total Reforma 2.0: IA generativa para simular impacto fiscal até 2033. Análises conversacionais com gráficos de impacto instantâneos.</div>
+        <div class="comp-highlight">→ Relevante para Dashboard RT da Qive</div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-card-header">
+          <div class="comp-name">AppZen</div>
+          <div class="comp-badge comp-badge-agent">Agente</div>
+        </div>
+        <div class="comp-feature">Auditoria de 100% das notas antes do pagamento. Bloqueia automaticamente em caso de discrepância. LLM próprio (ZenLM) treinado em trilhões de transações.</div>
+        <div class="comp-highlight">→ Referência para meta Confia (2027)</div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-card-header">
+          <div class="comp-name">Coupa Navi™</div>
+          <div class="comp-badge comp-badge-agent">Crawl-Walk-Run</div>
+        </div>
+        <div class="comp-feature">Institucionaliza a progressão de confiança no produto: sugestão → validação → execução autônoma. Confirma o modelo identificado nas entrevistas.</div>
+        <div class="comp-highlight">→ Arquitetura de confiança da Qive</div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-card-header">
+          <div class="comp-name">Ramp</div>
+          <div class="comp-badge comp-badge-agent">Agente</div>
+        </div>
+        <div class="comp-feature">Ramp Sheets: planilha nativa com IA que substitui o Excel. Usuário conecta dados e consulta via chat. Elimina a exportação de dados.</div>
+        <div class="comp-highlight">→ Alerta: estão atacando o Excel, nossa maior concorrência indireta</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRIORITY TABLE -->
+  <div class="order-section">
+    <div class="order-header">📊 Ranking de Apostas — Sinal × Custo de desenvolvimento</div>
+    <div style="padding:12px 20px;background:#FFF7ED;border-bottom:1px solid var(--gray-200);font-size:11px;color:#92400E;display:flex;align-items:flex-start;gap:8px;">
+      <span>⚖️</span>
+      <span><strong>Lógica de priorização revisada:</strong> sinal de demanda (survey + competitivo) ponderado pelo custo de desenvolvimento. Apostas com alto sinal e baixo custo sobem; Aposta 1 (Inconsistências) desce apesar do maior score porque o motor tributário tem custo alto. A sequência também habilita infraestrutura: RT valida o LLM → Ponte ERP constrói o canal Monitora → Inconsistências aproveita ambos a custo marginal menor.</span>
+    </div>
+    <table class="order-table">
+      <thead>
+        <tr>
+          <th>Prior.</th>
+          <th>Aposta</th>
+          <th>Modelo</th>
+          <th>Score / Sinal</th>
+          <th>Custo dev</th>
+          <th>Status</th>
+          <th>Próximo passo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="background:#F0FDFA;">
+          <td><div class="priority-num" style="background:var(--teal);">1</div></td>
+          <td style="font-weight:600;">Guia de Reforma Tributária <span style="font-size:10px;color:var(--teal);font-weight:700;">✦ NOVO</span></td>
+          <td><span class="model-tag tag-pull" style="display:inline-block;">Responde</span></td>
+          <td><div class="score-bar-wrap"><div class="score-bar teal" style="width:70px;"></div><span class="score-val comp-signal">3 players · alta ansiedade</span></div></td>
+          <td><span style="font-size:11px;font-weight:700;color:#065F46;background:#D1FAE5;padding:2px 8px;border-radius:20px;">🟢 Baixo</span></td>
+          <td><span class="status-badge status-competitivo">Sinal competitivo</span></td>
+          <td style="color:var(--gray-500);">Avaliar LLM RT existente · definir diferencial contextual</td>
+        </tr>
+        <tr>
+          <td><div class="priority-num">2</div></td>
+          <td style="font-weight:600;">Ponte com ERP → Three-Way Match <span style="font-size:10px;color:var(--gray-500);">(Confere)</span></td>
+          <td><span class="model-tag tag-inflow" style="display:inline-block;">Acompanha</span></td>
+          <td><div class="score-bar-wrap"><div class="score-bar" style="width:86px;"></div><span class="score-val">4.30</span></div></td>
+          <td><span style="font-size:11px;font-weight:700;color:#065F46;background:#D1FAE5;padding:2px 8px;border-radius:20px;">🟢 Baixo-médio</span></td>
+          <td><span class="status-badge status-nao-testada">Não testada</span></td>
+          <td style="color:var(--gray-500);">Mapear ERPs prioritários · constrói infraestrutura Monitora</td>
+        </tr>
+        <tr>
+          <td><div class="priority-num">3</div></td>
+          <td style="font-weight:600;">Agente de Inconsistências Tributárias</td>
+          <td><span class="model-tag tag-push" style="display:inline-block;">Monitora</span></td>
+          <td><div class="score-bar-wrap"><div class="score-bar" style="width:87px;"></div><span class="score-val">4.37</span></div></td>
+          <td><span style="font-size:11px;font-weight:700;color:#991B1B;background:#FEE2E2;padding:2px 8px;border-radius:20px;">🔴 Alto</span></td>
+          <td><span class="status-badge status-nao-testada">Não testada</span></td>
+          <td style="color:var(--gray-500);">Iniciar após canal Monitora existir · spec + threshold</td>
+        </tr>
+        <tr style="background:#FEFCE8;">
+          <td><div class="priority-num" style="background:#CA8A04;">3.5</div></td>
+          <td style="font-weight:600;">Agente de Validação PO + NF-e <span style="font-size:10px;color:#854D0E;font-weight:700;">🤝 Fini</span></td>
+          <td><span class="model-tag tag-push" style="display:inline-block;">Monitora</span></td>
+          <td><div class="score-bar-wrap"><span style="font-size:11px;color:#854D0E;font-weight:600;">Sinal de cliente</span></div></td>
+          <td><span style="font-size:11px;font-weight:700;color:#065F46;background:#D1FAE5;padding:2px 8px;border-radius:20px;">🟢 Baixo-médio</span></td>
+          <td><span class="status-badge status-cliente">🤝 Explorando com Fini</span></td>
+          <td style="color:var(--gray-500);">Co-criar Confere com Fini · compartilha detecção com Three-Way Match</td>
+        </tr>
+        <tr>
+          <td><div class="priority-num">4</div></td>
+          <td style="font-weight:600;">Assistente Qive (hipótese revisada)</td>
+          <td><span class="model-tag tag-pull" style="display:inline-block;">Responde</span></td>
+          <td><div class="score-bar-wrap"><div class="score-bar" style="width:74px;"></div><span class="score-val">3.73</span></div></td>
+          <td><span style="font-size:11px;font-weight:700;color:#92400E;background:#FEF3C7;padding:2px 8px;border-radius:20px;">🟡 Médio</span></td>
+          <td><span class="status-badge status-revisao">Em revisão</span></td>
+          <td style="color:var(--gray-500);">Redefinir métricas · acoplar entrada ao Monitora</td>
+        </tr>
+        <tr>
+          <td><div class="priority-num">5</div></td>
+          <td style="font-weight:600;">Sugestão de Etiquetas Automatizadas</td>
+          <td><span class="model-tag tag-inflow" style="display:inline-block;">Acompanha</span></td>
+          <td><div class="score-bar-wrap"><div class="score-bar" style="width:72px;"></div><span class="score-val">3.64</span></div></td>
+          <td><span style="font-size:11px;font-weight:700;color:#92400E;background:#FEF3C7;padding:2px 8px;border-radius:20px;">🟡 Médio</span></td>
+          <td><span class="status-badge status-em-dev">Em desenvolvimento</span></td>
+          <td style="color:var(--gray-500);">Definir threshold mínimo antes de lançar</td>
+        </tr>
+        <tr>
+          <td><div class="priority-num">6</div></td>
+          <td style="font-weight:600;">Verificação Tributária Automatizada</td>
+          <td><span class="model-tag tag-push" style="display:inline-block;">Monitora</span></td>
+          <td><div class="score-bar-wrap"><div class="score-bar" style="width:65px;"></div><span class="score-val comp-signal">Alta demanda qualitativa</span></div></td>
+          <td><span style="font-size:11px;font-weight:700;color:#991B1B;background:#FEE2E2;padding:2px 8px;border-radius:20px;">🔴 Muito alto</span></td>
+          <td><span class="status-badge status-nao-testada">Não testada</span></td>
+          <td style="color:var(--gray-500);">Avaliar viabilidade técnica tributária primeiro</td>
+        </tr>
+        <tr>
+          <td><div class="priority-num">7</div></td>
+          <td style="font-weight:600;">Presença em Assistentes Externos</td>
+          <td><span class="model-tag tag-embedded" style="display:inline-block;">Habita</span></td>
+          <td><div class="score-bar-wrap"><div class="score-bar" style="width:71px;"></div><span class="score-val">3.58</span></div></td>
+          <td><span style="font-size:11px;font-weight:700;color:#92400E;background:#FEF3C7;padding:2px 8px;border-radius:20px;">🟡 Médio</span></td>
+          <td><span class="status-badge status-nao-testada">Não testada</span></td>
+          <td style="color:var(--gray-500);">Entrevistas com segmento AI-native + persona TI</td>
+        </tr>
+        <tr style="opacity:0.7;">
+          <td><div class="priority-num" style="background:#9CA3AF;">8</div></td>
+          <td style="font-weight:600;color:var(--gray-500);">Sugestão de Pagamentos por Padrão <span style="font-size:10px;font-style:italic;font-weight:400;">· sem evidência</span></td>
+          <td><span class="model-tag tag-inflow" style="display:inline-block;">Acompanha</span></td>
+          <td><div class="score-bar-wrap"><span style="font-size:11px;color:var(--gray-500);font-style:italic;">Sem sinal ainda</span></div></td>
+          <td><span style="font-size:11px;font-weight:700;color:#6B7280;background:#F3F4F6;padding:2px 8px;border-radius:20px;">— A explorar</span></td>
+          <td><span class="status-badge status-sem-evidencia">Sem evidência</span></td>
+          <td style="color:var(--gray-500);">Validar demanda com entrevistas · verificar sobreposição com ERP</td>
+        </tr>
+        <tr style="opacity:0.7;">
+          <td><div class="priority-num" style="background:#9CA3AF;">9</div></td>
+          <td style="font-weight:600;color:var(--gray-500);">Inteligência de Fornecedores <span style="font-size:10px;font-style:italic;font-weight:400;">· sem evidência</span></td>
+          <td><span class="model-tag tag-pull" style="display:inline-block;">Responde</span></td>
+          <td><div class="score-bar-wrap"><span style="font-size:11px;color:var(--gray-500);font-style:italic;">Sem sinal ainda</span></div></td>
+          <td><span style="font-size:11px;font-weight:700;color:#6B7280;background:#F3F4F6;padding:2px 8px;border-radius:20px;">— A explorar</span></td>
+          <td><span class="status-badge status-sem-evidencia">Sem evidência</span></td>
+          <td style="color:var(--gray-500);">Entrevistas qualitativas · avaliar viabilidade de dados entre clientes</td>
+        </tr>
+        <tr style="opacity:0.65;background:#FAF5FF;">
+          <td><div class="priority-num" style="background:var(--purple);">L</div></td>
+          <td style="font-weight:600;color:#5B21B6;">Normalização de Produtos & Benchmark de Preços <span style="font-size:10px;font-style:italic;font-weight:400;color:var(--purple);">· Labs</span></td>
+          <td><span class="model-tag" style="background:#EDE9FE;color:#5B21B6;display:inline-block;">Plataforma</span></td>
+          <td><div class="score-bar-wrap"><span style="font-size:11px;color:#5B21B6;font-style:italic;">Capacidade habilitadora</span></div></td>
+          <td><span style="font-size:11px;font-weight:700;color:#5B21B6;background:#EDE9FE;padding:2px 8px;border-radius:20px;">🚀 Tech pronta · Q3</span></td>
+          <td><span class="status-badge" style="background:#EDE9FE;color:#5B21B6;">Validando PMF · Q3 2026</span></td>
+          <td style="color:var(--gray-500);">Validação PMF Q3 · produtização Q4 se PMF confirmado</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <div class="footer-logo">Qi<span>ve</span></div>
+    <div>Baseado em: Survey (186 resp.) · Desk Research (8 players) · Entrevistas (10 usuários)</div>
+    <div>Confidencial · Produto de IA · Pedro Finamore · Junho 2026</div>
+  </div>
+
+</div><!-- /main -->
+</div><!-- /tab-mapa -->
+
+<!-- ══════════════════════════════════════════
+     RESUMO EXECUTIVO
+══════════════════════════════════════════ -->
+<div id="tab-exec">
+<div class="exec-wrap">
+
+  <!-- HERO -->
+  <div class="exec-hero">
+    <div>
+      <div class="exec-kicker">Produto de IA · Qive 2026</div>
+      <div class="exec-title">Estratégia de IA —<br>Visão Executiva</div>
+      <div class="exec-subtitle">Portfolio de apostas, priorização e próximos passos · H2 2026</div>
+    </div>
+    <div class="exec-meta">
+      <div class="exec-meta-badge">Junho 2026</div>
+      <div>Pedro Finamore</div>
+      <div>Produto de IA</div>
+      <div style="margin-top:6px;font-size:11px;opacity:0.6;">Confidencial</div>
+    </div>
+  </div>
+
+  <!-- TESE -->
+  <div class="exec-section">
+    <div class="exec-section-label">Tese estratégica</div>
+    <div class="thesis-box">
+      A Qive já recebe <span class="thesis-em">100% das NF-es e CT-es dos clientes em tempo real</span> — eliminando o maior custo de IA em finanças corporativas: aquisição e limpeza de dados.
+      Nossas apostas funcionam sobre dados que já existem, sem novas integrações obrigatórias.
+      A janela de vantagem é agora: <span class="thesis-em">concorrentes com dados fragmentados levam anos para replicar essa posição.</span>
+    </div>
+  </div>
+
+  <!-- ONDE ESTAMOS HOJE -->
+  <div class="exec-section">
+    <div class="exec-section-label">Onde estamos hoje</div>
+    <div class="thesis-box" style="background:#EFF6FF;border-left:4px solid #3B82F6;">
+      O chatbot já cumpre bem o papel de <strong>Responde</strong>: tira dúvidas básicas sobre notas fiscais eletrônicas e executa ações via linguagem natural — classificação por etiquetas e manifestação dos documentos fiscais.
+      A capacidade técnica está validada; o que está em revisão é a hipótese de que o chat funcione como <span class="thesis-em">porta de entrada principal</span> da IA na Qive.
+    </div>
+  </div>
+
+  <!-- DADOS DA PESQUISA -->
+  <div class="exec-section">
+    <div class="exec-section-label">Base de evidências</div>
+    <div class="stats-row">
+      <div class="stat-box">
+        <div class="stat-num">186</div>
+        <div class="stat-label">clientes responderam survey sobre IA fiscal</div>
+        <div class="stat-insight">9/10 delegariam tarefas com condições de confiança</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">8</div>
+        <div class="stat-label">players mapeados em desk research competitivo</div>
+        <div class="stat-insight">5 das nossas apostas sem equivalente no mercado</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">10</div>
+        <div class="stat-label">entrevistas qualitativas com usuários reais</div>
+        <div class="stat-insight">54% exportam dados todo dia para cruzamento manual</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PORTFOLIO -->
+  <div class="exec-section">
+    <div class="exec-section-label">Portfolio — 11 apostas mapeadas</div>
+    <div class="portfolio-grid">
+      <div class="portfolio-item" style="background:#F0FDFA;border-color:#99F6E4;">
+        <div class="p-rank" style="background:#0D9488;">1</div>
+        <div class="p-name">Guia de Reforma Tributária (Assistente Qive) <a href="https://www.notion.so/3836f5f2cc0281099a51d69fa758d801" target="_blank" style="text-decoration:none;font-size:10px;" title="Abrir entrega no Notion">📎</a></div>
+        <span class="portfolio-tag tag-pull" style="margin-right:4px;">Responde</span>
+        <span class="p-signal" style="color:#065F46;">🟢 Baixo custo</span>
+      </div>
+      <div class="portfolio-item">
+        <div class="p-rank">2</div>
+        <div class="p-name">Three-Way Match — Ponte ERP + NF-e + CT-e <a href="https://www.notion.so/3836f5f2cc0281e08b98c555c675540d" target="_blank" style="text-decoration:none;font-size:10px;" title="Abrir entrega no Notion">📎</a></div>
+        <span class="portfolio-tag tag-inflow" style="margin-right:4px;">Acompanha</span>
+        <span class="p-signal" style="color:#065F46;">🟢 Score 4.30</span>
+      </div>
+      <div class="portfolio-item">
+        <div class="p-rank">3</div>
+        <div class="p-name">Agente de Inconsistências Tributárias</div>
+        <span class="portfolio-tag tag-push" style="margin-right:4px;">Monitora</span>
+        <span class="p-signal" style="color:#991B1B;">🔴 Score 4.37</span>
+      </div>
+      <div class="portfolio-item" style="background:#FEFCE8;border-color:#FDE68A;">
+        <div class="p-rank" style="background:#CA8A04;">3.5</div>
+        <div class="p-name">Agente de Validação PO + NF-e <span style="color:#854D0E;font-size:10px;">🤝 Fini</span></div>
+        <span class="portfolio-tag tag-push" style="margin-right:4px;">Monitora</span>
+        <span class="p-signal" style="color:#854D0E;">🟢 Sinal cliente</span>
+      </div>
+      <div class="portfolio-item">
+        <div class="p-rank">4</div>
+        <div class="p-name">Assistente Qive — Chat com Documentos Fiscais <a href="https://www.notion.so/3126f5f2cc02807885c8c24825056b2d" target="_blank" style="text-decoration:none;font-size:10px;" title="Abrir entrega no Notion">📎</a></div>
+        <span class="portfolio-tag tag-pull" style="margin-right:4px;">Responde</span>
+        <span class="p-signal" style="color:#92400E;">🟡 Score 3.73</span>
+      </div>
+      <div class="portfolio-item">
+        <div class="p-rank">5</div>
+        <div class="p-name">Sugestão de Etiquetas Automatizadas <a href="https://www.notion.so/3126f5f2cc0280978fd1e2f348d63d98" target="_blank" style="text-decoration:none;font-size:10px;" title="Abrir entrega no Notion">📎</a></div>
+        <span class="portfolio-tag tag-inflow" style="margin-right:4px;">Acompanha</span>
+        <span class="p-signal" style="color:#92400E;">🟡 Em dev</span>
+      </div>
+      <div class="portfolio-item">
+        <div class="p-rank">6</div>
+        <div class="p-name">Verificação Tributária Automatizada</div>
+        <span class="portfolio-tag tag-push" style="margin-right:4px;">Monitora</span>
+        <span class="p-signal" style="color:#991B1B;">🔴 Alto custo</span>
+      </div>
+      <div class="portfolio-item">
+        <div class="p-rank">7</div>
+        <div class="p-name">Presença em Assistentes Externos (API / MCP)</div>
+        <span class="portfolio-tag tag-embedded" style="margin-right:4px;">Habita</span>
+        <span class="p-signal" style="color:#92400E;">🟡 Score 3.58</span>
+      </div>
+      <div class="portfolio-item" style="background:var(--gray-50);">
+        <div class="p-rank" style="background:var(--gray-500);">8</div>
+        <div class="p-name">Agenda de Pagamentos Inteligente</div>
+        <span class="portfolio-tag tag-inflow" style="margin-right:4px;">Acompanha</span>
+        <span class="p-signal" style="color:var(--gray-500);">⬜ Sem evidência</span>
+      </div>
+      <div class="portfolio-item" style="background:var(--gray-50);">
+        <div class="p-rank" style="background:var(--gray-500);">9</div>
+        <div class="p-name">Inteligência de Fornecedores</div>
+        <span class="portfolio-tag tag-pull" style="margin-right:4px;">Responde</span>
+        <span class="p-signal" style="color:var(--gray-500);">⬜ Sem evidência</span>
+      </div>
+      <div class="portfolio-item" style="background:var(--purple-bg);border-color:#C4B5FD;grid-column:span 2;">
+        <div class="p-rank" style="background:var(--purple);">L</div>
+        <div class="p-name">Labs — Normalização de Produtos &amp; Benchmark de Preços</div>
+        <span class="portfolio-tag" style="background:var(--purple-bg);color:var(--purple);margin-right:4px;">Labs</span>
+        <span class="p-signal" style="color:var(--purple);">🔬 Validando PMF</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEQUÊNCIA -->
+  <div class="exec-section">
+    <div class="exec-section-label">Sequência recomendada</div>
+    <div class="timeline-grid">
+      <div class="tl-col">
+        <div class="tl-head tl-head-now">🟠 AGORA — Q3 2026</div>
+        <div class="tl-body">
+          <div class="tl-item"><span class="tl-dot-now">→</span><div><strong>Guia RT no Assistente Qive</strong>Menor custo, maior sinal competitivo. Janela fecha pós-2028.</div></div>
+          <div class="tl-item"><span class="tl-dot-now">→</span><div><strong>Conferência Qive × ERP (Confere)</strong>Democratiza via Assistente Qive um produto já existente, hoje restrito a planos superiores. Usuário cola chaves de NF-e do ERP; Qive aponta divergências. Iniciativa própria — Three-Way Match é separado.</div></div>
+          <div class="tl-item"><span class="tl-dot-now">→</span><div><strong>Discovery no contexto de gestão de fornecedores</strong> <span class="mat-badge mb-discovery">Discovery</span><br>Problema mapeado: divergências entre PO e NF-e exigem que alguém pare, investigue quem errou e comunique manualmente o ajuste. Discovery em andamento com a Fini para validar a hipótese de um agente que automatiza essa detecção e comunicação. Pode evoluir para Confere em Q4.</div></div>
+          <div class="tl-item"><span class="tl-dot-now">→</span><div><strong>Melhorias de Usabilidade — Agente de Conversação (Responde)</strong>Camada de conversação na Home do Produto · relatórios gerados dentro da conversa · redução de validações desnecessárias · sugestão de ações rápidas com base no contexto da conversa.</div></div>
+          <div class="tl-item"><span class="tl-dot-now">→</span><div><strong>Benchmark de Preços — Validação PMF (Labs)</strong> <span class="mat-badge mb-discovery">Discovery</span><br>Entrevistas sobre cotação de preços. Go/no-go define produtização em Q4.</div></div>
+        </div>
+      </div>
+      <div class="tl-col">
+        <div class="tl-head tl-head-next">🔵 PRÓXIMO — Q4 2026 · Q1 2027</div>
+        <div class="tl-body">
+          <div class="tl-item"><span class="tl-dot-next">→</span><div><strong>Agente PO+NF-e · Q4 2026</strong>Após validação do discovery com Fini.</div></div>
+          <div class="tl-item"><span class="tl-dot-next">→</span><div><strong>Sugestão de Etiquetas Automatizadas · Q4 2026</strong>Experimento: sugestão de etapa do fluxo (conferência, lançamento, aprovação).</div></div>
+          <div class="tl-item"><span class="tl-dot-next">→</span><div><strong>Three-Way Match · Q1 2027</strong>Iniciativa separada. PO + NF-e + CT-e completo, com pré-requisito de a Conferência Qive×ERP estar validada via chat.</div></div>
+          <div class="tl-item"><span class="tl-dot-next">→</span><div><strong>PoC MCP em assistentes externos · Q1 2027</strong>Primeira integração com assistente B2B.</div></div>
+          <div class="tl-item"><span class="tl-dot-next">→</span><div><strong>Inconsistências Tributárias</strong>Aguarda canal Monitora validado.</div></div>
+          <div class="tl-item"><span class="tl-dot-next">→</span><div><strong>Benchmark de Preços · Q4 2026</strong>Produtização condicional ao PMF confirmado em Q3.</div></div>
+          <div class="tl-item"><span class="tl-dot-next">→</span><div><strong>Assistente Qive Chat</strong>Reposicionado como segundo passo após notificação Monitora.</div></div>
+        </div>
+      </div>
+      <div class="tl-col">
+        <div class="tl-head tl-head-later">⬜ DEPOIS — 2027+</div>
+        <div class="tl-body">
+          <div class="tl-item"><span class="tl-dot-later">→</span><div><strong>Verificação Tributária</strong>Alto custo; depende do motor fiscal maduro.</div></div>
+          <div class="tl-item"><span class="tl-dot-later">→</span><div><strong>Presença em Assistentes Externos</strong>Depende de adoção B2B de assistentes de IA.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIFERENCIAIS -->
+  <div class="exec-section">
+    <div class="exec-section-label">Por que a Qive tem vantagem</div>
+    <div class="diff-grid">
+      <div class="diff-card">
+        <div class="diff-icon">🔗</div>
+        <div class="diff-title">Three-Way Match sem WMS</div>
+        <div class="diff-text">Única plataforma com NF-e + CT-e nativos. Realiza matching PO → NF-e → CT-e sem depender de sistema de estoque. Concorrentes precisam de integrações adicionais para replicar.</div>
+        <div class="diff-badge">✦ Sem equivalente nos 8 players mapeados</div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon">📬</div>
+        <div class="diff-title">Agente de Comunicação PO + NF-e</div>
+        <div class="diff-text">Além de detectar divergências entre pedido e nota, o agente identifica quem errou (fornecedor ou área interna) e redige a comunicação de correção automaticamente.</div>
+        <div class="diff-badge">✦ Sem equivalente nos 8 players mapeados</div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon">💬</div>
+        <div class="diff-title">Chat com contexto fiscal real</div>
+        <div class="diff-text">O chat responde perguntas sobre documentos reais do cliente (NF-es, CT-es, fornecedores). Concorrentes oferecem chat genérico sem esse contexto operacional.</div>
+        <div class="diff-badge">✦ Diferencial de mercado identificado</div>
+      </div>
+      <div class="diff-card">
+        <div class="diff-icon">📦</div>
+        <div class="diff-title">Benchmark de Preços com dados fiscais reais</div>
+        <div class="diff-text">Base de NF-es permite comparar preços pagos por produtos com GTIN padronizado. Dados de mercado genuínos — não estimativas ou preços de tabela de fornecedores.</div>
+        <div class="diff-badge">✦ Validação PMF Q3 · produtização Q4 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRÓXIMAS AÇÕES -->
+  <div class="exec-section">
+    <div class="exec-section-label">Próximas ações — 90 dias</div>
+    <div class="actions-grid">
+      <div class="action-item">
+        <div class="action-num">1</div>
+        <div class="action-body"><strong>Conferência Qive × ERP — Confere</strong>Usuário cola lista de chaves de NF-e do ERP; Qive retorna divergências de existência. Zero integração necessária — capacidade já existe, hoje restrita a planos superiores. Trazê-la para o Assistente Qive democratiza o acesso; sucesso vinculado ao sunset do produto legado. Three-Way Match segue como iniciativa separada.</div>
+      </div>
+      <div class="action-item">
+        <div class="action-num">2</div>
+        <div class="action-body"><strong>Guia RT no Assistente Qive</strong>Curadoria de conteúdo sobre IBS/CBS + LLM. Janela competitiva real antes de 2028 — players sem contexto fiscal estão chegando.</div>
+      </div>
+      <div class="action-item">
+        <div class="action-num">3</div>
+        <div class="action-body"><strong>Validação PMF do Benchmark de Preços — Q3 2026 (Labs)</strong>Modelo pronto. Entrevistas com base de clientes para confirmar se cotação de preços é dor real e recorrente. PMF confirmado → produtizar em Q4.</div>
+      </div>
+      <div class="action-item">
+        <div class="action-num">4</div>
+        <div class="action-body"><strong>Threshold de Sugestão de Etiquetas Automatizadas</strong>Definir precisão mínima aceitável antes do lançamento. Evitar que o modelo degrade a confiança do usuário.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RADAR DE MATURIDADE -->
+  <div class="exec-section">
+    <div class="exec-section-label">Maturidade por pilar · evolução ao longo dos quarters</div>
+    <div class="radar-wrap">
+      <div class="radar-canvas-box">
+        <canvas id="radarChart" style="max-height:380px;"></canvas>
+        <div class="radar-note">Clique nos quarters ao lado para mostrar ou ocultar cada curva</div>
+        <!-- MATRIX DE ENTREGAS -->
+        <div class="mat-wrap">
+          <table class="mat-table">
+            <thead>
+              <tr>
+                <th>Nível</th>
+                <th>📣 Monitora</th>
+                <th>✍️ Acompanha</th>
+                <th>🔄 Responde</th>
+                <th>🔌 Habita</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1<br>Hipótese</td>
+                <td class="mat-hoje">
+                  <div class="mat-cell-name">Inconsistências Tributárias</div>
+                  <div class="mat-cell-detail">Hipótese mapeada · alto score survey (4.37)</div>
+                  <br>
+                  <div class="mat-cell-name">Discovery no contexto de gestão de fornecedores</div>
+                  <div class="mat-cell-detail">Problema mapeado: divergências PO×NF-e exigem investigação manual · discovery com Fini</div>
+                  <div><span class="mat-badge mb-hoje">Hoje</span></div>
+                </td>
+                <td class="mat-hoje">
+                  <div class="mat-cell-name">Sugestão de Etiquetas Automatizadas</div>
+                  <div class="mat-cell-detail">Em desenvolvimento ativo</div>
+                  <br>
+                  <div class="mat-cell-name">Agenda de Pagamentos</div>
+                  <div class="mat-cell-detail">Sem evidência — aguarda validação</div>
+                  <div><span class="mat-badge mb-hoje">Hoje</span></div>
+                </td>
+                <td class="mat-hoje">
+                  <div class="mat-cell-name">Assistente Qive (em revisão)</div>
+                  <div class="mat-cell-detail">PoC não mostrou retenção — hipótese revisada</div>
+                  <br>
+                  <div class="mat-cell-name">Guia RT · Inteligência de Fornecedores</div>
+                  <div class="mat-cell-detail">Hipóteses novas · sem evidência quantitativa</div>
+                  <br>
+                  <div class="mat-cell-name">Benchmark de Preços (Labs)</div>
+                  <div class="mat-cell-detail">Validação PMF — entrevistas sobre cotação de preços</div>
+                  <div><span class="mat-badge mb-q426">Q3 2026</span></div>
+                </td>
+                <td class="mat-q426">
+                  <div class="mat-cell-name">Presença em Assistentes Externos</div>
+                  <div class="mat-cell-detail">Hipótese a explorar — depende de adoção B2B de IA</div>
+                  <div><span class="mat-badge mb-q426">Q4 2026</span></div>
+                </td>
+              </tr>
+              <tr>
+                <td>2<br>Confere</td>
+                <td class="mat-q426">
+                  <div class="mat-cell-name">Agente PO+NF-e</div>
+                  <div class="mat-cell-detail">Detecção de divergência + rascunho de comunicação</div>
+                  <div><span class="mat-badge mb-q426">Q4 2026</span></div>
+                </td>
+                <td class="mat-q426">
+                  <div class="mat-cell-name">Sugestão de Etiquetas Automatizadas</div>
+                  <div class="mat-cell-detail">Sugestão de etiqueta de etapa do fluxo com confirmação.</div>
+                  <div><span class="mat-badge mb-q426">Q4 2026</span></div>
+                  <br>
+                  <div class="mat-cell-name">Conferência Qive × ERP</div>
+                  <div class="mat-cell-detail">Democratiza via Assistente Qive um produto já existente, restrito a planos superiores. Usuário cola chaves de NF-e do ERP; Qive aponta divergências</div>
+                  <div><span class="mat-badge mb-q426">Q3 2026</span></div>
+                </td>
+                <td class="mat-q426">
+                  <div class="mat-cell-name">Guia de Reforma Tributária</div>
+                  <div class="mat-cell-detail">Canal de consulta sobre IBS/CBS e impactos no negócio — sem dados do cliente</div>
+                  <div><span class="mat-badge mb-q426">Q3 2026</span></div>
+                  <br>
+                  <div class="mat-cell-name">Benchmark de Preços · Confere (Labs)</div>
+                  <div class="mat-cell-detail">Usuário consulta preços pagos; IA compara com histórico intra-cliente</div>
+                  <div><span class="mat-badge mb-q426">Q4 2026</span></div>
+                </td>
+                <td class="mat-q227">
+                  <div class="mat-cell-name">Prova de conceito com MCP em assistentes externos</div>
+                  <div class="mat-cell-detail">Especificação de skill para assistentes</div>
+                  <div><span class="mat-badge mb-q227">Q1 2027</span></div>
+                </td>
+              </tr>
+              <tr>
+                <td>3<br>Aprova</td>
+                <td class="mat-q227">
+                  <div class="mat-cell-name">Agente PO+NF-e</div>
+                  <div class="mat-cell-detail">Detecção + rascunho de comunicação com aprovação</div>
+                  <br>
+                  <div class="mat-cell-name">Inconsistências Tributárias</div>
+                  <div class="mat-cell-detail">Primeiras sugestões de ajuste fiscal</div>
+                  <div><span class="mat-badge mb-q227">Q2 2027</span></div>
+                </td>
+                <td class="mat-q227">
+                  <div class="mat-cell-name">Three-Way Match</div>
+                  <div class="mat-cell-detail">PO + NF-e + CT-e: matching completo com aprovação</div>
+                  <div><span class="mat-badge mb-q227">Q1 2027</span></div>
+                </td>
+                <td class="mat-q227">
+                  <div class="mat-cell-name">Guia RT (dados do cliente) + Assistente Qive</div>
+                  <div class="mat-cell-detail">Análise personalizada: impacto da RT nas NF-es reais do cliente + chat reposicionado pós-Monitora</div>
+                  <div><span class="mat-badge mb-q227">Q2 2027</span></div>
+                </td>
+                <td class="mat-q427">
+                  <div class="mat-cell-name">Presença em Assistentes Externos</div>
+                  <div class="mat-cell-detail">Integração MCP com assistentes B2B</div>
+                  <div><span class="mat-badge mb-q427">Q4 2027</span></div>
+                </td>
+              </tr>
+              <tr>
+                <td>4<br>Confia parcial</td>
+                <td class="mat-q427">
+                  <div class="mat-cell-name">Inconsistências Tributárias</div>
+                  <div class="mat-cell-detail">Execução em lote com revisão D-1</div>
+                  <div><span class="mat-badge mb-q427">Q4 2027</span></div>
+                </td>
+                <td class="mat-q227">
+                  <div class="mat-cell-name">Agenda de Pagamentos</div>
+                  <div class="mat-cell-detail">Sugestões cruzadas com score Three-Way Match</div>
+                  <div><span class="mat-badge mb-q227">Q2 2027</span></div>
+                </td>
+                <td class="mat-q427">
+                  <div class="mat-cell-name">Assistente Qive + Guia RT maduros</div>
+                  <div class="mat-cell-detail">Chat contextual + guia pós-RT consolidado</div>
+                  <div><span class="mat-badge mb-q427">Q4 2027</span></div>
+                </td>
+                <td class="mat-vazio">—</td>
+              </tr>
+              <tr>
+                <td>5<br>Confia total</td>
+                <td class="mat-q427">
+                  <div class="mat-cell-name">Verificação Tributária</div>
+                  <div class="mat-cell-detail">Detecção e correção autônoma de inconsistências fiscais</div>
+                  <div><span class="mat-badge mb-q427">Q4 2027+</span></div>
+                </td>
+                <td class="mat-q427">
+                  <div class="mat-cell-name">Three-Way Match</div>
+                  <div class="mat-cell-detail">PO + NF-e + CT-e com aprovação autônoma</div>
+                  <div><span class="mat-badge mb-q427">Q4 2027</span></div>
+                </td>
+                <td class="mat-vazio">—</td>
+                <td class="mat-vazio">—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="radar-side">
+        <div class="q-toggles-box">
+          <div class="q-toggles-title">Quarters</div>
+          <button class="q-btn active" data-idx="0">
+            <span class="q-dot" style="background:#9CA3AF;"></span> Q2 2026 · Hoje
+          </button>
+          <button class="q-btn active" data-idx="1">
+            <span class="q-dot" style="background:#FF6B00;"></span> H2 2026 (Q3–Q4)
+          </button>
+          <button class="q-btn active" data-idx="2">
+            <span class="q-dot" style="background:#3B82F6;"></span> Q2 2027
+          </button>
+          <button class="q-btn active" data-idx="3">
+            <span class="q-dot" style="background:#10B981;"></span> Q4 2027
+          </button>
+        </div>
+        <div class="ms-box">
+          <div class="ms-title">Escala de maturidade</div>
+          <div class="ms-item"><div class="ms-num">5</div>Confia — Autonomia total</div>
+          <div class="ms-item"><div class="ms-num">4</div>Confia — Autonomia parcial</div>
+          <div class="ms-item"><div class="ms-num">3</div>Aprova — Execução supervisionada</div>
+          <div class="ms-item"><div class="ms-num">2</div>Confere — Sugestão assistida</div>
+          <div class="ms-item"><div class="ms-num">1</div>Hipótese definida</div>
+          <div class="ms-item"><div class="ms-num" style="background:var(--gray-400,#9CA3AF);">0</div>Sem aposta ativa</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER EXEC -->
+  <div class="exec-footer">
+    <div class="exec-footer-logo">Qi<span>ve</span></div>
+    <div>Survey (186 resp.) · Desk Research (8 players) · Entrevistas (10 usuários)</div>
+    <div>Confidencial · Pedro Finamore · Junho 2026</div>
+  </div>
+
+</div><!-- /exec-wrap -->
+</div><!-- /tab-exec -->
+
+<script>
+function showTab(id) {
+  var mapa = document.getElementById('tab-mapa');
+  var exec = document.getElementById('tab-exec');
+  var btnMapa = document.getElementById('btn-mapa');
+  var btnExec = document.getElementById('btn-exec');
+  if (id === 'mapa') {
+    mapa.style.display = '';
+    exec.style.display = 'none';
+    btnMapa.classList.add('active');
+    btnExec.classList.remove('active');
+  } else {
+    mapa.style.display = 'none';
+    exec.style.display = '';
+    btnMapa.classList.remove('active');
+    btnExec.classList.add('active');
+  }
+}
+
+// ── RADAR DE MATURIDADE ──
+(function() {
+  var quarterData = [
+    {
+      label: 'Q2 2026 · Hoje',
+      // [Monitora, Acompanha, Responde, Habita]
+      data: [1, 2, 1, 0],
+      color: 'rgba(156,163,175,0.18)',
+      border: '#9CA3AF',
+      point: '#9CA3AF'
+    },
+    {
+      label: 'H2 2026 (Q3–Q4)',
+      data: [2, 3, 2, 1],
+      color: 'rgba(255,107,0,0.15)',
+      border: '#FF6B00',
+      point: '#FF6B00'
+    },
+    {
+      label: 'Q2 2027',
+      data: [3, 4, 3, 2],
+      color: 'rgba(59,130,246,0.15)',
+      border: '#3B82F6',
+      point: '#3B82F6'
+    },
+    {
+      label: 'Q4 2027',
+      data: [4, 5, 4, 3],
+      color: 'rgba(16,185,129,0.15)',
+      border: '#10B981',
+      point: '#10B981'
+    }
+  ];
+
+  function buildDatasets() {
+    return quarterData.map(function(q) {
+      return {
+        label: q.label,
+        data: q.data,
+        backgroundColor: q.color,
+        borderColor: q.border,
+        pointBackgroundColor: q.point,
+        pointBorderColor: '#fff',
+        pointRadius: 5,
+        pointHoverRadius: 7,
+        borderWidth: 2.5
+      };
+    });
+  }
+
+  function initRadar() {
+    var canvas = document.getElementById('radarChart');
+    if (!canvas || !window.Chart) return;
+    var ctx = canvas.getContext('2d');
+
+    var maturityLabels = ['Sem aposta', 'Hipótese', 'Confere', 'Aprova', 'Confia parcial', 'Confia total'];
+
+    var chart = new Chart(ctx, {
+      type: 'radar',
+      data: {
+        labels: ['📣  Monitora', '✍️  Acompanha', '🔄  Responde', '🔌  Habita'],
+        datasets: buildDatasets()
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        scales: {
+          r: {
+            min: 0,
+            max: 5,
+            ticks: {
+              stepSize: 1,
+              font: { size: 10 },
+              color: '#9CA3AF',
+              backdropColor: 'transparent',
+              callback: function(v) { return v; }
+            },
+            grid: { color: 'rgba(209,213,219,0.7)' },
+            angleLines: { color: 'rgba(209,213,219,0.7)' },
+            pointLabels: {
+              font: { size: 13, weight: '700' },
+              color: '#0F1629'
+            }
+          }
+        },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: function(ctx) {
+                var v = Math.round(ctx.raw);
+                return ' ' + ctx.dataset.label + ': ' + maturityLabels[v] + ' (' + ctx.raw + '/5)';
+              }
+            }
+          }
+        }
+      }
+    });
+
+    // Quarter toggle buttons
+    document.querySelectorAll('.q-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var idx = parseInt(btn.getAttribute('data-idx'));
+        var ds = chart.data.datasets[idx];
+        var isActive = btn.classList.contains('active');
+        if (isActive) {
+          btn.classList.remove('active');
+          btn.classList.add('inactive');
+          ds.backgroundColor = 'rgba(0,0,0,0)';
+          ds.borderColor = 'rgba(0,0,0,0)';
+          ds.pointBackgroundColor = 'rgba(0,0,0,0)';
+          ds.pointBorderColor = 'rgba(0,0,0,0)';
+        } else {
+          btn.classList.remove('inactive');
+          btn.classList.add('active');
+          ds.backgroundColor = quarterData[idx].color;
+          ds.borderColor = quarterData[idx].border;
+          ds.pointBackgroundColor = quarterData[idx].point;
+          ds.pointBorderColor = '#fff';
+        }
+        chart.update();
+      });
+    });
+  }
+
+  // Load Chart.js from CDN then init
+  var s = document.createElement('script');
+  s.src = 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js';
+  s.onload = initRadar;
+  document.head.appendChild(s);
+})();
+</script>
+</body>
+</html>
