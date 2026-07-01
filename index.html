@@ -305,6 +305,20 @@
   .pin-btn { width: 100%; background: var(--orange); color: white; border: none; padding: 11px; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: inherit; }
   .pin-btn:hover { background: var(--orange-light); }
   .pin-error { font-size: 11px; color: var(--red); margin-top: 10px; min-height: 14px; }
+
+  /* ── FUNIL DE ADOÇÃO ── */
+  #tab-funil { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--gray-50); min-height: 100vh; padding: 32px 24px 48px; }
+  .funil-wrap { max-width: 760px; margin: 0 auto; }
+  .funil-subtitle { font-size: 14px; color: var(--gray-500); margin: -18px 0 24px; }
+  .funil-stage { width: 100%; max-width: 480px; margin: 0 auto; background: var(--orange-pale); border: 1px solid #FFD0AA; border-radius: 10px; padding: 16px 22px; }
+  .funil-stage .row { display: flex; justify-content: space-between; align-items: baseline; }
+  .funil-stage .name { font-size: 14px; font-weight: 700; color: var(--navy); }
+  .funil-stage .count { font-size: 14px; font-weight: 700; color: #C04A00; }
+  .funil-stage .detail { font-size: 11px; color: #7C3A00; margin: 4px 0 0; }
+  .funil-connector { display: flex; flex-direction: column; align-items: center; padding: 8px 0; color: var(--gray-500); font-size: 11px; }
+  .funil-connector svg { width: 16px; height: 16px; }
+  .funil-table-wrap { margin-top: 28px; }
+  .funil-note { font-size: 11px; color: var(--gray-500); margin-top: 16px; line-height: 1.5; }
 </style>
 </head>
 <body>
@@ -364,6 +378,7 @@
 <div class="page-tabs">
   <button class="tab-btn active" id="btn-exec" onclick="showTab('exec')">📊 Resumo Executivo</button>
   <button class="tab-btn" id="btn-mapa" onclick="showTab('mapa')">📋 Mapa Completo</button>
+  <button class="tab-btn" id="btn-funil" onclick="showTab('funil')">📈 Funil Assistente Qive</button>
 </div>
 
 <div id="tab-mapa" style="display:none;">
@@ -1975,24 +1990,110 @@
 </div><!-- /exec-wrap -->
 </div><!-- /tab-exec -->
 
+<div id="tab-funil" style="display:none;">
+<div class="funil-wrap">
+
+  <div class="exec-section-label">Funil de adoção</div>
+  <div style="font-size:22px;font-weight:800;color:var(--navy);margin-bottom:2px;">Funil de adoção — Assistente Qive</div>
+  <div class="funil-subtitle">clicked_ai_chat_open → viewed_ai_chat · 25 mar – 1 jul 2026</div>
+
+  <div class="stats-row" style="margin-bottom:28px;">
+    <div class="stat-box">
+      <div class="stat-num">21</div>
+      <div class="stat-label">Usuários únicos</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num" style="color:#10B981;">100%</div>
+      <div class="stat-label">Conversão do funil</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">0</div>
+      <div class="stat-label">Perda entre etapas</div>
+    </div>
+  </div>
+
+  <div>
+    <div class="funil-stage">
+      <div class="row">
+        <span class="name">1. clicked_ai_chat_open</span>
+        <span class="count">21 usuários</span>
+      </div>
+      <p class="detail">100% da base · 225 cliques no total</p>
+    </div>
+
+    <div class="funil-connector">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      0% de perda
+    </div>
+
+    <div class="funil-stage">
+      <div class="row">
+        <span class="name">2. viewed_ai_chat</span>
+        <span class="count">21 usuários</span>
+      </div>
+      <p class="detail">100% do funil · 14.102 visualizações no total</p>
+    </div>
+  </div>
+
+  <div class="stats-row" style="grid-template-columns:repeat(2,1fr);margin-top:28px;">
+    <div class="stat-box">
+      <div class="stat-num" style="font-size:22px;">7 · 671,5</div>
+      <div class="stat-label">Visualizações por usuário<br>(mediana · média)</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num" style="font-size:22px;">1 · 10,7</div>
+      <div class="stat-label">Cliques por usuário<br>(mediana · média)</div>
+    </div>
+  </div>
+
+  <div class="funil-table-wrap">
+    <div class="exec-section-label">Detalhe por usuário</div>
+    <div class="order-section" style="margin-top:0;">
+      <table class="order-table">
+        <thead>
+          <tr><th>user_id</th><th>clicked_ai_chat_open</th><th>viewed_ai_chat</th></tr>
+        </thead>
+        <tbody id="funil-user-table"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <p class="funil-note">Fonte: bq-results-20260701-205326-1782939233355.csv · Todos os 21 usuários que clicaram para abrir o Assistente Qive também o visualizaram em seguida, portanto a conversão do funil é de 100% em ambas as etapas.</p>
+
+</div>
+</div><!-- /tab-funil -->
+
 <script>
 function showTab(id) {
-  var mapa = document.getElementById('tab-mapa');
-  var exec = document.getElementById('tab-exec');
-  var btnMapa = document.getElementById('btn-mapa');
-  var btnExec = document.getElementById('btn-exec');
-  if (id === 'mapa') {
-    mapa.style.display = '';
-    exec.style.display = 'none';
-    btnMapa.classList.add('active');
-    btnExec.classList.remove('active');
-  } else {
-    mapa.style.display = 'none';
-    exec.style.display = '';
-    btnMapa.classList.remove('active');
-    btnExec.classList.add('active');
-  }
+  var tabs = { mapa: document.getElementById('tab-mapa'), exec: document.getElementById('tab-exec'), funil: document.getElementById('tab-funil') };
+  var btns = { mapa: document.getElementById('btn-mapa'), exec: document.getElementById('btn-exec'), funil: document.getElementById('btn-funil') };
+  Object.keys(tabs).forEach(function(key) {
+    if (key === id) {
+      tabs[key].style.display = '';
+      btns[key].classList.add('active');
+    } else {
+      tabs[key].style.display = 'none';
+      btns[key].classList.remove('active');
+    }
+  });
 }
+
+(function() {
+  var data = [
+    ["5", 53, 6947], ["969", 135, 6337], ["366730", 2, 336], ["703521", 4, 160],
+    ["907326", 1, 76], ["1497", 2, 63], ["913110", 4, 61], ["388246", 4, 53],
+    ["427894", 5, 26], ["2", 2, 8], ["894551", 3, 7], ["972228", 1, 3],
+    ["980187", 1, 3], ["477789", 1, 3], ["945170", 1, 3], ["475722", 1, 3],
+    ["986783", 1, 3], ["898654", 1, 3], ["884394", 1, 3], ["897807", 1, 2],
+    ["897819", 1, 2]
+  ];
+  var tbody = document.getElementById('funil-user-table');
+  data.forEach(function(row) {
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td>' + row[0] + '</td><td>' + row[1] + '</td><td>' + row[2].toLocaleString('pt-BR') + '</td>';
+    tbody.appendChild(tr);
+  });
+})();
 
 // ── RADAR DE MATURIDADE ──
 (function() {
