@@ -319,6 +319,17 @@
   .funil-connector svg { width: 16px; height: 16px; }
   .funil-table-wrap { margin-top: 28px; }
   .funil-note { font-size: 11px; color: var(--gray-500); margin-top: 16px; line-height: 1.5; }
+  .funil-callout { background: #FEF2F2; border-left: 4px solid var(--red); border-radius: 0 10px 10px 0; padding: 14px 18px; margin: 18px 0 28px; }
+  .funil-callout-label { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #991B1B; margin-bottom: 4px; }
+  .funil-callout-text { font-size: 13px; color: #7F1D1D; line-height: 1.5; }
+  .retention-table { width: 100%; border-collapse: collapse; font-size: 11px; }
+  .retention-table th { font-size: 10px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: var(--gray-500); padding: 8px 10px; text-align: center; border-bottom: 1px solid var(--gray-200); background: var(--gray-50); }
+  .retention-table th:first-child, .retention-table td:first-child { text-align: left; }
+  .retention-table td { padding: 8px 10px; text-align: center; border-bottom: 1px solid var(--gray-100); }
+  .retention-table td.cohort-date { font-weight: 600; color: var(--navy); white-space: nowrap; }
+  .retention-table td.cohort-size { color: var(--gray-500); }
+  .retention-table tr.total-row td { border-top: 2px solid var(--gray-200); font-weight: 700; color: var(--navy); background: var(--gray-50); }
+  .ret-cell-na { color: var(--gray-300); }
 </style>
 </head>
 <body>
@@ -1995,11 +2006,11 @@
 
   <div class="exec-section-label">Funil de adoção</div>
   <div style="font-size:22px;font-weight:800;color:var(--navy);margin-bottom:2px;">Funil de adoção — Assistente Qive</div>
-  <div class="funil-subtitle">clicked_ai_chat_open → viewed_ai_chat · 25 mar – 1 jul 2026</div>
+  <div class="funil-subtitle">clicked_ai_chat_open → viewed_ai_chat · 25 mar – 3 jul 2026 · exclui usuário interno 969</div>
 
   <div class="stats-row" style="margin-bottom:28px;">
     <div class="stat-box">
-      <div class="stat-num">21</div>
+      <div class="stat-num">36</div>
       <div class="stat-label">Usuários únicos</div>
     </div>
     <div class="stat-box">
@@ -2016,9 +2027,9 @@
     <div class="funil-stage">
       <div class="row">
         <span class="name">1. clicked_ai_chat_open</span>
-        <span class="count">21 usuários</span>
+        <span class="count">36 usuários</span>
       </div>
-      <p class="detail">100% da base · 225 cliques no total</p>
+      <p class="detail">100% da base · 109 cliques no total</p>
     </div>
 
     <div class="funil-connector">
@@ -2029,25 +2040,45 @@
     <div class="funil-stage">
       <div class="row">
         <span class="name">2. viewed_ai_chat</span>
-        <span class="count">21 usuários</span>
+        <span class="count">36 usuários</span>
       </div>
-      <p class="detail">100% do funil · 14.102 visualizações no total</p>
+      <p class="detail">100% do funil · 8.430 visualizações no total</p>
     </div>
   </div>
 
   <div class="stats-row" style="grid-template-columns:repeat(2,1fr);margin-top:28px;">
     <div class="stat-box">
-      <div class="stat-num" style="font-size:22px;">7 · 671,5</div>
+      <div class="stat-num" style="font-size:22px;">7,5 · 234,2</div>
       <div class="stat-label">Visualizações por usuário<br>(mediana · média)</div>
     </div>
     <div class="stat-box">
-      <div class="stat-num" style="font-size:22px;">1 · 10,7</div>
+      <div class="stat-num" style="font-size:22px;">1 · 3,0</div>
       <div class="stat-label">Cliques por usuário<br>(mediana · média)</div>
     </div>
   </div>
 
+  <p class="funil-note">Fonte: bq-results-20260703-151050-1783091465941.csv · Usuário 969 (interno) excluído da análise · Todos os 36 usuários que clicaram para abrir o Assistente Qive também o visualizaram em seguida, portanto a conversão do funil é de 100% em ambas as etapas.</p>
+
+  <div class="exec-section-label" style="margin-top:36px;">Retenção diária · cohorts de 30/06 a 03/07</div>
+  <p class="funil-subtitle" style="margin:-10px 0 4px;">Cohort = dia da primeira vez que cada usuário deu clicked_ai_chat_open · janela de 30/06 (data mais antiga com cohort diário denso) até 03/07 (último dia no CSV) · células mostram usuários do cohort que voltaram a abrir o chat naquele dia calendário · usuário interno 969 excluído</p>
+
+  <div class="funil-callout">
+    <div class="funil-callout-label">Sinal de alerta</div>
+    <div class="funil-callout-text">Nos 4 cohorts mais recentes (30/06, 01/07, 02/07 e 03/07, somando 30 usuários), a retenção no dia seguinte é 0% em todos os casos — nenhum usuário que abriu o Assistente Qive pela primeira vez nesses dias voltou a abri-lo no dia seguinte. Excluindo o usuário interno 969, o único usuário com retorno frequente ao longo do histórico completo é o ID 5 (15 dias distintos de uso desde abril); os outros 5 usuários que já retornaram alguma vez o fizeram de forma esporádica. No total, 30 dos 36 usuários (83%) nunca voltaram a abrir o chat em nenhum outro dia.</div>
+  </div>
+
+  <div class="mat-wrap" style="margin-top:0;">
+    <table class="retention-table">
+      <thead>
+        <tr><th>Cohort</th><th>Usuários</th><th>30/06</th><th>01/07</th><th>02/07</th><th>03/07</th></tr>
+      </thead>
+      <tbody id="retention-table-body"></tbody>
+    </table>
+  </div>
+  <p class="funil-note">"—" = dia anterior ao cohort (não aplicável). A diagonal (célula de mesma data do cohort) é sempre 100% por definição — é o próprio dia de entrada. Fonte: bq-results-20260703-151050-1783091465941.csv, eventos clicked_ai_chat_open, usuário interno 969 excluído.</p>
+
   <div class="funil-table-wrap">
-    <div class="exec-section-label">Detalhe por usuário</div>
+    <div class="exec-section-label" style="margin-top:36px;">Detalhe por usuário</div>
     <div class="order-section" style="margin-top:0;">
       <table class="order-table">
         <thead>
@@ -2057,8 +2088,6 @@
       </table>
     </div>
   </div>
-
-  <p class="funil-note">Fonte: bq-results-20260701-205326-1782939233355.csv · Todos os 21 usuários que clicaram para abrir o Assistente Qive também o visualizaram em seguida, portanto a conversão do funil é de 100% em ambas as etapas.</p>
 
 </div>
 </div><!-- /tab-funil -->
@@ -2080,17 +2109,51 @@ function showTab(id) {
 
 (function() {
   var data = [
-    ["5", 53, 6947], ["969", 135, 6337], ["366730", 2, 336], ["703521", 4, 160],
-    ["907326", 1, 76], ["1497", 2, 63], ["913110", 4, 61], ["388246", 4, 53],
-    ["427894", 5, 26], ["2", 2, 8], ["894551", 3, 7], ["972228", 1, 3],
-    ["980187", 1, 3], ["477789", 1, 3], ["945170", 1, 3], ["475722", 1, 3],
-    ["986783", 1, 3], ["898654", 1, 3], ["884394", 1, 3], ["897807", 1, 2],
-    ["897819", 1, 2]
+    ["5", 53, 6947], ["366730", 2, 336], ["904999", 1, 237], ["703521", 4, 160],
+    ["945978", 1, 135], ["441676", 1, 76], ["907326", 1, 76], ["922051", 1, 67],
+    ["1497", 2, 63], ["913110", 4, 61], ["388246", 4, 53], ["897644", 1, 40],
+    ["921951", 1, 40], ["427894", 5, 26], ["658711", 4, 21], ["907287", 1, 16],
+    ["700628", 1, 11], ["2", 2, 8], ["894551", 3, 7], ["947548", 1, 5],
+    ["945170", 1, 3], ["907335", 1, 3], ["897710", 1, 3], ["980187", 1, 3],
+    ["898654", 1, 3], ["884394", 1, 3], ["972228", 1, 3], ["986275", 1, 3],
+    ["986783", 1, 3], ["490479", 1, 3], ["985531", 1, 3], ["477789", 1, 3],
+    ["475722", 1, 3], ["897819", 1, 2], ["33290", 1, 2], ["897807", 1, 2]
   ];
   var tbody = document.getElementById('funil-user-table');
   data.forEach(function(row) {
     var tr = document.createElement('tr');
     tr.innerHTML = '<td>' + row[0] + '</td><td>' + row[1] + '</td><td>' + row[2].toLocaleString('pt-BR') + '</td>';
+    tbody.appendChild(tr);
+  });
+})();
+
+// ── COHORT DE RETENÇÃO DIÁRIA (clicked_ai_chat_open) · 30/06 a 03/07 · exclui usuário interno 969 ──
+(function() {
+  // calendarDays = colunas da tabela (últimos dias do CSV)
+  var calendarDays = ['30/06', '01/07', '02/07', '03/07'];
+  // cada cohort: usuários que abriram o chat pela 1ª vez naquele dia, e em quais dias do calendário voltaram a abrir
+  var cohorts = [
+    { date: '30/06', size: 3,  activity: { '30/06': 3, '01/07': 0, '02/07': 0, '03/07': 0 } },
+    { date: '01/07', size: 11, activity: { '01/07': 11, '02/07': 0, '03/07': 0 } },
+    { date: '02/07', size: 12, activity: { '02/07': 12, '03/07': 0 } },
+    { date: '03/07', size: 4,  activity: { '03/07': 4 } }
+  ];
+
+  var tbody = document.getElementById('retention-table-body');
+  cohorts.forEach(function(c) {
+    var tr = document.createElement('tr');
+    var cells = '<td class="cohort-date">' + c.date + '</td><td class="cohort-size">' + c.size + '</td>';
+    calendarDays.forEach(function(day) {
+      if (!(day in c.activity)) {
+        cells += '<td class="ret-cell-na">—</td>';
+      } else {
+        var v = c.activity[day];
+        var pct = Math.round(100 * v / c.size);
+        var bg = v > 0 ? 'rgba(16,185,129,' + (0.12 + 0.5 * pct / 100) + ')' : 'transparent';
+        cells += '<td style="background:' + bg + ';">' + v + '/' + c.size + ' (' + pct + '%)</td>';
+      }
+    });
+    tr.innerHTML = cells;
     tbody.appendChild(tr);
   });
 })();
