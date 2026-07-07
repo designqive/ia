@@ -116,6 +116,9 @@
   .status-competitivo { background: var(--teal-bg); color: var(--teal); }
   .status-sem-evidencia { background: #F3F4F6; color: #374151; border: 1px dashed #9CA3AF; }
   .status-cliente { background: #FEF9C3; color: #854D0E; border: 1px solid #FDE047; }
+  .card-top-side { display: flex; flex-direction: column; align-items: flex-end; gap: 5px; flex-shrink: 0; }
+  .bet-date { font-size: 9px; color: var(--gray-500); white-space: nowrap; }
+  .bet-date.new { color: var(--teal); font-weight: 700; }
 
   /* CARD BODY */
   .card-body { padding: 14px 18px; }
@@ -512,7 +515,10 @@
             <div class="card-title">Agente de Inconsistências Tributárias</div>
             <div class="card-subtitle">Alertas automáticos de erros em NF-e, alíquotas, prazos e duplicidade</div>
           </div>
-          <div class="status-badge status-nao-testada">Não testada</div>
+          <div class="card-top-side">
+            <div class="status-badge status-nao-testada">Não testada</div>
+            <div class="bet-date">📅 Jun/2026</div>
+          </div>
         </div>
         <div class="card-body">
           <div class="field">
@@ -559,7 +565,10 @@
             <div class="card-title">Verificação Tributária Automatizada</div>
             <div class="card-subtitle">Validação de CST, CFOP, ICMS, PIS, COFINS em cada NF-e recebida</div>
           </div>
-          <div class="status-badge status-nao-testada">Não testada</div>
+          <div class="card-top-side">
+            <div class="status-badge status-nao-testada">Não testada</div>
+            <div class="bet-date">📅 Jun/2026</div>
+          </div>
         </div>
         <div class="card-body">
           <div class="field">
@@ -602,7 +611,10 @@
             <div class="card-title">Agente de Validação PO + NF-e</div>
             <div class="card-subtitle">Detecta divergência entre pedido e nota, identifica responsável e sugere a comunicação de ajuste</div>
           </div>
-          <div class="status-badge status-cliente">🤝 Explorando com Fini</div>
+          <div class="card-top-side">
+            <div class="status-badge status-cliente">🤝 Explorando com Fini</div>
+            <div class="bet-date">📅 Jun/2026</div>
+          </div>
         </div>
         <div class="card-body">
           <div class="field">
@@ -686,7 +698,10 @@
             <div class="card-title">Sugestão de Etiquetas Automatizadas</div>
             <div class="card-subtitle">Sugestão de etiqueta de etapa do fluxo (conferência, lançamento, aprovação…) com base no contexto da NF-e e histórico do usuário</div>
           </div>
-          <div class="status-badge status-em-dev">Em desenvolvimento</div>
+          <div class="card-top-side">
+            <div class="status-badge status-em-dev">Em desenvolvimento</div>
+            <div class="bet-date">📅 Jun/2026</div>
+          </div>
         </div>
         <div class="card-body">
           <div class="field">
@@ -746,7 +761,10 @@
             <div class="card-title">Conferência Qive × ERP (Confere)</div>
             <div class="card-subtitle">Democratizar via Assistente Qive um produto que já existe, hoje restrito a planos superiores</div>
           </div>
-          <div class="status-badge status-em-dev">Produto existente · expandindo via chat</div>
+          <div class="card-top-side">
+            <div class="status-badge status-em-dev">Produto existente · expandindo via chat</div>
+            <div class="bet-date">📅 Jun/2026</div>
+          </div>
         </div>
         <div class="card-body">
           <div style="background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;padding:10px 12px;margin-bottom:12px;">
@@ -820,7 +838,10 @@
             <div class="card-title">Three-Way Match (PO + NF-e + CT-e)</div>
             <div class="card-subtitle">Iniciativa separada — evolução futura para Aprova → Confia, depende de integração contratada com ERP</div>
           </div>
-          <div class="status-badge status-nao-testada">Não testada</div>
+          <div class="card-top-side">
+            <div class="status-badge status-nao-testada">Não testada</div>
+            <div class="bet-date">📅 Jun/2026</div>
+          </div>
         </div>
         <div class="card-body">
           <div class="field">
@@ -918,7 +939,10 @@
             <div class="card-title">Agenda de Pagamentos Inteligente</div>
             <div class="card-subtitle">O que pagar hoje — sugerido pela IA, executado pelo usuário, automatizado com o tempo</div>
           </div>
-          <div class="status-badge status-sem-evidencia">Sem evidência</div>
+          <div class="card-top-side">
+            <div class="status-badge status-sem-evidencia">Sem evidência</div>
+            <div class="bet-date">📅 Jun/2026</div>
+          </div>
         </div>
         <div class="card-body">
           <div style="background:#F9FAFB;border:1px dashed #D1D5DB;border-radius:8px;padding:10px 12px;margin-bottom:12px;">
@@ -979,6 +1003,53 @@
         </div>
       </div>
 
+      <!-- Aposta: Agente de Onboarding para Fornecedores -->
+      <div class="bet-card">
+        <div class="card-top">
+          <div class="card-icon">🎓</div>
+          <div class="card-title-block">
+            <div class="card-title">Agente de Onboarding para Fornecedores</div>
+            <div class="card-subtitle">IA guia os fornecedores dos clientes Qive na emissão e correção de documentos fiscais, reduzindo a curva de aprendizado e acelerando a adoção do fluxo correto</div>
+          </div>
+          <div class="card-top-side">
+            <div class="status-badge status-nao-testada">Não testada</div>
+            <div class="bet-date new">📅 07/07/2026</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="field">
+            <div class="field-label">Hipótese</div>
+            <div class="field-text">Se a Qive oferece um agente de IA que guia o fornecedor do cliente na primeira submissão de documentos fiscais — orientando formato de emissão, corrigindo divergências na origem e respondendo dúvidas de status/prazo em tempo real — a curva de aprendizado cai, a adoção do fluxo correto pelos fornecedores aumenta e o volume de documentos rejeitados ou de suporte manual do time do cliente diminui.</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Referência competitiva — com precedente de mercado</div>
+            <div class="evidence-row">
+              <div class="evidence-chip comp">V360: chatbot "Assis" no Portal do Fornecedor</div>
+              <div class="evidence-chip comp">ROIT: autoatendimento de fornecedores (sem chat)</div>
+              <div class="evidence-chip comp">Avalara/Pyxs: IA no onboarding do conector</div>
+            </div>
+            <div style="background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;padding:10px 12px;margin-top:8px;">
+              <div style="font-size:11px;color:#1E40AF;line-height:1.5;">A V360 usa o chatbot "Assis" 24/7 dentro do Portal do Fornecedor como suporte de nível 0 — respondendo status de documentos, prazos de faturamento e orientação de emissão sem depender de humano. No caso da Suzano, a automação fiscal saltou de 35% para 74% em apenas 1 mês, com mais de 10 mil pessoas treinadas e 3.733 fornecedores ativos operando de forma autônoma; na Firjan, mais de 12,6 mil fornecedores usam o portal para acompanhar suas faturas. A ROIT segue caminho parecido sem chat: o portal elimina preenchimentos manuais complexos e os fornecedores só interagem para upload e autoatendimento de divergências. Já a Avalara/Pyxs planeja, a curto prazo, um agente de IA para guiar o onboarding do conector e sugerir parametrizações — mesma lógica aplicada a um público diferente (parceiro técnico, não fornecedor final).</div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Como funcionaria na Qive</div>
+            <div class="field-text">Agente integrado ao portal de fornecedores da Qive, com escopo estreito e transacional (no mesmo padrão validado pelos concorrentes, e alinhado ao aprendizado de retenção do Assistente Qive): orientar o formato correto de emissão antes do envio, explicar o motivo de uma rejeição ou divergência assim que ela ocorre, e responder dúvidas de status/prazo — sem tentar ser um chat aberto e exploratório.</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Sinal de validação</div>
+            <div class="field-text">% de documentos rejeitados na origem (antes vs. depois) · tempo médio até o fornecedor atingir autonomia operacional · volume de tickets de suporte humano evitados · % de fornecedores ativos autônomos no portal</div>
+          </div>
+          <div class="field">
+            <div class="field-label">Risco principal</div>
+            <div class="risk-row">
+              <div class="risk-icon">⚡</div>
+              <div class="risk-text">O fornecedor não é usuário direto da Qive — é usuário do cliente da Qive. A adoção depende do cliente divulgar e, idealmente, exigir o uso do portal; sem esse incentivo, o fornecedor tende a preferir o canal manual (e-mail) que já conhece, mesmo com o agente disponível.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -1015,26 +1086,35 @@
         <div class="model-name">Responde — Conversacional</div>
         <span class="model-desc">O usuário pergunta, a Qive responde · Requer intenção de acesso · Melhor como segundo passo</span>
       </div>
-      <div class="model-tag tag-pull">🔄 Em revisão</div>
+      <div class="model-tag tag-pull">🔄 Confirmado por dado — repriorizando</div>
     </div>
     <div class="cards-grid three">
       <div class="bet-card reframe">
-        <div class="reframe-banner">⚠️ HIPÓTESE REVISADA — A PoC não mostrou retenção. Reframing necessário baseado em survey + entrevistas.</div>
+        <div class="reframe-banner">⚠️ HIPÓTESE CONFIRMADA POR DADO DE PRODUÇÃO — 0% de retenção D+1 em 49 usuários (25/mar–07/jul). Reframing em execução: chat repriorizado como segundo passo, dependente do Modelo 1 (Monitora).</div>
         <div class="card-top">
           <div class="card-icon">💬</div>
           <div class="card-title-block">
             <div class="card-title">Assistente Qive — Chat com Documentos Fiscais</div>
             <div class="card-subtitle">Consulta, etiquetas e manifestação via linguagem natural</div>
           </div>
-          <div class="status-badge status-revisao">Hipótese em revisão</div>
+          <div class="card-top-side">
+            <div class="status-badge status-revisao">Hipótese confirmada — repriorizada</div>
+            <div class="bet-date">📅 Jun/2026</div>
+          </div>
         </div>
         <div class="card-body">
           <div style="background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;padding:10px 12px;margin-bottom:12px;">
             <div style="font-size:10px;font-weight:700;color:#1E40AF;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;">✅ Onde estamos hoje</div>
-            <div style="font-size:11px;color:#1E40AF;">O chatbot já cumpre bem o papel de Responde: tira dúvidas básicas sobre notas fiscais eletrônicas e executa ações via linguagem natural — classificação por etiquetas e manifestação dos documentos fiscais. A capacidade técnica está validada; o que está em revisão é a hipótese de que o chat funcione como porta de entrada principal da IA.</div>
+            <div style="font-size:11px;color:#1E40AF;">O chatbot já cumpre bem o papel de Responde: tira dúvidas básicas sobre notas fiscais eletrônicas e executa ações via linguagem natural — classificação por etiquetas e manifestação dos documentos fiscais. A capacidade técnica está validada; o que estava em revisão (chat como porta de entrada principal da IA) agora tem dado de produção confirmando a invalidação — ver "Evidência de produto" abaixo.</div>
           </div>
           <div class="field">
-            <div class="field-label">Melhorias de usabilidade — Q3 2026</div>
+            <div class="field-label">Evidência de produto (pós-rollout · 25/mar–07/jul, exclui usuários internos 969, 5 e 2)</div>
+            <div style="background:#FEF2F2;border-left:3px solid var(--red);padding:8px 10px;border-radius:0 6px 6px 0;">
+              <div style="font-size:11px;color:#7F1D1D;line-height:1.5;">49 usuários abriram o chat, 100% o visualizaram em seguida (funil sem perda) — mas a retenção no dia seguinte é <strong>0% em todos os 7 cohorts diários</strong> observados entre 30/06 e 07/07. No histórico completo, <strong>42 dos 49 usuários (86%) abriram uma única vez e nunca voltaram</strong>; os outros 7 (14%) voltaram em algum outro dia, mas nunca no dia seguinte — 3 desses retornos aconteceram dentro da própria janela de 30/06–07/07 (D+4 a D+6).</div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Melhorias de usabilidade — Q3 2026 <span style="font-weight:400;color:var(--gray-500);text-transform:none;letter-spacing:0;">(pausadas até o piloto de notificação — ver Critério de decisão)</span></div>
             <div style="background:#F8FAFC;border:1px solid var(--gray-200);border-radius:8px;padding:10px 12px;">
               <div style="font-size:11px;color:var(--gray-700);line-height:1.6;">
                 <div>• Adicionar uma camada de conversação na Home do Produto</div>
@@ -1076,14 +1156,31 @@
             <div class="field-label">Referência competitiva</div>
             <div style="background:#F0FDF4;border-left:3px solid #10B981;padding:7px 10px;border-radius:0 6px 6px 0;">
               <div style="font-size:10px;font-weight:700;color:#065F46;margin-bottom:3px;">✦ Sem referência mapeada para chat contextualizado em documentos fiscais</div>
-              <div style="font-size:11px;color:#065F46;">V360 possui chatbot, mas focado em Reforma Tributária (perguntas genéricas). Nenhum player mapeado oferece chat que responde com base nos documentos fiscais reais do cliente — CFOPs específicos, fornecedores, regimes. Possível diferencial estrutural.</div>
+              <div style="font-size:11px;color:#065F46;">V360 possui chatbot ("Assis"), mas de escopo restrito e sempre transacional (status de documento, prazos, orientação de emissão) — nunca exploração livre. A ROIT rejeita chatbot por princípio, apostando 100% em automação silenciosa (92% dos lançamentos sem intervenção humana). A Thomson Reuters tem o chat mais avançado do mercado (CoCounsel), mas para tarefas profissionais de alto valor já definidas, não para conversa aberta. Nenhum dos 4 dossiês de IA revisados (Avalara/Pyxs, ROIT, Thomson Reuters, V360) trata chat como porta de entrada exploratória — reforça que chat contextualizado nos documentos fiscais reais do cliente segue como possível diferencial estrutural, mas só funciona junto de um escopo estreito ou de um gatilho externo, nunca sozinho.</div>
             </div>
           </div>
           <div class="field">
             <div class="field-label">Risco principal</div>
             <div class="risk-row">
               <div class="risk-icon">⚡</div>
-              <div class="risk-text">O chat depende do sucesso do Modelo 1 (Monitora) para ter entrada qualificada. Sem notificações que tragam o usuário, o chat fica sem contexto de uso recorrente.</div>
+              <div class="risk-text">O chat depende do sucesso do Modelo 1 (Monitora) para ter entrada qualificada. Sem notificações que tragam o usuário, o chat fica sem contexto de uso recorrente — confirmado pelos 0% de retenção D+1 observados em produção.</div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Próximos testes (Q3 2026 · antes de retomar investimento em chat)</div>
+            <div style="background:#F8FAFC;border:1px solid var(--gray-200);border-radius:8px;padding:10px 12px;">
+              <div style="font-size:11px;color:var(--gray-700);line-height:1.6;">
+                <div>1. <strong>Piloto de notificação proativa</strong> — grupo teste recebe alerta (ex: inconsistência fiscal) vs. grupo controle; medir reabertura do chat em 24-48h.</div>
+                <div>2. <strong>Análise do conteúdo das conversas já existentes</strong> — checar se são comandos de execução única ou exploração de múltiplos turnos (não exige nova instrumentação).</div>
+                <div>3. <strong>Entrevistas com usuários de abertura única</strong> — 3 a 4 conversas para entender o que esperavam do chat e por que não voltaram.</div>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label">Critério de decisão (go/no-go)</div>
+            <div class="quali-insight">
+              <div class="quali-insight-label">Gate antes de investir mais em usabilidade do chat</div>
+              <div class="quali-insight-text">Se o piloto de notificação elevar a reabertura do chat em pelo menos 15-20 pontos percentuais (de ~0% hoje) dentro de 4 semanas, retomar as melhorias de usabilidade já especificadas para Q3 2026, agora como segundo passo pós-notificação. Se não houver esse salto mesmo com o gatilho, o problema é o valor percebido do chat em si — pausar novos investimentos em usabilidade e revisitar o escopo (ex: restringir a casos transacionais estreitos, como fazem os concorrentes).</div>
             </div>
           </div>
           <div class="field">
@@ -1104,7 +1201,10 @@
             <div class="card-title">Guia de Reforma Tributária</div>
             <div class="card-subtitle">Capacidade especializada dentro do Assistente Qive — não um produto separado</div>
           </div>
-          <div class="status-badge status-competitivo">Sinal competitivo</div>
+          <div class="card-top-side">
+            <div class="status-badge status-competitivo">Sinal competitivo</div>
+            <div class="bet-date">📅 Jun/2026</div>
+          </div>
         </div>
         <div class="card-body">
           <div class="field">
@@ -1184,7 +1284,10 @@
             <div class="card-title">Inteligência de Fornecedores</div>
             <div class="card-subtitle">Perguntas sobre desempenho, preços e padrões de fornecedores via chat</div>
           </div>
-          <div class="status-badge status-sem-evidencia">Sem evidência</div>
+          <div class="card-top-side">
+            <div class="status-badge status-sem-evidencia">Sem evidência</div>
+            <div class="bet-date">📅 Jun/2026</div>
+          </div>
         </div>
         <div class="card-body">
           <div style="background:#F9FAFB;border:1px dashed #D1D5DB;border-radius:8px;padding:10px 12px;margin-bottom:12px;">
@@ -1245,7 +1348,10 @@
             <div class="card-title">Presença em Assistentes Externos (API / MCP)</div>
             <div class="card-subtitle">Dados fiscais acessíveis via ChatGPT, Copilot ou assistentes internos sem abrir a Qive</div>
           </div>
-          <div class="status-badge status-nao-testada">Não testada</div>
+          <div class="card-top-side">
+            <div class="status-badge status-nao-testada">Não testada</div>
+            <div class="bet-date">📅 Jun/2026</div>
+          </div>
         </div>
         <div class="card-body">
           <div class="field">
@@ -1308,7 +1414,10 @@
             <div class="card-title">Normalização de Produtos & Benchmark de Preços</div>
             <div class="card-subtitle">Capacidade de plataforma: normaliza nomes de produtos via GTIN e habilita inteligência de preços entre fornecedores e clientes</div>
           </div>
-          <div class="status-badge" style="background:#EDE9FE;color:#5B21B6;">Validando PMF · Q3 2026</div>
+          <div class="card-top-side">
+            <div class="status-badge" style="background:#EDE9FE;color:#5B21B6;">Validando PMF · Q3 2026</div>
+            <div class="bet-date">📅 Jun/2026</div>
+          </div>
         </div>
         <div class="card-body">
           <div style="background:#F5F3FF;border:1px solid #C4B5FD;border-radius:8px;padding:10px 12px;margin-bottom:12px;">
@@ -1564,6 +1673,15 @@
           <td><span class="status-badge status-sem-evidencia">Sem evidência</span></td>
           <td style="color:var(--gray-500);">Entrevistas qualitativas · avaliar viabilidade de dados entre clientes</td>
         </tr>
+        <tr style="opacity:0.7;">
+          <td><div class="priority-num" style="background:#9CA3AF;">10</div></td>
+          <td style="font-weight:600;color:var(--gray-500);">Agente de Onboarding para Fornecedores <span style="font-size:10px;color:var(--teal);font-weight:700;font-style:normal;">✦ NOVO</span></td>
+          <td><span class="model-tag tag-inflow" style="display:inline-block;">Acompanha</span></td>
+          <td><div class="score-bar-wrap"><span style="font-size:11px;color:var(--teal);font-weight:600;">3 players · precedente direto (V360, ROIT, Avalara/Pyxs)</span></div></td>
+          <td><span style="font-size:11px;font-weight:700;color:#065F46;background:#D1FAE5;padding:2px 8px;border-radius:20px;">🟢 Baixo-médio</span></td>
+          <td><span class="status-badge status-nao-testada">Não testada</span></td>
+          <td style="color:var(--gray-500);">Validar com 1-2 clientes-piloto · reaproveita LLM e interface já existentes</td>
+        </tr>
         <tr style="opacity:0.65;background:#FAF5FF;">
           <td><div class="priority-num" style="background:var(--purple);">L</div></td>
           <td style="font-weight:600;color:#5B21B6;">Normalização de Produtos & Benchmark de Preços <span style="font-size:10px;font-style:italic;font-weight:400;color:var(--purple);">· Labs</span></td>
@@ -1651,7 +1769,7 @@
 
   <!-- PORTFOLIO -->
   <div class="exec-section">
-    <div class="exec-section-label">Portfolio — 11 apostas mapeadas</div>
+    <div class="exec-section-label">Portfolio — 12 apostas mapeadas</div>
     <div class="portfolio-grid">
       <div class="portfolio-item" style="background:#F0FDFA;border-color:#99F6E4;">
         <div class="p-rank" style="background:#0D9488;">1</div>
@@ -1713,6 +1831,12 @@
         <span class="portfolio-tag tag-pull" style="margin-right:4px;">Responde</span>
         <span class="p-signal" style="color:var(--gray-500);">⬜ Sem evidência</span>
       </div>
+      <div class="portfolio-item" style="background:#F0FDFA;border-color:#99F6E4;">
+        <div class="p-rank" style="background:#0D9488;">10</div>
+        <div class="p-name">Agente de Onboarding para Fornecedores <span style="color:#0D9488;font-size:10px;">✦ NOVO</span></div>
+        <span class="portfolio-tag tag-inflow" style="margin-right:4px;">Acompanha</span>
+        <span class="p-signal" style="color:#0D9488;">🟢 Precedente em 3 players</span>
+      </div>
       <div class="portfolio-item" style="background:var(--purple-bg);border-color:#C4B5FD;grid-column:span 2;">
         <div class="p-rank" style="background:var(--purple);">L</div>
         <div class="p-name">Labs — Normalização de Produtos &amp; Benchmark de Preços</div>
@@ -1732,7 +1856,7 @@
           <div class="tl-item"><span class="tl-dot-now">→</span><div><strong>Guia RT no Assistente Qive</strong>Menor custo, maior sinal competitivo. Janela fecha pós-2028.</div></div>
           <div class="tl-item"><span class="tl-dot-now">→</span><div><strong>Conferência Qive × ERP (Confere)</strong>Democratiza via Assistente Qive um produto já existente, hoje restrito a planos superiores. Usuário cola chaves de NF-e do ERP; Qive aponta divergências. Iniciativa própria — Three-Way Match é separado.</div></div>
           <div class="tl-item"><span class="tl-dot-now">→</span><div><strong>Discovery no contexto de gestão de fornecedores</strong> <span class="mat-badge mb-discovery">Discovery</span><br>Problema mapeado: divergências entre PO e NF-e exigem que alguém pare, investigue quem errou e comunique manualmente o ajuste. Discovery em andamento com a Fini para validar a hipótese de um agente que automatiza essa detecção e comunicação. Pode evoluir para Confere em Q4.</div></div>
-          <div class="tl-item"><span class="tl-dot-now">→</span><div><strong>Melhorias de Usabilidade — Agente de Conversação (Responde)</strong>Camada de conversação na Home do Produto · relatórios gerados dentro da conversa · redução de validações desnecessárias · sugestão de ações rápidas com base no contexto da conversa.</div></div>
+          <div class="tl-item"><span class="tl-dot-now">→</span><div><strong>Validação da hipótese de retenção do Chat (Responde)</strong> <span class="mat-badge mb-discovery">Discovery</span><br>0% de retenção D+1 confirmado em produção (49 usuários). Antes de retomar usabilidade: piloto de notificação proativa com grupo controle, análise do conteúdo das conversas existentes e entrevistas com usuários de abertura única. Gate go/no-go em 4 semanas.</div></div>
           <div class="tl-item"><span class="tl-dot-now">→</span><div><strong>Benchmark de Preços — Validação PMF (Labs)</strong> <span class="mat-badge mb-discovery">Discovery</span><br>Entrevistas sobre cotação de preços. Go/no-go define produtização em Q4.</div></div>
         </div>
       </div>
@@ -1745,7 +1869,7 @@
           <div class="tl-item"><span class="tl-dot-next">→</span><div><strong>PoC MCP em assistentes externos · Q1 2027</strong>Primeira integração com assistente B2B.</div></div>
           <div class="tl-item"><span class="tl-dot-next">→</span><div><strong>Inconsistências Tributárias</strong>Aguarda canal Monitora validado.</div></div>
           <div class="tl-item"><span class="tl-dot-next">→</span><div><strong>Benchmark de Preços · Q4 2026</strong>Produtização condicional ao PMF confirmado em Q3.</div></div>
-          <div class="tl-item"><span class="tl-dot-next">→</span><div><strong>Assistente Qive Chat</strong>Reposicionado como segundo passo após notificação Monitora.</div></div>
+          <div class="tl-item"><span class="tl-dot-next">→</span><div><strong>Assistente Qive Chat — Melhorias de Usabilidade</strong>Liberadas apenas se o piloto de notificação (Q3) confirmar aumento de reabertura ≥15-20pp: camada de conversação na Home, relatórios na conversa, redução de validações, sugestão de ações rápidas — sempre reposicionado como segundo passo após notificação Monitora.</div></div>
         </div>
       </div>
       <div class="tl-col">
@@ -1848,11 +1972,14 @@
                   <br>
                   <div class="mat-cell-name">Agenda de Pagamentos</div>
                   <div class="mat-cell-detail">Sem evidência — aguarda validação</div>
+                  <br>
+                  <div class="mat-cell-name">Agente de Onboarding para Fornecedores <span style="color:#0D9488;">✦ NOVO</span></div>
+                  <div class="mat-cell-detail">Hipótese mapeada · precedente direto em 3 concorrentes (V360, ROIT, Avalara/Pyxs)</div>
                   <div><span class="mat-badge mb-hoje">Hoje</span></div>
                 </td>
                 <td class="mat-hoje">
-                  <div class="mat-cell-name">Assistente Qive (em revisão)</div>
-                  <div class="mat-cell-detail">PoC não mostrou retenção — hipótese revisada</div>
+                  <div class="mat-cell-name">Assistente Qive (repriorizado)</div>
+                  <div class="mat-cell-detail">0% retenção D+1 confirmada em produção (49 usuários) — piloto de notificação antes de retomar usabilidade</div>
                   <br>
                   <div class="mat-cell-name">Guia RT · Inteligência de Fornecedores</div>
                   <div class="mat-cell-detail">Hipóteses novas · sem evidência quantitativa</div>
@@ -2006,11 +2133,11 @@
 
   <div class="exec-section-label">Funil de adoção</div>
   <div style="font-size:22px;font-weight:800;color:var(--navy);margin-bottom:2px;">Funil de adoção — Assistente Qive</div>
-  <div class="funil-subtitle">clicked_ai_chat_open → viewed_ai_chat · 25 mar – 3 jul 2026 · exclui usuário interno 969</div>
+  <div class="funil-subtitle">clicked_ai_chat_open → viewed_ai_chat · 25 mar – 7 jul 2026 · exclui usuários internos 969, 5 e 2</div>
 
   <div class="stats-row" style="margin-bottom:28px;">
     <div class="stat-box">
-      <div class="stat-num">36</div>
+      <div class="stat-num">49</div>
       <div class="stat-label">Usuários únicos</div>
     </div>
     <div class="stat-box">
@@ -2027,9 +2154,9 @@
     <div class="funil-stage">
       <div class="row">
         <span class="name">1. clicked_ai_chat_open</span>
-        <span class="count">36 usuários</span>
+        <span class="count">49 usuários</span>
       </div>
-      <p class="detail">100% da base · 109 cliques no total</p>
+      <p class="detail">100% da base · 72 cliques no total</p>
     </div>
 
     <div class="funil-connector">
@@ -2040,42 +2167,42 @@
     <div class="funil-stage">
       <div class="row">
         <span class="name">2. viewed_ai_chat</span>
-        <span class="count">36 usuários</span>
+        <span class="count">49 usuários</span>
       </div>
-      <p class="detail">100% do funil · 8.430 visualizações no total</p>
+      <p class="detail">100% do funil · 1.725 visualizações no total</p>
     </div>
   </div>
 
   <div class="stats-row" style="grid-template-columns:repeat(2,1fr);margin-top:28px;">
     <div class="stat-box">
-      <div class="stat-num" style="font-size:22px;">7,5 · 234,2</div>
+      <div class="stat-num" style="font-size:22px;">6 · 35,2</div>
       <div class="stat-label">Visualizações por usuário<br>(mediana · média)</div>
     </div>
     <div class="stat-box">
-      <div class="stat-num" style="font-size:22px;">1 · 3,0</div>
+      <div class="stat-num" style="font-size:22px;">1 · 1,5</div>
       <div class="stat-label">Cliques por usuário<br>(mediana · média)</div>
     </div>
   </div>
 
-  <p class="funil-note">Fonte: bq-results-20260703-151050-1783091465941.csv · Usuário 969 (interno) excluído da análise · Todos os 36 usuários que clicaram para abrir o Assistente Qive também o visualizaram em seguida, portanto a conversão do funil é de 100% em ambas as etapas.</p>
+  <p class="funil-note">Fonte: bq-results-20260707-142202-1783443883144.csv (primeira exportação com histórico completo desde 25/03/2026) · Usuários internos 969, 5 e 2 excluídos da análise — IDs numéricos curtos com padrão de conta interna/teste; o usuário "5" sozinho concentrava 7.036 eventos entre abril e junho (80% de todas as visualizações do arquivo bruto), o que distorcia fortemente médias e totais. Todos os 49 usuários reais que clicaram para abrir o Assistente Qive também o visualizaram em seguida, portanto a conversão do funil é de 100% em ambas as etapas.</p>
 
-  <div class="exec-section-label" style="margin-top:36px;">Retenção diária · cohorts de 30/06 a 03/07</div>
-  <p class="funil-subtitle" style="margin:-10px 0 4px;">Cohort = dia da primeira vez que cada usuário deu clicked_ai_chat_open · janela de 30/06 (data mais antiga com cohort diário denso) até 03/07 (último dia no CSV) · células mostram usuários do cohort que voltaram a abrir o chat naquele dia calendário · usuário interno 969 excluído</p>
+  <div class="exec-section-label" style="margin-top:36px;">Retenção diária · cohorts de 30/06 a 07/07</div>
+  <p class="funil-subtitle" style="margin:-10px 0 4px;">Cohort = dia da primeira vez que cada usuário deu clicked_ai_chat_open · janela de 30/06 (data mais antiga com cohort diário denso) até 07/07 (último dia com dado) · células mostram usuários do cohort que voltaram a abrir o chat naquele dia calendário · usuários internos 969, 5 e 2 excluídos</p>
 
   <div class="funil-callout">
-    <div class="funil-callout-label">Sinal de alerta</div>
-    <div class="funil-callout-text">Nos 4 cohorts mais recentes (30/06, 01/07, 02/07 e 03/07, somando 30 usuários), a retenção no dia seguinte é 0% em todos os casos — nenhum usuário que abriu o Assistente Qive pela primeira vez nesses dias voltou a abri-lo no dia seguinte. Excluindo o usuário interno 969, o único usuário com retorno frequente ao longo do histórico completo é o ID 5 (15 dias distintos de uso desde abril); os outros 5 usuários que já retornaram alguma vez o fizeram de forma esporádica. No total, 30 dos 36 usuários (83%) nunca voltaram a abrir o chat em nenhum outro dia.</div>
+    <div class="funil-callout-label">Atualização 07/07 — histórico completo (25/03 a 07/07): 3 retornos dentro da janela, nenhum em D+1</div>
+    <div class="funil-callout-text">Com o histórico completo do BigQuery (antes a exportação só cobria parte do período), confirmamos 3 retornos espontâneos dentro da janela de 30/06–07/07: o usuário 898654 (cohort 30/06) reabriu em 06/07 (D+6); o usuário 427894 (cohort 01/07) reabriu em 07/07 (D+6); e o usuário 898266 (cohort 03/07) reabriu em 07/07 (D+4). Em nenhum dos 7 cohorts diários da janela houve retorno em D+1 — a retenção no dia seguinte à primeira abertura segue em 0% em todos os casos. Olhando o histórico completo (25/03–07/07, excluindo os usuários internos 969, 5 e 2), 7 dos 49 usuários (14%) já retornaram ao chat em pelo menos um outro dia — os 3 da janela atual mais 4 casos mais antigos (usuários 703521, 388246, 366730 e 894551, todos entre março e junho). Os outros 42 (86%) nunca voltaram a abrir o chat em nenhum outro dia depois do primeiro clique.</div>
   </div>
 
   <div class="mat-wrap" style="margin-top:0;">
     <table class="retention-table">
       <thead>
-        <tr><th>Cohort</th><th>Usuários</th><th>30/06</th><th>01/07</th><th>02/07</th><th>03/07</th></tr>
+        <tr><th>Cohort</th><th>Usuários</th><th>30/06</th><th>01/07</th><th>02/07</th><th>03/07</th><th>04/07</th><th>05/07</th><th>06/07</th><th>07/07</th></tr>
       </thead>
       <tbody id="retention-table-body"></tbody>
     </table>
   </div>
-  <p class="funil-note">"—" = dia anterior ao cohort (não aplicável). A diagonal (célula de mesma data do cohort) é sempre 100% por definição — é o próprio dia de entrada. Fonte: bq-results-20260703-151050-1783091465941.csv, eventos clicked_ai_chat_open, usuário interno 969 excluído.</p>
+  <p class="funil-note">"—" = dia anterior ao cohort (não aplicável) ou dia sem cohort novo (05/07, sem primeiras aberturas nesse dia). A diagonal (célula de mesma data do cohort) é sempre 100% por definição — é o próprio dia de entrada. Célula com borda verde e ✦ = retorno espontâneo real (não é a diagonal). Fonte: bq-results-20260707-142202-1783443883144.csv (histórico completo 25/03–07/07), eventos clicked_ai_chat_open, usuários internos 969, 5 e 2 excluídos.</p>
 
   <div class="funil-table-wrap">
     <div class="exec-section-label" style="margin-top:36px;">Detalhe por usuário</div>
@@ -2109,15 +2236,19 @@ function showTab(id) {
 
 (function() {
   var data = [
-    ["5", 53, 6947], ["366730", 2, 336], ["904999", 1, 237], ["703521", 4, 160],
-    ["945978", 1, 135], ["441676", 1, 76], ["907326", 1, 76], ["922051", 1, 67],
-    ["1497", 2, 63], ["913110", 4, 61], ["388246", 4, 53], ["897644", 1, 40],
-    ["921951", 1, 40], ["427894", 5, 26], ["658711", 4, 21], ["907287", 1, 16],
-    ["700628", 1, 11], ["2", 2, 8], ["894551", 3, 7], ["947548", 1, 5],
-    ["945170", 1, 3], ["907335", 1, 3], ["897710", 1, 3], ["980187", 1, 3],
-    ["898654", 1, 3], ["884394", 1, 3], ["972228", 1, 3], ["986275", 1, 3],
-    ["986783", 1, 3], ["490479", 1, 3], ["985531", 1, 3], ["477789", 1, 3],
-    ["475722", 1, 3], ["897819", 1, 2], ["33290", 1, 2], ["897807", 1, 2]
+    ["366730", 2, 336], ["904999", 1, 237], ["703521", 4, 160], ["945978", 1, 135],
+    ["441676", 1, 76], ["907326", 1, 76], ["922051", 1, 67], ["1497", 2, 63],
+    ["913110", 4, 61], ["898268", 1, 59], ["388246", 4, 53], ["898654", 2, 42],
+    ["921951", 1, 40], ["897644", 1, 40], ["898667", 1, 39], ["453553", 1, 37],
+    ["427894", 6, 29], ["408068", 1, 21], ["658711", 4, 21], ["907287", 1, 16],
+    ["943652", 1, 14], ["700628", 1, 11], ["946177", 1, 8], ["894551", 3, 7],
+    ["898266", 2, 6], ["331462", 1, 5], ["947548", 1, 5], ["389713", 1, 3],
+    ["743707", 1, 3], ["984045", 1, 3], ["985055", 1, 3], ["849522", 1, 3],
+    ["490479", 1, 3], ["907335", 1, 3], ["986275", 1, 3], ["985531", 1, 3],
+    ["897710", 1, 3], ["972228", 1, 3], ["980187", 1, 3], ["477789", 1, 3],
+    ["945170", 1, 3], ["475722", 1, 3], ["986783", 1, 3], ["884394", 1, 3],
+    ["116256", 1, 2], ["947132", 1, 2], ["33290", 1, 2], ["897807", 1, 2],
+    ["897819", 1, 2]
   ];
   var tbody = document.getElementById('funil-user-table');
   data.forEach(function(row) {
@@ -2127,16 +2258,22 @@ function showTab(id) {
   });
 })();
 
-// ── COHORT DE RETENÇÃO DIÁRIA (clicked_ai_chat_open) · 30/06 a 03/07 · exclui usuário interno 969 ──
+// ── COHORT DE RETENÇÃO DIÁRIA (clicked_ai_chat_open) · 30/06 a 07/07 · exclui usuários internos 969, 5 e 2 ──
 (function() {
   // calendarDays = colunas da tabela (últimos dias do CSV)
-  var calendarDays = ['30/06', '01/07', '02/07', '03/07'];
+  var calendarDays = ['30/06', '01/07', '02/07', '03/07', '04/07', '05/07', '06/07', '07/07'];
   // cada cohort: usuários que abriram o chat pela 1ª vez naquele dia, e em quais dias do calendário voltaram a abrir
+  // não há cohort novo em 05/07 (nenhum usuário abriu o chat pela 1ª vez nesse dia)
+  // atualizado em 07/07 com histórico completo (25/03–07/07): 3 retornos confirmados dentro da janela —
+  // 898654 (cohort 30/06) reabriu em 06/07; 427894 (cohort 01/07) reabriu em 07/07; 898266 (cohort 03/07) reabriu em 07/07
   var cohorts = [
-    { date: '30/06', size: 3,  activity: { '30/06': 3, '01/07': 0, '02/07': 0, '03/07': 0 } },
-    { date: '01/07', size: 11, activity: { '01/07': 11, '02/07': 0, '03/07': 0 } },
-    { date: '02/07', size: 12, activity: { '02/07': 12, '03/07': 0 } },
-    { date: '03/07', size: 4,  activity: { '03/07': 4 } }
+    { date: '30/06', size: 3,  activity: { '30/06': 3, '01/07': 0, '02/07': 0, '03/07': 0, '04/07': 0, '05/07': 0, '06/07': 1, '07/07': 0 } },
+    { date: '01/07', size: 11, activity: { '01/07': 11, '02/07': 0, '03/07': 0, '04/07': 0, '05/07': 0, '06/07': 0, '07/07': 1 } },
+    { date: '02/07', size: 12, activity: { '02/07': 12, '03/07': 0, '04/07': 0, '05/07': 0, '06/07': 0, '07/07': 0 } },
+    { date: '03/07', size: 9,  activity: { '03/07': 9, '04/07': 0, '05/07': 0, '06/07': 0, '07/07': 1 } },
+    { date: '04/07', size: 2,  activity: { '04/07': 2, '05/07': 0, '06/07': 0, '07/07': 0 } },
+    { date: '06/07', size: 7,  activity: { '06/07': 7, '07/07': 0 } },
+    { date: '07/07', size: 1,  activity: { '07/07': 1 } }
   ];
 
   var tbody = document.getElementById('retention-table-body');
@@ -2149,8 +2286,10 @@ function showTab(id) {
       } else {
         var v = c.activity[day];
         var pct = Math.round(100 * v / c.size);
+        var isReturn = v > 0 && day !== c.date;
         var bg = v > 0 ? 'rgba(16,185,129,' + (0.12 + 0.5 * pct / 100) + ')' : 'transparent';
-        cells += '<td style="background:' + bg + ';">' + v + '/' + c.size + ' (' + pct + '%)</td>';
+        var style = 'background:' + bg + ';' + (isReturn ? 'border:2px solid #10B981;font-weight:700;' : '');
+        cells += '<td style="' + style + '">' + v + '/' + c.size + ' (' + pct + '%)' + (isReturn ? ' ✦' : '') + '</td>';
       }
     });
     tr.innerHTML = cells;
