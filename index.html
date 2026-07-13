@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mapa de Apostas de IA | Qive 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -275,6 +278,14 @@
   .ms-item:last-child { border-bottom: none; }
   .ms-num { width: 20px; height: 20px; border-radius: 50%; background: var(--navy); color: white; font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .radar-note { margin-top: 10px; font-size: 11px; color: var(--gray-500); line-height: 1.5; text-align: center; }
+
+  /* ── MANDALA DE SOLUÇÕES ── */
+  .mandala-canvas-box { background: white; border: 1px solid var(--gray-200); border-radius: 12px; padding: 24px; text-align: center; }
+  .mandala-pillar-legend { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+  .mandala-pillar-tag { font-size: 10.5px; font-weight: 700; padding: 5px 12px; border-radius: 20px; }
+  .mandala-status-legend { display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; margin-top: 10px; font-size: 10.5px; color: var(--gray-500); }
+  .mandala-status-legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .mandala-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; display: inline-block; }
 
   /* ── MATRIX DE ENTREGAS ── */
   .mat-wrap { margin-top: 20px; overflow-x: auto; }
@@ -1103,7 +1114,7 @@
     </div>
     <div class="cards-grid three">
       <div class="bet-card reframe">
-        <div class="reframe-banner">⚠️ HIPÓTESE CONFIRMADA POR DADO DE PRODUÇÃO — 0% de retenção D+1 em 53 usuários (25/mar–08/jul). Reframing em execução: chat repriorizado como segundo passo, dependente do Modelo 1 (Monitora).</div>
+        <div class="reframe-banner">⚠️ HIPÓTESE CONFIRMADA POR DADO DE PRODUÇÃO — 0% de retenção D+1 em 65 usuários (25/mar–13/jul). Reframing em execução: chat repriorizado como segundo passo, dependente do Modelo 1 (Monitora).</div>
         <div class="card-top">
           <div class="card-icon">💬</div>
           <div class="card-title-block">
@@ -1121,9 +1132,9 @@
             <div style="font-size:11px;color:#1E40AF;">O chatbot já cumpre bem o papel de Responde: tira dúvidas básicas sobre notas fiscais eletrônicas e executa ações via linguagem natural — classificação por etiquetas e manifestação dos documentos fiscais. A capacidade técnica está validada; o que estava em revisão (chat como porta de entrada principal da IA) agora tem dado de produção confirmando a invalidação — ver "Evidência de produto" abaixo.</div>
           </div>
           <div class="field">
-            <div class="field-label">Evidência de produto (pós-rollout · 25/mar–08/jul, exclui usuários internos 969, 5 e 2)</div>
+            <div class="field-label">Evidência de produto (pós-rollout · 25/mar–13/jul, exclui usuários internos 969, 5 e 2)</div>
             <div style="background:#FEF2F2;border-left:3px solid var(--red);padding:8px 10px;border-radius:0 6px 6px 0;">
-              <div style="font-size:11px;color:#7F1D1D;line-height:1.5;">53 usuários abriram o chat, 100% o visualizaram em seguida (funil sem perda) — mas a retenção no dia seguinte é <strong>0% em todos os 8 cohorts diários</strong> observados entre 30/06 e 08/07. No histórico completo, <strong>45 dos 53 usuários (85%) abriram uma única vez e nunca voltaram</strong>; os outros 8 (15%) voltaram em algum outro dia, mas nunca no dia seguinte — 4 desses retornos aconteceram dentro da própria janela de 30/06–08/07 (D+4 a D+6).</div>
+              <div style="font-size:11px;color:#7F1D1D;line-height:1.5;">65 usuários abriram o chat, 100% o visualizaram em seguida (funil sem perda) — mas a retenção no dia seguinte é <strong>0% em todos os 11 cohorts diários</strong> observados entre 30/06 e 13/07. No histórico completo, <strong>57 dos 65 usuários (87,7%) abriram uma única vez e nunca voltaram</strong>; os outros 8 (12,3%) voltaram em algum outro dia, mas nunca no dia seguinte — 4 desses retornos aconteceram dentro da própria janela de 30/06–13/07 (D+4 a D+6), os outros 4 são mais antigos (D+4 a D+20).</div>
             </div>
           </div>
           <div class="field">
@@ -1787,7 +1798,7 @@
 
   <!-- PORTFOLIO -->
   <div class="exec-section">
-    <div class="exec-section-label">Portfolio — 12 apostas mapeadas</div>
+    <div class="exec-section-label">Portfolio — 13 apostas mapeadas</div>
     <div class="portfolio-grid">
       <div class="portfolio-item" style="background:#F0FDFA;border-color:#99F6E4;">
         <div class="p-rank" style="background:#0D9488;">1</div>
@@ -1861,6 +1872,12 @@
         <span class="portfolio-tag" style="background:var(--purple-bg);color:var(--purple);margin-right:4px;">Labs</span>
         <span class="p-signal" style="color:var(--purple);">🔬 Validando PMF</span>
       </div>
+      <div class="portfolio-item" style="background:var(--gray-50);">
+        <div class="p-rank" style="background:var(--gray-500);">11</div>
+        <div class="p-name">Chat Conversacional em Produtos Pouco Ativados (Pagamentos, Automações) <span style="color:#0D9488;font-size:10px;">✦ NOVO</span></div>
+        <span class="portfolio-tag tag-pull" style="margin-right:4px;">Responde</span>
+        <span class="p-signal" style="color:var(--gray-500);">⬜ Ideia em avaliação — conversa inicial com liderança</span>
+      </div>
     </div>
   </div>
 
@@ -1874,7 +1891,7 @@
           <div class="tl-item"><span class="tl-dot-now">→</span><div><strong>Guia RT no Assistente Qive</strong>Menor custo, maior sinal competitivo. Janela fecha pós-2028.</div></div>
           <div class="tl-item"><span class="tl-dot-now">→</span><div><strong>Conferência Qive × ERP (Confere)</strong>Democratiza via Assistente Qive um produto já existente, hoje restrito a planos superiores. Usuário cola chaves de NF-e do ERP; Qive aponta divergências. Iniciativa própria — Three-Way Match é separado.</div></div>
           <div class="tl-item"><span class="tl-dot-now">→</span><div><strong>Discovery no contexto de gestão de fornecedores</strong> <span class="mat-badge mb-discovery">Discovery</span><br>Problema mapeado: divergências entre PO e NF-e exigem que alguém pare, investigue quem errou e comunique manualmente o ajuste. Discovery em andamento com a Fini para validar a hipótese de um agente que automatiza essa detecção e comunicação. Pode evoluir para Confere em Q4.</div></div>
-          <div class="tl-item"><span class="tl-dot-now">→</span><div><strong>Validação da hipótese de retenção do Chat (Responde)</strong> <span class="mat-badge mb-discovery">Discovery</span><br>0% de retenção D+1 confirmado em produção (53 usuários). Antes de retomar usabilidade: piloto de notificação proativa com grupo controle, análise do conteúdo das conversas existentes e entrevistas com usuários de abertura única. Gate go/no-go em 4 semanas.</div></div>
+          <div class="tl-item"><span class="tl-dot-now">→</span><div><strong>Validação da hipótese de retenção do Chat (Responde)</strong> <span class="mat-badge mb-discovery">Discovery</span><br>0% de retenção D+1 confirmado em produção (65 usuários). Antes de retomar usabilidade: piloto de notificação proativa com grupo controle, análise do conteúdo das conversas existentes e entrevistas com usuários de abertura única. Gate go/no-go em 4 semanas.</div></div>
           <div class="tl-item"><span class="tl-dot-now">→</span><div><strong>Benchmark de Preços — Validação PMF (Labs)</strong> <span class="mat-badge mb-discovery">Discovery</span><br>Entrevistas sobre cotação de preços. Go/no-go define produtização em Q4.</div></div>
         </div>
       </div>
@@ -1997,7 +2014,7 @@
                 </td>
                 <td class="mat-hoje">
                   <div class="mat-cell-name">Assistente Qive (repriorizado)</div>
-                  <div class="mat-cell-detail">0% retenção D+1 confirmada em produção (53 usuários) — piloto de notificação antes de retomar usabilidade</div>
+                  <div class="mat-cell-detail">0% retenção D+1 confirmada em produção (65 usuários) — piloto de notificação antes de retomar usabilidade</div>
                   <br>
                   <div class="mat-cell-name">Guia RT · Inteligência de Fornecedores</div>
                   <div class="mat-cell-detail">Hipóteses novas · sem evidência quantitativa</div>
@@ -2136,6 +2153,73 @@
     </div>
   </div>
 
+  <!-- MANDALA DE SOLUÇÕES -->
+  <div class="exec-section">
+    <div class="exec-section-label">Leque de apostas de IA · por pilar da mandala de soluções Qive</div>
+    <div class="mandala-canvas-box">
+      <svg viewBox="0 290 1040 610" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;max-width:640px;display:block;margin:0 auto;">
+        <path d="M 485.0 739.4 L 270.0 367.0 A 500 500 0 0 0 20.0 800.0 L 450.0 800.0 A 70 70 0 0 1 485.0 739.4 Z" fill="#FFF0E6" stroke="white" stroke-width="3"/>
+        <path d="M 555.0 739.4 L 770.0 367.0 A 500 500 0 0 0 270.0 367.0 L 485.0 739.4 A 70 70 0 0 1 555.0 739.4 Z" fill="#FFF0E6" stroke="white" stroke-width="3"/>
+        <path d="M 590.0 800.0 L 1020.0 800.0 A 500 500 0 0 0 770.0 367.0 L 555.0 739.4 A 70 70 0 0 1 590.0 800.0 Z" fill="#FFF0E6" stroke="white" stroke-width="3"/>
+        <path d="M 680.0 800.0 A 160 160 0 0 0 360.0 800.0" fill="none" stroke="#F3D9C4" stroke-width="1"/>
+        <path d="M 820.0 800.0 A 300 300 0 0 0 220.0 800.0" fill="none" stroke="#F3D9C4" stroke-width="1"/>
+        <path d="M 960.0 800.0 A 440 440 0 0 0 80.0 800.0" fill="none" stroke="#F3D9C4" stroke-width="1"/>
+        <line x1="590.0" y1="800.0" x2="1020.0" y2="800.0" stroke="white" stroke-width="2.5"/>
+        <line x1="555.0" y1="739.4" x2="770.0" y2="367.0" stroke="white" stroke-width="2.5"/>
+        <line x1="485.0" y1="739.4" x2="270.0" y2="367.0" stroke="white" stroke-width="2.5"/>
+        <line x1="450.0" y1="800.0" x2="20.0" y2="800.0" stroke="white" stroke-width="2.5"/>
+        <circle cx="520" cy="800" r="70" fill="#0F1629"/>
+        <text x="520" y="796" text-anchor="middle" font-size="15" font-weight="900" fill="white" font-family="Lexend,-apple-system,sans-serif">Qi<tspan fill="#FF6B00">ve</tspan></text>
+        <rect x="81.0" y="305.0" width="178.0" height="30" rx="15" fill="#3B82F6"/>
+        <text x="170" y="324.5" text-anchor="middle" font-size="12.5" font-weight="800" fill="white" font-family="Lexend,-apple-system,sans-serif">Gestão de Documentos</text>
+        <rect x="423.4" y="305.0" width="193.2" height="30" rx="15" fill="#FF6B00"/>
+        <text x="520" y="324.5" text-anchor="middle" font-size="12.5" font-weight="800" fill="white" font-family="Lexend,-apple-system,sans-serif">Gestão de Fornecedores</text>
+        <rect x="781.0" y="305.0" width="178.0" height="30" rx="15" fill="#0D9488"/>
+        <text x="870" y="324.5" text-anchor="middle" font-size="12.5" font-weight="800" fill="white" font-family="Lexend,-apple-system,sans-serif">Gestão de Pagamentos</text>
+        <rect x="293.8" y="713.0" width="210" height="34" rx="17" fill="white" stroke="#10B981" stroke-width="1.5"/>
+        <circle cx="308.8" cy="730.0" r="4.2" fill="#10B981"/>
+        <text x="405.8" y="734.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#0F1629" font-family="Lexend,-apple-system,sans-serif">Chat Assistente Qive</text>
+        <rect x="224.0" y="672.8" width="210" height="34" rx="17" fill="white" stroke="#FF6B00" stroke-width="1.5"/>
+        <circle cx="239.0" cy="689.8" r="4.2" fill="#FF6B00"/>
+        <text x="336.0" y="693.8" text-anchor="middle" font-size="10.5" font-weight="700" fill="#0F1629" font-family="Lexend,-apple-system,sans-serif">Guia Reforma Tributária</text>
+        <rect x="154.3" y="632.5" width="210" height="34" rx="17" fill="white" stroke="#3B82F6" stroke-width="1.5"/>
+        <circle cx="169.3" cy="649.5" r="4.2" fill="#3B82F6"/>
+        <text x="266.3" y="653.5" text-anchor="middle" font-size="10.5" font-weight="700" fill="#0F1629" font-family="Lexend,-apple-system,sans-serif">Piloto de Notificação</text>
+        <rect x="84.6" y="592.2" width="210" height="34" rx="17" fill="white" stroke="#FF6B00" stroke-width="1.5"/>
+        <circle cx="99.6" cy="609.2" r="4.2" fill="#FF6B00"/>
+        <text x="196.6" y="613.2" text-anchor="middle" font-size="10.5" font-weight="700" fill="#0F1629" font-family="Lexend,-apple-system,sans-serif">Conferência Qive × ERP</text>
+        <rect x="14.9" y="552.0" width="210" height="34" rx="17" fill="white" stroke="#10B981" stroke-width="1.5"/>
+        <circle cx="29.9" cy="569.0" r="4.2" fill="#10B981"/>
+        <text x="126.9" y="573.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#0F1629" font-family="Lexend,-apple-system,sans-serif">Etiquetas Automatizadas</text>
+        <rect x="410.0" y="623.0" width="220" height="34" rx="17" fill="white" stroke="#9CA3AF" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <circle cx="425.0" cy="640.0" r="4.2" fill="#9CA3AF"/>
+        <text x="527.0" y="644.0" text-anchor="middle" font-size="10.5" font-weight="700" font-style="italic" fill="#6B7280" font-family="Lexend,-apple-system,sans-serif">Onboarding de Fornecedores</text>
+        <rect x="410.0" y="483.0" width="220" height="34" rx="17" fill="white" stroke="#3B82F6" stroke-width="1.5"/>
+        <circle cx="425.0" cy="500.0" r="4.2" fill="#3B82F6"/>
+        <text x="527.0" y="504.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#0F1629" font-family="Lexend,-apple-system,sans-serif">Detecção PO × NF-e</text>
+        <rect x="410.0" y="343.0" width="220" height="34" rx="17" fill="white" stroke="#3B82F6" stroke-width="1.5"/>
+        <circle cx="425.0" cy="360.0" r="4.2" fill="#3B82F6"/>
+        <text x="527.0" y="364.0" text-anchor="middle" font-size="10.5" font-weight="700" fill="#0F1629" font-family="Lexend,-apple-system,sans-serif">Benchmark de Preços (GTIN)</text>
+        <rect x="546.1" y="703.0" width="225" height="34" rx="17" fill="white" stroke="#9CA3AF" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <circle cx="561.1" cy="720.0" r="4.2" fill="#9CA3AF"/>
+        <text x="665.6" y="724.0" text-anchor="middle" font-size="10.5" font-weight="700" font-style="italic" fill="#6B7280" font-family="Lexend,-apple-system,sans-serif">Chat Conversacional (Pag.+Automações)</text>
+        <rect x="667.3" y="633.0" width="225" height="34" rx="17" fill="white" stroke="#9CA3AF" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <circle cx="682.3" cy="650.0" r="4.2" fill="#9CA3AF"/>
+        <text x="786.8" y="654.0" text-anchor="middle" font-size="10.5" font-weight="700" font-style="italic" fill="#6B7280" font-family="Lexend,-apple-system,sans-serif">Agenda de Pagamentos Inteligente</text>
+        <rect x="788.6" y="563.0" width="225" height="34" rx="17" fill="white" stroke="#9CA3AF" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <circle cx="803.6" cy="580.0" r="4.2" fill="#9CA3AF"/>
+        <text x="908.1" y="584.0" text-anchor="middle" font-size="10.5" font-weight="700" font-style="italic" fill="#6B7280" font-family="Lexend,-apple-system,sans-serif">Three-Way Match (PO+NF-e+CT-e)</text>
+      </svg>
+      <div class="mandala-status-legend">
+        <span><span class="mandala-dot" style="background:#10B981;"></span>Concluído / em produção</span>
+        <span><span class="mandala-dot" style="background:#FF6B00;"></span>Em delivery (refinamento, piloto)</span>
+        <span><span class="mandala-dot" style="background:#3B82F6;"></span>Em discovery (hipótese em validação)</span>
+        <span><span class="mandala-dot" style="border:1.5px dashed #9CA3AF;background:transparent;"></span>Hipótese mapeada, ainda não iniciada</span>
+      </div>
+    </div>
+    <p class="funil-note" style="margin-top:14px;">Cada aposta de IA da Qive posicionada no pilar da mandala de soluções ao qual pertence. Documentos concentra 5 das 8 apostas mapeadas (Etiquetas, Conferência ERP, Piloto de Notificação, Guia da Reforma Tributária e o Chat do Assistente Qive); Fornecedores tem 3 (Benchmark de Preços e Detecção PO × NF-e em discovery ativo — a divergência tratada ali nasce no relacionamento com o fornecedor —, e Onboarding de Fornecedores ainda como hipótese mapeada, sem movimento além de conversas internas iniciais); Pagamentos tem 3 apostas mapeadas mas ainda não iniciadas — Three-Way Match (PO+NF-e+CT-e, Q1 2027), Agenda de Pagamentos Inteligente (Q2 2027) e, mais recente, a ideia de levar uma experiência conversacional para produtos pouco ativados como Pagamentos e Automações, ainda em conversa inicial com a liderança.</p>
+  </div>
+
   <!-- FOOTER EXEC -->
   <div class="exec-footer">
     <div class="exec-footer-logo">Qi<span>ve</span></div>
@@ -2151,11 +2235,11 @@
 
   <div class="exec-section-label">Funil de adoção</div>
   <div style="font-size:22px;font-weight:800;color:var(--navy);margin-bottom:2px;">Funil de adoção — Assistente Qive</div>
-  <div class="funil-subtitle">clicked_ai_chat_open → viewed_ai_chat · 25 mar – 8 jul 2026 · exclui usuários internos 969, 5 e 2</div>
+  <div class="funil-subtitle">clicked_ai_chat_open → viewed_ai_chat · 25 mar – 9 jul 2026 · exclui usuários internos 969, 5 e 2</div>
 
   <div class="stats-row" style="margin-bottom:28px;">
     <div class="stat-box">
-      <div class="stat-num">53</div>
+      <div class="stat-num">61</div>
       <div class="stat-label">Usuários únicos</div>
     </div>
     <div class="stat-box">
@@ -2172,9 +2256,9 @@
     <div class="funil-stage">
       <div class="row">
         <span class="name">1. clicked_ai_chat_open</span>
-        <span class="count">53 usuários</span>
+        <span class="count">65 usuários</span>
       </div>
-      <p class="detail">100% da base · 82 cliques no total</p>
+      <p class="detail">100% da base · 100 cliques no total</p>
     </div>
 
     <div class="funil-connector">
@@ -2185,15 +2269,15 @@
     <div class="funil-stage">
       <div class="row">
         <span class="name">2. viewed_ai_chat</span>
-        <span class="count">53 usuários</span>
+        <span class="count">65 usuários</span>
       </div>
-      <p class="detail">100% do funil · 2.358 visualizações no total</p>
+      <p class="detail">100% do funil · 2.776 visualizações no total</p>
     </div>
   </div>
 
   <div class="stats-row" style="grid-template-columns:repeat(2,1fr);margin-top:28px;">
     <div class="stat-box">
-      <div class="stat-num" style="font-size:22px;">6 · 44,5</div>
+      <div class="stat-num" style="font-size:22px;">7 · 42,7</div>
       <div class="stat-label">Visualizações por usuário<br>(mediana · média)</div>
     </div>
     <div class="stat-box">
@@ -2202,25 +2286,56 @@
     </div>
   </div>
 
-  <p class="funil-note">Fonte: bq-results-20260708-133438-1783517711476.csv (histórico completo 25/03–08/07) · Usuários internos 969, 5 e 2 excluídos da análise — IDs numéricos curtos com padrão de conta interna/teste; o usuário "5" sozinho concentrava 7.036 eventos entre abril e junho, o que distorcia fortemente médias e totais. Todos os 53 usuários reais que clicaram para abrir o Assistente Qive também o visualizaram em seguida, portanto a conversão do funil é de 100% em ambas as etapas.</p>
+  <p class="funil-note">Fonte: bq-results-20260713-135909-1783951175453.csv (histórico completo 25/03–13/jul) · Usuários internos 969, 5 e 2 excluídos da análise — IDs numéricos curtos com padrão de conta interna/teste; o usuário "5" sozinho concentrava 7.036 eventos entre abril e junho, o que distorcia fortemente médias e totais. Todos os 65 usuários reais que clicaram para abrir o Assistente Qive também o visualizaram em seguida, portanto a conversão do funil é de 100% em ambas as etapas.</p>
 
-  <div class="exec-section-label" style="margin-top:36px;">Retenção diária · cohorts de 30/06 a 08/07</div>
-  <p class="funil-subtitle" style="margin:-10px 0 4px;">Cohort = dia da primeira vez que cada usuário deu clicked_ai_chat_open · janela de 30/06 (data mais antiga com cohort diário denso) até 08/07 (último dia com dado) · células mostram usuários do cohort que voltaram a abrir o chat naquele dia calendário · usuários internos 969, 5 e 2 excluídos</p>
+  <div class="exec-section-label" style="margin-top:36px;">Retenção semanal · cohorts de 29/jun a 13/jul</div>
+  <p class="funil-subtitle" style="margin:-10px 0 4px;">Cohort = semana (segunda a domingo) da primeira vez que cada usuário deu clicked_ai_chat_open · colunas mostram % do cohort que voltou a abrir o chat em cada semana seguinte (W0 = semana de entrada) · janela recente e densa (29/06 em diante), usuários internos 969, 5 e 2 excluídos</p>
 
   <div class="funil-callout">
-    <div class="funil-callout-label">Atualização 08/07 — 4 retornos dentro da janela, nenhum em D+1</div>
-    <div class="funil-callout-text">Com o dado de 08/07, confirmamos um 4º retorno espontâneo: o usuário 897644 (cohort 02/07) reabriu em 08/07 (D+6), somando-se aos já observados 898654 (cohort 30/06 → 06/07, D+6), 427894 (cohort 01/07 → 07/07, D+6) e 898266 (cohort 03/07 → 07/07, D+4). Em nenhum dos 8 cohorts diários da janela houve retorno em D+1 — a retenção no dia seguinte à primeira abertura segue em 0% em todos os casos. Olhando o histórico completo (25/03–08/07, excluindo os usuários internos 969, 5 e 2), 8 dos 53 usuários (15%) já retornaram ao chat em pelo menos um outro dia — os 4 da janela atual mais 4 casos mais antigos (usuários 703521, 388246, 366730 e 894551, todos entre março e junho). Os outros 45 (85%) nunca voltaram a abrir o chat em nenhum outro dia depois do primeiro clique.</div>
+    <div class="funil-callout-label">Visão semanal muda o sinal: 10,8% do cohort mais recente voltou na semana seguinte</div>
+    <div class="funil-callout-text">Agrupando por semana em vez de por dia, o cohort de 29/06 (37 usuários — a virada de junho para julho, quando o uso decolou) teve <strong>4 usuários (10,8%) retornando na semana seguinte (W+1)</strong>, mesmo com 0% de retorno no dia seguinte (D+1). É um sinal mais animador do que a leitura diária sozinha sugeria — pode ser que o ritmo natural de uso do Assistente Qive seja semanal, não diário. O cohort mais novo (06/07, 23 usuários) ainda não tem W+1 completo — a semana de 13/07 começou hoje, com apenas 1 dia de dado.</div>
   </div>
 
   <div class="mat-wrap" style="margin-top:0;">
     <table class="retention-table">
       <thead>
-        <tr><th>Cohort</th><th>Usuários</th><th>30/06</th><th>01/07</th><th>02/07</th><th>03/07</th><th>04/07</th><th>05/07</th><th>06/07</th><th>07/07</th><th>08/07</th></tr>
+        <tr><th>Cohort (semana)</th><th>Usuários</th><th>W0</th><th>W+1</th><th>W+2</th><th>W+3</th><th>W+4</th><th>W+5</th><th>W+6</th></tr>
       </thead>
-      <tbody id="retention-table-body"></tbody>
+      <tbody>
+        <tr>
+          <td class="cohort-date">29/06</td><td class="cohort-size">37</td>
+          <td>37/37 (100%)</td>
+          <td style="background:rgba(16,185,129,0.35);border:2px solid #10B981;font-weight:700;">4/37 (10,8%) ✦</td>
+          <td style="font-style:italic;color:var(--gray-500);">0/37 (0%)*</td>
+          <td class="ret-cell-na">—</td>
+          <td class="ret-cell-na">—</td>
+          <td class="ret-cell-na">—</td>
+          <td class="ret-cell-na">—</td>
+        </tr>
+        <tr>
+          <td class="cohort-date">06/07</td><td class="cohort-size">23</td>
+          <td>23/23 (100%)</td>
+          <td style="font-style:italic;color:var(--gray-500);">0/23 (0%)*</td>
+          <td class="ret-cell-na">—</td>
+          <td class="ret-cell-na">—</td>
+          <td class="ret-cell-na">—</td>
+          <td class="ret-cell-na">—</td>
+          <td class="ret-cell-na">—</td>
+        </tr>
+        <tr>
+          <td class="cohort-date">13/07</td><td class="cohort-size">1</td>
+          <td>1/1 (100%)</td>
+          <td class="ret-cell-na">—</td>
+          <td class="ret-cell-na">—</td>
+          <td class="ret-cell-na">—</td>
+          <td class="ret-cell-na">—</td>
+          <td class="ret-cell-na">—</td>
+          <td class="ret-cell-na">—</td>
+        </tr>
+      </tbody>
     </table>
   </div>
-  <p class="funil-note">"—" = dia anterior ao cohort (não aplicável) ou dia sem cohort novo (05/07, sem primeiras aberturas nesse dia). A diagonal (célula de mesma data do cohort) é sempre 100% por definição — é o próprio dia de entrada. Célula com borda verde e ✦ = retorno espontâneo real (não é a diagonal). Fonte: bq-results-20260708-133438-1783517711476.csv (histórico completo 25/03–08/07), eventos clicked_ai_chat_open, usuários internos 969, 5 e 2 excluídos.</p>
+  <p class="funil-note">"—" = semana ainda não alcançada pelo histórico disponível. "*" = semana em andamento (13/07 é segunda-feira, apenas 1 dia de dado até o momento) — o valor pode mudar até o fechamento da semana. A coluna W0 é sempre 100% por definição — é a própria semana de entrada. Célula com borda verde e ✦ = semana com retorno espontâneo real. Tabela restrita aos cohorts a partir de 29/06 (janela recente e mais densa em volume) — cohorts anteriores (23/03 e 13/04) tinham 3 e 1 usuário, respectivamente, e não entram nesta leitura. Fonte: bq-results-20260713-135909-1783951175453.csv (histórico completo 25/03–13/07), eventos clicked_ai_chat_open, usuários internos 969, 5 e 2 excluídos.</p>
 
   <div class="exec-section-label" style="margin-top:36px;">Evidência qualitativa — o que os usuários perguntam ao Assistente Qive</div>
   <p class="funil-subtitle" style="margin:-10px 0 4px;">25 mensagens de usuário (role=user), 15 usuários distintos, conversas reais pós-30/06 · fonte: input do time de engenharia (Mensagens para Análise.xlsx)</p>
@@ -2317,47 +2432,6 @@ function showTab(id) {
   data.forEach(function(row) {
     var tr = document.createElement('tr');
     tr.innerHTML = '<td>' + row[0] + '</td><td>' + row[1] + '</td><td>' + row[2].toLocaleString('pt-BR') + '</td>';
-    tbody.appendChild(tr);
-  });
-})();
-
-// ── COHORT DE RETENÇÃO DIÁRIA (clicked_ai_chat_open) · 30/06 a 08/07 · exclui usuários internos 969, 5 e 2 ──
-(function() {
-  // calendarDays = colunas da tabela (últimos dias do CSV)
-  var calendarDays = ['30/06', '01/07', '02/07', '03/07', '04/07', '05/07', '06/07', '07/07', '08/07'];
-  // cada cohort: usuários que abriram o chat pela 1ª vez naquele dia, e em quais dias do calendário voltaram a abrir
-  // não há cohort novo em 05/07 (nenhum usuário abriu o chat pela 1ª vez nesse dia)
-  // atualizado em 08/07 com histórico completo (25/03–08/07): 4 retornos confirmados dentro da janela —
-  // 898654 (cohort 30/06) reabriu em 06/07; 427894 (cohort 01/07) reabriu em 07/07; 898266 (cohort 03/07) reabriu em 07/07;
-  // 897644 (cohort 02/07) reabriu em 08/07 (novo)
-  var cohorts = [
-    { date: '30/06', size: 3,  activity: { '30/06': 3, '01/07': 0, '02/07': 0, '03/07': 0, '04/07': 0, '05/07': 0, '06/07': 1, '07/07': 0, '08/07': 0 } },
-    { date: '01/07', size: 11, activity: { '01/07': 11, '02/07': 0, '03/07': 0, '04/07': 0, '05/07': 0, '06/07': 0, '07/07': 1, '08/07': 0 } },
-    { date: '02/07', size: 12, activity: { '02/07': 12, '03/07': 0, '04/07': 0, '05/07': 0, '06/07': 0, '07/07': 0, '08/07': 1 } },
-    { date: '03/07', size: 9,  activity: { '03/07': 9, '04/07': 0, '05/07': 0, '06/07': 0, '07/07': 1, '08/07': 0 } },
-    { date: '04/07', size: 2,  activity: { '04/07': 2, '05/07': 0, '06/07': 0, '07/07': 0, '08/07': 0 } },
-    { date: '06/07', size: 7,  activity: { '06/07': 7, '07/07': 0, '08/07': 0 } },
-    { date: '07/07', size: 4,  activity: { '07/07': 4, '08/07': 0 } },
-    { date: '08/07', size: 1,  activity: { '08/07': 1 } }
-  ];
-
-  var tbody = document.getElementById('retention-table-body');
-  cohorts.forEach(function(c) {
-    var tr = document.createElement('tr');
-    var cells = '<td class="cohort-date">' + c.date + '</td><td class="cohort-size">' + c.size + '</td>';
-    calendarDays.forEach(function(day) {
-      if (!(day in c.activity)) {
-        cells += '<td class="ret-cell-na">—</td>';
-      } else {
-        var v = c.activity[day];
-        var pct = Math.round(100 * v / c.size);
-        var isReturn = v > 0 && day !== c.date;
-        var bg = v > 0 ? 'rgba(16,185,129,' + (0.12 + 0.5 * pct / 100) + ')' : 'transparent';
-        var style = 'background:' + bg + ';' + (isReturn ? 'border:2px solid #10B981;font-weight:700;' : '');
-        cells += '<td style="' + style + '">' + v + '/' + c.size + ' (' + pct + '%)' + (isReturn ? ' ✦' : '') + '</td>';
-      }
-    });
-    tr.innerHTML = cells;
     tbody.appendChild(tr);
   });
 })();
